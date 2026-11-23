@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>B.Kishore | Futuristic Portfolio</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ background:#050816;color:white;font-family:Arial,sans-serif;
+ overflow-x:hidden;
+}
+body:before{
+ content:"";position:fixed;inset:0;z-index:-2;
+ background:radial-gradient(circle at 15% 20%,#142d61,transparent 40%),
+ radial-gradient(circle at 85% 80%,#42165d,transparent 40%);
+}
+nav{
+ position:sticky;top:0;z-index:100;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:20px 8%;background:#050816dd;backdrop-filter:blur(15px);
+ border-bottom:1px solid #174b69;
+}
+.logo{font-size:25px;font-weight:bold;color:#00eaff}
+nav a{color:white;text-decoration:none;margin-left:18px}
+nav a:hover{color:#00eaff}
+.hero{
+ min-height:90vh;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;padding:25px;
+}
+.tag{color:#00eaff;border:1px solid #00eaff;padding:10px 20px;
+ border-radius:30px;box-shadow:0 0 15px #00eaff66}
+h1{font-size:clamp(40px,8vw,75px);margin:25px 0}
+h1 span{color:#00eaff;text-shadow:0 0 25px #00eaff}
+.hero p{color:#c2cee4;line-height:1.8;font-size:18px}
+.btn{
+ display:inline-block;margin-top:25px;padding:14px 28px;
+ background:#00eaff;color:#050816;border-radius:30px;
+ text-decoration:none;font-weight:bold;transition:.3s;
+}
+.btn:hover{box-shadow:0 0 30px #00eaff;transform:scale(1.08)}
+section{padding:75px 9%;scroll-margin-top:75px}
+.heading{text-align:center;font-size:35px;margin-bottom:35px}
+.heading span{color:#00eaff}
+.card{
+ background:#101a32;border:1px solid #29436c;
+ border-radius:18px;padding:27px;margin:20px 0;
+ transition:border .3s,box-shadow .3s;
+ transform-style:preserve-3d;
+}
+.card:hover{border-color:#00eaff;box-shadow:0 0 25px #00eaff44}
+.card h3{color:#00eaff;margin-bottom:12px}
+.card p{color:#c2cee4;line-height:1.8}
+.marks{font-size:24px;color:#00eaff;font-weight:bold}
+.skills{display:flex;flex-wrap:wrap;justify-content:center;gap:15px}
+.skill{
+ padding:16px 24px;background:#101a32;color:#00eaff;
+ border:1px solid #00eaff;border-radius:12px;transition:.3s;
+}
+.skill:hover{background:#00eaff;color:#050816;transform:translateY(-7px)}
+footer{text-align:center;padding:30px;color:#9aabc8;border-top:1px solid #29436c}
+
+/* CUSTOM MOUSE POINTER */
+.cursor,.ring,.glow{
+ position:fixed;pointer-events:none;z-index:9999;
+ transform:translate(-50%,-50%);
+}
+.cursor{
+ width:10px;height:10px;background:#00eaff;border-radius:50%;
+ box-shadow:0 0 15px #00eaff,0 0 30px #00eaff;
+}
+.ring{
+ width:38px;height:38px;border:2px solid #00eaff;
+ border-radius:50%;z-index:9998;
+}
+.glow{
+ width:280px;height:280px;border-radius:50%;z-index:-1;
+ background:radial-gradient(circle,#00eaff20,transparent 70%);
+}
+
+/* ANIMATIONS */
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-12px)}
+}
+@keyframes pulse{
+ 50%{box-shadow:0 0 25px #00eaff}
+}
+.hero h1{animation:float 3s infinite}
+.tag{animation:pulse 2s infinite}
+.reveal{opacity:0;transform:translateY(35px);transition:.8s}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:650px){
+ nav{padding:16px 4%;flex-wrap:wrap;gap:12px}
+ nav a{margin-left:8px;font-size:12px}
+ section{padding:55px 6%}
+}
+@media(hover:none),(pointer:coarse){
+ .cursor,.ring,.glow{display:none}
+ .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor"></div>
+<div class="ring"></div>
+<div class="glow"></div>
+
+<nav>
+ <div class="logo">B.KISHORE</div>
+ <div>
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#education">Education</a>
+  <a href="#skills">Skills</a>
+ </div>
+</nav>
+
+<div class="hero" id="home">
+ <div class="tag">WELCOME TO MY DIGITAL WORLD</div>
+ <h1>Hi, I'm <span>B. Kishore</span></h1>
+ <p>Student | Technology Enthusiast | Future Innovator</p>
+ <p>Learning Today, Leading Tomorrow 🚀</p>
+ <a href="#about" class="btn">Explore My Profile ↓</a>
+</div>
+
+<section id="about">
+ <h2 class="heading">About <span>Me</span></h2>
+ <div class="card">
+  <h3>Who Am I?</h3>
+  <p>
+   My name is Bandaru Kishore. I am currently pursuing
+   my first year at Vignan College, Vadlamudi.
+   I am passionate about technology, learning new skills,
+   problem-solving and building a successful future.
+  </p>
+ </div>
+</section>
+
+<section id="education">
+ <h2 class="heading">My <span>Education</span></h2>
+
+ <div class="card">
+  <h3>10th Grade</h3>
+  <p>Little Angels High School, Bapatla</p>
+  <p class="marks">574 / 600</p>
+ </div>
+
+ <div class="card">
+  <h3>Intermediate</h3>
+  <p>Sri Chaitanya Junior College, Vijayawada</p>
+  <p class="marks">987 / 1000</p>
+ </div>
+
+ <div class="card">
+  <h3>Current Education</h3>
+  <p>Vignan College, Vadlamudi</p>
+  <p>First Year Student</p>
+ </div>
+</section>
+
+<section id="skills">
+ <h2 class="heading">My <span>Skills</span></h2>
+ <div class="skills">
+  <div class="skill">C Programming</div>
+  <div class="skill">Problem Solving</div>
+  <div class="skill">Communication</div>
+  <div class="skill">Teamwork</div>
+  <div class="skill">Quick Learning</div>
+  <div class="skill">AI & ML Enthusiasm</div>
+ </div>
+</section>
+
+<section>
+ <h2 class="heading">My <span>Ambition</span></h2>
+ <div class="card" style="text-align:center">
+  <h3>Dream Big. Think Smart. Create the Future.</h3>
+  <p>
+   My ambition is to become a successful professional
+   by improving my technical knowledge, gaining experience
+   and continuously learning new technologies.
+  </p>
+ </div>
+</section>
+
+<footer>
+ <p>© 2026 Bandaru Kishore | All Rights Reserved</p>
+ <p>Designed with ❤️ and futuristic vision</p>
+</footer>
+
+<script>
+// MOUSE FOLLOWING ANIMATION
+const cursor=document.querySelector('.cursor');
+const ring=document.querySelector('.ring');
+const glow=document.querySelector('.glow');
+
+let x=0,y=0,rx=0,ry=0;
+
+document.addEventListener('mousemove',e=>{
+ x=e.clientX;y=e.clientY;
+ cursor.style.left=x+'px';
+ cursor.style.top=y+'px';
+ glow.style.left=x+'px';
+ glow.style.top=y+'px';
+});
+
+function animate(){
+ rx+=(x-rx)*.15;
+ ry+=(y-ry)*.15;
+ ring.style.left=rx+'px';
+ ring.style.top=ry+'px';
+ requestAnimationFrame(animate);
+}
+animate();
+
+// INTERACTIVE HOVER CURSOR
+document.querySelectorAll('a,.card,.skill').forEach(el=>{
+ el.addEventListener('mouseenter',()=>{
+  ring.style.width='55px';
+  ring.style.height='55px';
+ });
+ el.addEventListener('mouseleave',()=>{
+  ring.style.width='38px';
+  ring.style.height='38px';
+ });
+});
+
+// 3D MOUSE TILT CARDS
+document.querySelectorAll('.card').forEach(card=>{
+ card.addEventListener('mousemove',e=>{
+  let r=card.getBoundingClientRect();
+  let px=(e.clientX-r.left)/r.width;
+  let py=(e.clientY-r.top)/r.height;
+  card.style.transform=
+  `perspective(800px) rotateX(${(0.5-py)*10}deg)
+   rotateY(${(px-0.5)*10}deg)`;
+ });
+ card.addEventListener('mouseleave',()=>{
+  card.style.transform='';
+ });
+});
+
+// SCROLL REVEAL
+const observer=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(entry.isIntersecting){
+   entry.target.classList.add('show');
+   observer.unobserve(entry.target);
+  }
+ });
+},{threshold:.15});
+
+document.querySelectorAll('section .card,section .heading')
+.forEach(el=>{
+ el.classList.add('reveal');
+ observer.observe(el);
+});
+</script>
+
+</body>
+</html>
