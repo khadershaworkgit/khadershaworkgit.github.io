@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mukunda Sai Bandi | Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #070b18;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Background */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+    radial-gradient(circle at 20% 20%, #12365a, transparent 40%),
+    radial-gradient(circle at 80% 70%, #32165a, transparent 40%);
+}
+
+header {
+    position: sticky;
+    top: 0;
+    padding: 22px 8%;
+    background: rgba(7,11,24,0.85);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #263550;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #55e7ff;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #55e7ff;
+}
+
+/* Hero */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px 8%;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 7vw, 75px);
+    margin: 15px 0;
+}
+
+.hero h1 span {
+    color: #55e7ff;
+}
+
+.hero p {
+    color: #aab8d0;
+    line-height: 1.8;
+    max-width: 550px;
+}
+
+.tagline {
+    color: #55e7ff !important;
+    letter-spacing: 3px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 13px 25px;
+    border-radius: 8px;
+    background: #55e7ff;
+    color: #07101b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px #55e7ff;
+}
+
+/* Animated Circle */
+.circle {
+    width: 260px;
+    height: 260px;
+    border: 2px solid #55e7ff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 65px;
+    font-weight: bold;
+    color: #55e7ff;
+    box-shadow: 0 0 40px #55e7ff;
+    animation: rotateGlow 4s infinite alternate;
+}
+
+@keyframes rotateGlow {
+    from {
+        transform: rotate(-8deg) scale(0.95);
+    }
+    to {
+        transform: rotate(8deg) scale(1.05);
+        box-shadow: 0 0 65px #9b70ff;
+    }
+}
+
+/* Sections */
+section {
+    padding: 80px 8%;
+}
+
+.heading {
+    font-size: 35px;
+    margin-bottom: 30px;
+    color: #55e7ff;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: rgba(20,35,60,0.7);
+    border: 1px solid #29415e;
+    padding: 28px;
+    border-radius: 15px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #55e7ff;
+    box-shadow: 0 0 25px rgba(85,231,255,0.2);
+}
+
+.card h3 {
+    color: #55e7ff;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #aab8d0;
+    line-height: 1.7;
+}
+
+.about-text {
+    color: #aab8d0;
+    font-size: 18px;
+    line-height: 1.9;
+}
+
+.skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 18px;
+}
+
+.skill {
+    padding: 25px;
+    text-align: center;
+    background: rgba(20,35,60,0.7);
+    border: 1px solid #29415e;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.skill:hover {
+    transform: scale(1.05);
+    color: #55e7ff;
+    box-shadow: 0 0 20px #245b75;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #aab8d0;
+    border-top: 1px solid #263550;
+}
+
+/* Mouse pointer */
+.cursor {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: #55e7ff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999;
+    box-shadow: 0 0 15px #55e7ff;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-ring {
+    position: fixed;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #55e7ff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 998;
+    transform: translate(-50%, -50%);
+}
+
+@media(max-width: 650px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 7px;
+        font-size: 13px;
+    }
+
+    .hero {
+        text-align: center;
+        padding-top: 70px;
+    }
+
+    .circle {
+        width: 210px;
+        height: 210px;
+    }
+
+    .cursor, .cursor-ring {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<header>
+    <div class="logo">MSB.</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<!-- HOME -->
+<div class="hero" id="home">
+
+    <div>
+        <p class="tagline">WELCOME TO MY PORTFOLIO</p>
+
+        <h1>Mukunda Sai <span>Bandi</span></h1>
+
+        <p>
+            A passionate B.Tech student exploring
+            Computer Science, Artificial Intelligence
+            and Data Science. I love learning new
+            technologies and building creative ideas.
+        </p>
+
+        <a href="#education" class="btn">
+            Explore My Profile →
+        </a>
+    </div>
+
+    <div class="circle">MSB</div>
+
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+
+    <h2 class="heading">About Me</h2>
+
+    <p class="about-text">
+        Hello! I'm Mukunda Sai Bandi.
+
+        I am currently pursuing B.Tech in
+        Computer Science and Engineering
+        with Artificial Intelligence and
+        Data Science.
+
+        I am interested in programming,
+        technology, problem-solving and
+        exploring innovative ideas.
+
+        My goal is to continuously improve
+        my skills and become a successful
+        technology professional.
+    </p>
+
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+
+    <h2 class="heading">My Education</h2>
+
+    <div class="card-container">
+
+        <div class="card">
+            <h3>B.Tech</h3>
+            <p>
+                CSE – Artificial Intelligence
+                and Data Science
+                <br><br>
+                Vignan University
+                <br>
+                Currently Pursuing
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Intermediate</h3>
+            <p>
+                Andhra Pradesh Board
+                <br><br>
+                Marks: 565 / 600
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>10th Standard</h3>
+            <p>
+                Secondary Education
+                <br><br>
+                Marks: 980 / 1000
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+
+    <h2 class="heading">My Skills</h2>
+
+    <div class="skills">
+
+        <div class="skill">💻 C Programming</div>
+
+        <div class="skill">🧠 Problem Solving</div>
+
+        <div class="skill">📊 MS Excel</div>
+
+        <div class="skill">📝 MS Word</div>
+
+        <div class="skill">🤖 Artificial Intelligence</div>
+
+        <div class="skill">📈 Data Science</div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+
+    <h2 class="heading">Contact Me</h2>
+
+    <div class="card">
+        <h3>Let's Connect!</h3>
+
+        <p>
+            I am interested in learning,
+            collaboration and new opportunities.
+        </p>
+
+        <a href="mailto:your-email@example.com"
+           class="btn">
+           Send Email →
+        </a>
+    </div>
+
+</section>
+
+<footer>
+    © 2026 Mukunda Sai Bandi | All Rights Reserved
+</footer>
+
+<script>
+
+// Custom mouse pointer animation
+const cursor = document.querySelector(".cursor");
+const ring = document.querySelector(".cursor-ring");
+
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+
+if (window.matchMedia("(pointer: fine)").matches) {
+
+    document.addEventListener("mousemove", (e) => {
+
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        cursor.style.left = mouseX + "px";
+        cursor.style.top = mouseY + "px";
+
+    });
+
+    function animateCursor() {
+
+        ringX += (mouseX - ringX) * 0.15;
+        ringY += (mouseY - ringY) * 0.15;
+
+        ring.style.left = ringX + "px";
+        ring.style.top = ringY + "px";
+
+        requestAnimationFrame(animateCursor);
+    }
+
+    animateCursor();
+}
+
+// Hover animation
+document.querySelectorAll("a, .card, .skill").forEach(item => {
+
+    item.addEventListener("mouseenter", () => {
+        cursor.style.transform = "translate(-50%, -50%) scale(2)";
+        ring.style.width = "55px";
+        ring.style.height = "55px";
+    });
+
+    item.addEventListener("mouseleave", () => {
+        cursor.style.transform = "translate(-50%, -50%) scale(1)";
+        ring.style.width = "35px";
+        ring.style.height = "35px";
+    });
+
+});
+
+</script>
+
+</body>
+</html>
