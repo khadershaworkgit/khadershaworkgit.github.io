@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070b18">
+  <title>G Sai Venkateswara Reddy | Portfolio</title>
+  <style>
+    :root {
+      --bg: #070b18;
+      --panel: rgba(16, 25, 48, .72);
+      --cyan: #55e7ff;
+      --violet: #a78bfa;
+      --text: #edf4ff;
+      --muted: #9aabc8;
+      --line: rgba(117, 220, 255, .2);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 15% 10%, rgba(50, 93, 190, .22), transparent 35%),
+        radial-gradient(ellipse at 85% 30%, rgba(126, 70, 220, .18), transparent 34%),
+        var(--bg);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      background-image: linear-gradient(rgba(130,190,255,.035) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(130,190,255,.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1100px, calc(100% - 40px)); margin: auto; }
+    header { padding: 25px 0; }
+    nav { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .logo { color: var(--cyan); font-weight: 800; letter-spacing: 2px; font-size: .95rem; }
+    .nav-links { display: flex; gap: 26px; color: var(--muted); font-size: .9rem; }
+    .nav-links a:hover { color: var(--cyan); }
+    .hero { min-height: 76vh; display: grid; grid-template-columns: 1.3fr .7fr; align-items: center; gap: 55px; padding: 65px 0 90px; }
+    .eyebrow { color: var(--cyan); letter-spacing: 3px; text-transform: uppercase; font-size: .78rem; font-weight: 700; }
+    h1 { font-size: clamp(2.5rem, 6vw, 5.3rem); line-height: 1.08; margin: 18px 0; letter-spacing: -2px; }
+    h1 span { color: transparent; background: linear-gradient(90deg, var(--cyan), var(--violet)); -webkit-background-clip: text; background-clip: text; }
+    .intro { max-width: 600px; color: var(--muted); font-size: 1.08rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .btn { padding: 12px 20px; border: 1px solid var(--cyan); border-radius: 7px; color: var(--cyan); font-weight: 700; transition: .2s; }
+    .btn.primary { color: #06101b; background: var(--cyan); box-shadow: 0 0 25px rgba(85,231,255,.22); }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 0 25px rgba(85,231,255,.25); }
+    .orbit-card { aspect-ratio: 1; max-width: 330px; width: 100%; justify-self: center; display: grid; place-items: center; position: relative; }
+    .orbit { position: absolute; border: 1px solid rgba(85,231,255,.45); border-radius: 50%; width: 95%; height: 95%; transform: rotate(-25deg) scaleY(.55); box-shadow: 0 0 22px rgba(85,231,255,.1); }
+    .orbit.two { width: 78%; height: 78%; transform: rotate(55deg) scaleY(.6); border-color: rgba(167,139,250,.55); }
+    .core { width: 56%; height: 56%; border-radius: 50%; display: grid; place-items: center; text-align: center; background: radial-gradient(circle at 35% 30%, #243c68, #10162c 68%); border: 1px solid rgba(85,231,255,.5); box-shadow: 0 0 55px rgba(85,231,255,.2), inset 0 0 30px rgba(85,231,255,.1); }
+    .core strong { font-size: 2.4rem; color: var(--cyan); letter-spacing: 2px; }
+    .core small { display: block; color: var(--muted); letter-spacing: 2px; font-size: .65rem; }
+    section { padding: 55px 0; }
+    .section-title { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 10px; }
+    .section-title span { color: var(--cyan); }
+    .section-sub { color: var(--muted); margin-bottom: 28px; }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 25px; backdrop-filter: blur(12px); transition: .25s; }
+    .card:hover { transform: translateY(-5px); border-color: rgba(85,231,255,.65); box-shadow: 0 12px 35px rgba(0,0,0,.2); }
+    .card .tag { color: var(--cyan); font-size: .75rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+    .card h3 { font-size: 1.35rem; margin: 8px 0; }
+    .score { font-size: 2.6rem; font-weight: 800; background: linear-gradient(90deg,var(--cyan),var(--violet)); color: transparent; -webkit-background-clip: text; background-clip: text; }
+    .skill-card { max-width: 520px; }
+    .skill-row { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .skill-icon { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 10px; color: var(--cyan); background: rgba(85,231,255,.1); border: 1px solid var(--line); font-size: 1.3rem; }
+    .skill-bar { height: 6px; background: rgba(255,255,255,.08); border-radius: 20px; margin-top: 18px; overflow: hidden; }
+    .skill-bar span { display: block; width: 82%; height: 100%; background: linear-gradient(90deg,var(--cyan),var(--violet)); border-radius: inherit; }
+    .note { color: var(--muted); font-size: .88rem; margin-top: 12px; }
+    footer { border-top: 1px solid var(--line); margin-top: 50px; padding: 25px 0; color: var(--muted); text-align: center; font-size: .85rem; }
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 35px; padding-top: 50px; }
+      .intro { margin: auto; }
+      .actions { justify-content: center; }
+      .orbit-card { max-width: 250px; }
+      .nav-links { gap: 13px; font-size: .8rem; }
+      .cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 420px) { .wrap { width: min(100% - 28px, 1100px); } .nav-links { gap: 9px; } .nav-links a { font-size: .72rem; } }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav aria-label="Main navigation">
+      <a class="logo" href="#home">GSVR<span style="color:#a78bfa">.</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap hero" id="home">
+      <div>
+        <p class="eyebrow">Welcome to my digital space</p>
+        <h1>Hi, I'm<br><span>G Sai Venkateswara Reddy</span></h1>
+        <p class="intro">A student with a passion for learning, solving problems, and exploring the possibilities of technology.</p>
+        <div class="actions">
+          <a class="btn primary" href="#education">Explore my profile</a>
+          <a class="btn" href="#skills">My skills</a>
+        </div>
+      </div>
+      <div class="orbit-card" aria-label="Decorative futuristic graphic">
+        <div class="orbit"></div><div class="orbit two"></div>
+        <div class="core"><div><strong>GSVR</strong><small>FUTURE IN PROGRESS</small></div></div>
+      </div>
+    </div>
+
+    <section class="wrap" id="about">
+      <p class="eyebrow">01 / About</p>
+      <h2 class="section-title">A little <span>about me</span></h2>
+      <p class="section-sub">I believe every challenge is an opportunity to learn something new.</p>
+      <div class="card">
+        <h3>Curious mind. Problem solver.</h3>
+        <p class="intro">My name is G Sai Venkateswara Reddy. I am focused on building my knowledge, improving my abilities, and growing step by step in the world of technology.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="education">
+      <p class="eyebrow">02 / Education</p>
+      <h2 class="section-title">My <span>qualifications</span></h2>
+      <p class="section-sub">My academic journey so far.</p>
+      <div class="cards">
+        <article class="card">
+          <p class="tag">Secondary education</p>
+          <h3>10th Standard</h3>
+          <div class="score">80%</div>
+          <p class="note">Successfully completed my 10th standard.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Higher secondary education</p>
+          <h3>Intermediate</h3>
+          <div class="score">93%</div>
+          <p class="note">Successfully completed my Intermediate education.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="skills">
+      <p class="eyebrow">03 / Skills</p>
+      <h2 class="section-title">What I <span>bring</span></h2>
+      <p class="section-sub">A skill I am developing and strengthening.</p>
+      <div class="card skill-card">
+        <div class="skill-row">
+          <div style="display:flex;align-items:center;gap:14px">
+            <div class="skill-icon">⌘</div>
+            <div><h3>Problem Solving</h3><p class="note" style="margin:0">Thinking logically and finding solutions to challenges.</p></div>
+          </div>
+          <span style="color:var(--cyan);font-size:1.2rem">✦</span>
+        </div>
+        <div class="skill-bar"><span></span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Designed with a futuristic vision · © <span id="year"></span> G Sai Venkateswara Reddy</div>
+  </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhilash | Futuristic Portfolio</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050816;
+    color:#ffffff;
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+}
+
+/* Background */
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-1;
+    background:
+    radial-gradient(circle at 20% 30%, #10244d 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, #0a3240 0%, transparent 40%);
+}
+
+/* Navbar */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:rgba(5,8,22,0.85);
+    backdrop-filter:blur(12px);
+    position:sticky;
+    top:0;
+    z-index:100;
+    border-bottom:1px solid rgba(0,255,255,0.15);
+}
+
+.logo{
+    font-family:'Orbitron',sans-serif;
+    font-size:22px;
+    color:#00eaff;
+    text-shadow:0 0 10px #00eaff;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+}
+
+nav ul li a:hover{
+    color:#00eaff;
+    text-shadow:0 0 10px #00eaff;
+}
+
+/* Hero */
+.hero{
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.tag{
+    color:#00eaff;
+    letter-spacing:4px;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-family:'Orbitron',sans-serif;
+    font-size:clamp(35px,7vw,75px);
+    line-height:1.2;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#00eaff;
+    text-shadow:0 0 20px rgba(0,234,255,0.5);
+}
+
+.hero p{
+    color:#b8c3d9;
+    font-size:17px;
+    max-width:650px;
+    margin:auto;
+    line-height:1.8;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:30px;
+    padding:13px 30px;
+    border:1px solid #00eaff;
+    color:#00eaff;
+    text-decoration:none;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#00eaff;
+    color:#050816;
+    box-shadow:0 0 25px #00eaff;
+}
+
+/* Sections */
+section{
+    padding:80px 8%;
+}
+
+.section-title{
+    text-align:center;
+    font-family:'Orbitron',sans-serif;
+    font-size:30px;
+    color:#00eaff;
+    margin-bottom:50px;
+    text-shadow:0 0 10px rgba(0,234,255,0.4);
+}
+
+.about-box{
+    max-width:900px;
+    margin:auto;
+    padding:35px;
+    background:rgba(14,23,48,0.7);
+    border:1px solid rgba(0,234,255,0.25);
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,234,255,0.05);
+}
+
+.about-box p{
+    line-height:2;
+    color:#c8d3e8;
+    text-align:center;
+}
+
+/* Qualification */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    max-width:1000px;
+    margin:auto;
+}
+
+.card{
+    background:rgba(14,23,48,0.8);
+    border:1px solid rgba(0,234,255,0.25);
+    padding:30px;
+    border-radius:15px;
+    transition:0.4s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#00eaff;
+    box-shadow:0 0 25px rgba(0,234,255,0.15);
+}
+
+.card h3{
+    color:#00eaff;
+    font-family:'Orbitron',sans-serif;
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+.card p{
+    color:#b8c3d9;
+    line-height:1.8;
+}
+
+.icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+/* Skills */
+.skills{
+    max-width:900px;
+    margin:auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.skill{
+    padding:18px 35px;
+    background:rgba(0,234,255,0.06);
+    border:1px solid #00eaff;
+    border-radius:10px;
+    color:#00eaff;
+    font-family:'Orbitron',sans-serif;
+    transition:0.3s;
+}
+
+.skill:hover{
+    background:#00eaff;
+    color:#050816;
+    box-shadow:0 0 20px #00eaff;
+    transform:scale(1.05);
+}
+
+/* Goals */
+.goal{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    color:#c8d3e8;
+    line-height:2;
+}
+
+/* Footer */
+footer{
+    text-align:center;
+    padding:30px;
+    border-top:1px solid rgba(0,234,255,0.2);
+    color:#8291ac;
+}
+
+footer span{
+    color:#00eaff;
+}
+
+/* Mobile */
+@media(max-width:600px){
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav ul{
+        gap:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    nav ul li a{
+        font-size:13px;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    section{
+        padding:60px 5%;
+    }
+
+    .about-box{
+        padding:25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div class="logo">ABHILASH.DEV</div>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#goals">Goals</a></li>
+    </ul>
+</nav>
+
+<!-- Home -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="tag">WELCOME TO MY DIGITAL WORLD</div>
+
+        <h1>I'm <span>Abhilash</span></h1>
+
+        <p>
+            A Computer Science Engineering Student,
+            aspiring developer and future technology innovator.
+            Exploring the digital universe one line of code at a time.
+        </p>
+
+        <a href="#about" class="btn">EXPLORE MY PROFILE</a>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about">
+    <h2 class="section-title">ABOUT ME</h2>
+
+    <div class="about-box">
+        <p>
+            Hello! I'm <strong>Vadugu Abhilash</strong>, a passionate
+            Computer Science Engineering student with a strong interest
+            in technology, programming and innovation.
+            I enjoy learning new skills, solving problems and exploring
+            the possibilities of the digital world.
+            My journey in technology has just started, and I aim to
+            transform my knowledge into creative and meaningful projects.
+        </p>
+    </div>
+</section>
+
+<!-- Education -->
+<section id="education">
+    <h2 class="section-title">EDUCATION</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🎓</div>
+            <h3>B.Tech - CSE</h3>
+            <p>
+                Bachelor of Technology<br>
+                Computer Science Engineering<br>
+                Vignan<br>
+                First Year
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📊</div>
+            <h3>Academic Performance</h3>
+            <p>
+                Current CGPA: 9.0<br>
+                Focused on academic excellence,
+                logical thinking and technical growth.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+    <h2 class="section-title">TECHNICAL SKILLS</h2>
+
+    <div class="skills">
+        <div class="skill">PYTHON</div>
+        <div class="skill">JAVA</div>
+        <div class="skill">PROGRAMMING</div>
+        <div class="skill">PROBLEM SOLVING</div>
+        <div class="skill">TECHNOLOGY</div>
+    </div>
+</section>
+
+<!-- Goals -->
+<section id="goals">
+    <h2 class="section-title">MY FUTURE VISION</h2>
+
+    <div class="goal">
+        <p>
+            My vision is to become a skilled software engineer,
+            develop innovative technologies and build solutions
+            that make a positive impact on the world.
+            I believe consistency, creativity, discipline and
+            continuous learning are the keys to success.
+            This is just the beginning of my journey into the future.
+        </p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>Designed in the Future | <span>Abhilash</span> © 2026</p>
+</footer>
+
+</body>
+</html>

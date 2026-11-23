@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varun | Cyberpunk Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{background:#080b10;color:#eafaff;font-family:Arial,sans-serif;overflow-x:hidden;cursor:none}
+a,button{cursor:none}
+.cursor{width:12px;height:12px;background:#fcee0a;border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 12px #fcee0a,0 0 25px #fcee0a}
+.cursor-ring{width:35px;height:35px;border:2px solid #00f0ff;border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s;box-shadow:0 0 12px #00f0ff}
+.trail{position:fixed;width:5px;height:5px;border-radius:50%;background:#00f0ff;pointer-events:none;z-index:9997;box-shadow:0 0 10px #00f0ff;animation:fade .6s linear forwards}
+@keyframes fade{to{opacity:0;transform:scale(0)}}
+.touch-glow{position:fixed;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,#00f0ff66,#00f0ff22,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:9990;animation:touchFade .7s forwards}
+@keyframes touchFade{to{opacity:0;transform:translate(-50%,-50%) scale(2)}}
+.ripple{position:fixed;width:20px;height:20px;border:2px solid #fcee0a;border-radius:50%;pointer-events:none;z-index:9991;transform:translate(-50%,-50%);animation:rippleEffect .6s ease-out forwards}
+@keyframes rippleEffect{to{width:100px;height:100px;opacity:0}}
+header{position:sticky;top:0;z-index:100;background:#080b10;border-bottom:2px solid #fcee0a;padding:20px 7%;display:flex;justify-content:space-between;align-items:center}
+.logo{color:#fcee0a;font-size:24px;font-weight:bold;text-shadow:0 0 12px #fcee0a}
+nav{display:flex;flex-wrap:wrap;justify-content:center}
+nav a{color:white;text-decoration:none;margin-left:18px;font-size:13px;transition:.3s}
+nav a:hover{color:#00f0ff;text-shadow:0 0 12px #00f0ff}
+.hero{min-height:90vh;padding:100px 10%;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(120deg,#101c2b,#080b10 65%);border-bottom:1px solid #00f0ff}
+.hero h3{color:#00f0ff;letter-spacing:5px;margin-bottom:20px}
+.hero h1{font-size:clamp(35px,7vw,65px);color:#fcee0a;text-shadow:3px 3px #ff1744,0 0 20px #fcee0a;animation:glow 2s infinite alternate}
+@keyframes glow{from{text-shadow:0 0 10px #fcee0a}to{text-shadow:0 0 30px #fcee0a,0 0 50px #ff1744}}
+.hero p{margin-top:20px;line-height:2;color:#c8d6e5}
+.btn{display:inline-block;background:#fcee0a;color:#080b10;text-decoration:none;padding:14px 25px;margin-top:25px;width:fit-content;font-weight:bold;transition:.3s}
+.btn:hover{background:#00f0ff;box-shadow:0 0 30px #00f0ff;transform:scale(1.08)}
+section{padding:75px 10%}
+.title{color:#fcee0a;font-size:30px;margin-bottom:30px;text-shadow:0 0 12px #fcee0a}
+.card{background:#111923;border-left:4px solid #00f0ff;border-bottom:1px solid #fcee0a;padding:25px;margin:18px 0;line-height:2;transition:.3s;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,#00f0ff22,transparent);transition:.5s}
+.card:hover::before{left:100%}
+.card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 0 25px #00f0ff55;border-left-color:#fcee0a}
+.card h3{color:#00f0ff}
+ul{padding-left:22px}
+li{margin:8px 0}
+footer{text-align:center;padding:30px;background:#05070a;color:#fcee0a;border-top:2px solid #00f0ff;line-height:2}
+.card:active,.btn:active{transform:scale(.96);box-shadow:0 0 25px #00f0ff}
+@media(max-width:600px){
+ body,a,button{cursor:auto}
+ .cursor,.cursor-ring{display:none}
+ header{flex-direction:column;gap:15px;padding:16px 5%}
+ .logo{font-size:21px}
+ nav{gap:12px}
+ nav a{margin:0;font-size:11px}
+ .hero{min-height:80vh;padding:70px 7%}
+ .hero h1{font-size:36px}
+ section{padding:55px 7%}
+ .title{font-size:25px}
+ .card{padding:20px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+<header>
+ <div class="logo">VARUN // 2077</div>
+ <nav>
+  <a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#education">EDUCATION</a><a href="#skills">SKILLS</a><a href="#contact">CONTACT</a>
+ </nav>
+</header>
+<div class="hero" id="home">
+ <h3>WELCOME TO THE FUTURE</h3>
+ <h1>SHANMUKA VARUN<br>CHAITANYA</h1>
+ <p>B.TECH COMPUTER SCIENCE STUDENT<br>FIRST YEAR // TECHNOLOGY ENTHUSIAST<br>BUILDING MY FUTURE THROUGH CODE.</p>
+ <a href="#about" class="btn">ENTER MY WORLD →</a>
+</div>
+<section id="about">
+ <h2 class="title">01 // ABOUT ME</h2>
+ <div class="card"><p>I am Shanmuka Varun Chaitanya, a first-year B.Tech Computer Science student. I am interested in technology, programming, web development and innovation. I enjoy learning new skills and developing my technical knowledge.</p></div>
+</section>
+<section id="education">
+ <h2 class="title">02 // EDUCATION</h2>
+ <div class="card"><h3>B.TECH - COMPUTER SCIENCE</h3><p>First Year | Currently Pursuing</p></div>
+ <div class="card"><h3>INTERMEDIATE</h3><p>Academic Score: 94%</p></div>
+ <div class="card"><h3>10TH STANDARD</h3><p>Academic Score: 90%</p></div>
+</section>
+<section id="skills">
+ <h2 class="title">03 // MY SKILLS</h2>
+ <div class="card"><h3>TECHNICAL SKILLS</h3><ul><li>HTML</li><li>CSS</li><li>Basic Programming</li><li>Web Designing</li></ul></div>
+ <div class="card"><h3>PERSONAL SKILLS</h3><ul><li>Problem Solving</li><li>Communication</li><li>Creative Thinking</li><li>Quick Learning</li></ul></div>
+</section>
+<section id="contact">
+ <h2 class="title">04 // CONTACT</h2>
+ <div class="card"><h3>PLAYER PROFILE</h3><p>Name: Shanmuka Varun Chaitanya</p><p>Course: B.Tech CSE</p><p>Year: First Year</p><p>Email: shanmukavarunchaitanya14@gmail.com</p><p>Location: Andhra Pradesh, India</p></div>
+</section>
+<footer><h3>WELCOME TO MY CYBER WORLD</h3><p>© 2026 SHANMUKA VARUN CHAITANYA</p><p>DESIGNED WITH HTML, CSS & JAVASCRIPT</p></footer>
+<script>
+const cursor=document.querySelector(".cursor");
+const ring=document.querySelector(".cursor-ring");
+let mouseX=0,mouseY=0,ringX=0,ringY=0;
+document.addEventListener("mousemove",function(e){
+ mouseX=e.clientX;mouseY=e.clientY;
+ cursor.style.left=mouseX+"px";cursor.style.top=mouseY+"px";
+ const dot=document.createElement("div");dot.className="trail";
+ dot.style.left=mouseX+"px";dot.style.top=mouseY+"px";
+ document.body.appendChild(dot);setTimeout(()=>dot.remove(),600);
+});
+function animateRing(){
+ ringX+=(mouseX-ringX)*.15;ringY+=(mouseY-ringY)*.15;
+ ring.style.left=ringX+"px";ring.style.top=ringY+"px";
+ requestAnimationFrame(animateRing);
+}
+animateRing();
+document.querySelectorAll("a,.card").forEach(item=>{
+ item.addEventListener("mouseenter",()=>{ring.style.width="55px";ring.style.height="55px"});
+ item.addEventListener("mouseleave",()=>{ring.style.width="35px";ring.style.height="35px"});
+});
+function createTouchEffect(x,y){
+ const glow=document.createElement("div");glow.className="touch-glow";
+ glow.style.left=x+"px";glow.style.top=y+"px";document.body.appendChild(glow);
+ const ripple=document.createElement("div");ripple.className="ripple";
+ ripple.style.left=x+"px";ripple.style.top=y+"px";document.body.appendChild(ripple);
+ setTimeout(()=>glow.remove(),700);setTimeout(()=>ripple.remove(),700);
+}
+document.addEventListener("touchstart",function(e){
+ for(const touch of e.changedTouches)createTouchEffect(touch.clientX,touch.clientY);
+},{passive:true});
+document.addEventListener("pointerdown",function(e){
+ if(e.pointerType!=="mouse")createTouchEffect(e.clientX,e.clientY);
+});
+console.log("CYBER SYSTEM ONLINE...");
+console.log("MOBILE TOUCH ENABLED...");
+</script>
+</body>
+</html>

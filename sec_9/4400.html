@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio website of Gummalla Jagadeesh, B.Tech student at Vignan University.">
+  <title>Gummalla Jagadeesh | Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #070b18;
+      --panel: rgba(16, 25, 48, .78);
+      --cyan: #52e5ff;
+      --purple: #a78bfa;
+      --text: #edf5ff;
+      --muted: #9aaac5;
+      --line: rgba(82, 229, 255, .22);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    @media (pointer: fine) {
+      body { cursor: none; }
+      a, button { cursor: none; }
+      .cursor-dot, .cursor-ring {
+        position: fixed; left: 0; top: 0; pointer-events: none; z-index: 9999;
+        border-radius: 50%; transform: translate(-50%, -50%);
+      }
+      .cursor-dot {
+        width: 7px; height: 7px; background: var(--cyan);
+        box-shadow: 0 0 12px var(--cyan), 0 0 24px rgba(82,229,255,.6);
+      }
+      .cursor-ring {
+        width: 34px; height: 34px; border: 1px solid rgba(82,229,255,.75);
+        box-shadow: 0 0 18px rgba(82,229,255,.14);
+        transition: width .18s ease, height .18s ease, border-color .18s ease, background .18s ease;
+      }
+      .cursor-ring.hover {
+        width: 52px; height: 52px; border-color: var(--purple);
+        background: rgba(167,139,250,.09);
+      }
+      .pointer-glow {
+        position: fixed; inset: 0; pointer-events: none; z-index: 0;
+        background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(82,229,255,.075), transparent 70%);
+      }
+    }
+    @media (pointer: coarse) {
+      .cursor-dot, .cursor-ring, .pointer-glow { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(67, 56, 202, .20), transparent 32rem),
+        radial-gradient(circle at 85% 35%, rgba(6, 182, 212, .14), transparent 30rem),
+        var(--bg);
+      font-family: Inter, sans-serif;
+      line-height: 1.6;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .16;
+      background-image: linear-gradient(rgba(82,229,255,.12) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(82,229,255,.12) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    /* Soft neon spotlight follows the mouse on desktop */
+    .cursor-glow {
+      position: fixed;
+      width: 340px;
+      height: 340px;
+      left: 0;
+      top: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      background: radial-gradient(circle, rgba(82,229,255,.12), rgba(167,139,250,.06) 38%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: opacity .25s ease;
+    }
+    .wrap { z-index: 1; }
+    .cursor-dot {
+      position: fixed;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan), 0 0 24px var(--cyan);
+      pointer-events: none;
+      z-index: 10;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      body:hover .cursor-glow, body:hover .cursor-dot { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+    .wrap { width: min(1080px, 90%); margin: auto; position: relative; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 26px 0;
+    }
+    .brand { font: 600 1rem Orbitron, sans-serif; letter-spacing: 1px; color: var(--cyan); }
+    nav { display: flex; gap: 24px; }
+    nav a { color: var(--muted); text-decoration: none; font-size: .9rem; transition: .2s; }
+    nav a:hover { color: var(--cyan); }
+    .hero { min-height: 76vh; display: flex; flex-direction: column; justify-content: center; padding: 70px 0 90px; }
+    .eyebrow {
+      color: var(--cyan); text-transform: uppercase; letter-spacing: 3px;
+      font: 600 .75rem Orbitron, sans-serif; margin-bottom: 18px;
+    }
+    h1 {
+      font: 700 clamp(2.5rem, 7vw, 5.4rem)/1.12 Orbitron, sans-serif;
+      max-width: 900px; letter-spacing: -2px;
+    }
+    h1 span {
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .intro { max-width: 600px; color: var(--muted); font-size: 1.08rem; margin: 24px 0 30px; }
+    .status { display: inline-flex; align-items: center; gap: 10px; color: #c9faff; font-size: .9rem; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
+    .section { padding: 42px 0 78px; }
+    .section-title { font: 600 clamp(1.4rem, 3vw, 2rem) Orbitron, sans-serif; margin-bottom: 28px; }
+    .section-title span { color: var(--cyan); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+      padding: 24px; backdrop-filter: blur(12px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.18); transition: transform .25s, border-color .25s;
+    }
+    .card:hover { transform: translateY(-5px); border-color: rgba(82,229,255,.65); }
+    .year { color: var(--cyan); font: 600 .75rem Orbitron, sans-serif; letter-spacing: 1px; }
+    .card h3 { font-size: 1.08rem; margin: 12px 0 7px; }
+    .card p { color: var(--muted); font-size: .92rem; }
+    .score { margin-top: 12px; color: #d9f8ff !important; }
+    .score strong { color: var(--cyan); font: 700 1rem Orbitron, sans-serif; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 12px; }
+    .tag {
+      border: 1px solid var(--line); color: #d9f8ff; background: rgba(82,229,255,.07);
+      border-radius: 999px; padding: 10px 16px; font-size: .9rem;
+    }
+    footer { border-top: 1px solid var(--line); padding: 24px 0 34px; color: var(--muted); text-align: center; font-size: .85rem; }
+    @media (max-width: 720px) {
+      header { align-items: flex-start; gap: 16px; flex-direction: column; }
+      nav { gap: 16px; flex-wrap: wrap; }
+      .hero { min-height: 65vh; padding: 60px 0; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="pointer-glow" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="wrap">
+    <header>
+      <div class="brand">GJ // PORTFOLIO</div>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="about">
+        <p class="eyebrow">Hello, I'm</p>
+        <h1>Gummalla<br><span>Jagadeesh.</span></h1>
+        <p class="intro">
+          A first-year B.Tech student at Vignan University, building a strong foundation
+          in technology and developing skills for the future.
+        </p>
+        <div class="status"><span class="dot"></span> B.Tech Student · 2026–2030</div>
+      </section>
+
+      <section class="section" id="education">
+        <h2 class="section-title"><span>01.</span> Education</h2>
+        <div class="grid">
+          <article class="card">
+            <p class="year">2026 — 2030</p>
+            <h3>Bachelor of Technology (B.Tech)</h3>
+            <p>Currently pursuing · Vignan University</p>
+          </article>
+          <article class="card">
+            <p class="year">2024 — 2026</p>
+            <h3>Intermediate</h3>
+            <p>Bhashyam Junior College</p>
+            <p class="score">Percentage: <strong>95%</strong></p>
+          </article>
+          <article class="card">
+            <p class="year">2023 — 2024</p>
+            <h3>SSC</h3>
+            <p>Sri Sahajananda High School</p>
+            <p class="score">Percentage: <strong>90%</strong></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <h2 class="section-title"><span>02.</span> Skills</h2>
+        <div class="tag-list">
+          <span class="tag">C Programming — Learning</span>
+          <span class="tag">Problem Solving — Developing</span>
+          <span class="tag">Computer Fundamentals</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 Gummalla Jagadeesh · Personal Portfolio</footer>
+  </div>
+
+  <script>
+    // Futuristic pointer: glowing center, smooth trailing ring and hover response.
+    if (window.matchMedia("(pointer: fine)").matches) {
+      const dot = document.querySelector(".cursor-dot");
+      const ring = document.querySelector(".cursor-ring");
+      const glow = document.querySelector(".pointer-glow");
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+
+      window.addEventListener("mousemove", (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+        dot.style.left = mouseX + "px";
+        dot.style.top = mouseY + "px";
+        glow.style.setProperty("--mouse-x", mouseX + "px");
+        glow.style.setProperty("--mouse-y", mouseY + "px");
+      });
+
+      function animateRing() {
+        ringX += (mouseX - ringX) * 0.16;
+        ringY += (mouseY - ringY) * 0.16;
+        ring.style.left = ringX + "px";
+        ring.style.top = ringY + "px";
+        requestAnimationFrame(animateRing);
+      }
+      animateRing();
+
+      document.querySelectorAll("a, .card, .tag").forEach((item) => {
+        item.addEventListener("mouseenter", () => ring.classList.add("hover"));
+        item.addEventListener("mouseleave", () => ring.classList.remove("hover"));
+      });
+    }
+  </script>
+</body>
+</html>

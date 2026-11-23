@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>T. Karthik | Portfolio</title>
+
+<style>
+
+/* ===== GENERAL ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #07111f;
+    color: white;
+}
+
+
+/* ===== WELCOME SCREEN ===== */
+
+#welcome {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background:
+        radial-gradient(circle at top, #164e70, #020617 65%);
+
+    transition: opacity 1s;
+}
+
+.welcome-box {
+    padding: 30px;
+}
+
+.welcome-box h1 {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.welcome-box h1 span {
+    color: #38bdf8;
+}
+
+.welcome-box p {
+    color: #cbd5e1;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.start-btn {
+    padding: 15px 35px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #38bdf8;
+    color: #020617;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.start-btn:hover {
+    transform: scale(1.08);
+    background: white;

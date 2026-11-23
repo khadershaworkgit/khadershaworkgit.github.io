@@ -3,526 +3,629 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prompt Engineering for Developers | Master AI-Assisted Software Engineering</title>
-  <meta name="description" content="Bridge the gap between basic prompting and professional prompt engineering for software development. Learn logic generation, debugging, refactoring, and AI coding workflows.">
-  
-  <!-- Stylesheet -->
+  <title>The AI Developer Athenaeum | Prompt Engineering & Student Portfolios</title>
+  <meta name="description" content="A pleasant, scholarly reading environment bridging prompt engineering, AI-assisted software development, and student portfolio archives for Sections 9, 17, and 53.">
+
+  <!-- Bootstrap 5.3 CSS via CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <!-- Custom Pleasant Reading Athenaeum Stylesheet -->
   <link rel="stylesheet" href="./style.css">
-
-  <!-- Three.js (Universal CDN - Zero CORS issues on file:/// and https://) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-  <!-- GSAP & ScrollTrigger from CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
-  <!-- Scroll Progress Indicator -->
-  <div id="scroll-progress"></div>
 
-  <!-- Custom Cursor Follower (Desktop only) -->
-  <div class="cursor-dot"></div>
-  <div class="cursor-follower"></div>
+  <!-- Top Reading Progress Indicator -->
+  <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Three.js 3D Background Canvas -->
-  <canvas id="bg-3d-canvas"></canvas>
-
-  <!-- Canvas for Quiz Celebration Confetti -->
-  <canvas id="confetti-canvas"></canvas>
+  <!-- Sparkle Particle Canvas Overlay -->
+  <canvas id="sparkle-canvas" aria-hidden="true"></canvas>
 
   <!-- Toast Notification Container -->
-  <div id="toast-container" aria-live="polite"></div>
+  <div id="toast-notice" role="status" aria-live="polite"></div>
 
-  <!-- ==================== STICKY GLASS NAVBAR ==================== -->
-  <header class="navbar" role="banner">
-    <div class="container nav-container">
-      <a href="#hero" class="nav-brand" aria-label="Home">
-        <div class="nav-logo-icon">⚡</div>
-        <span class="nav-logo-text">sec 17 = " no responses "</span>
+  <!-- ==================== ATHENAEUM HEADER / NAVBAR ==================== -->
+  <nav class="navbar navbar-expand-lg athenaeum-nav" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand nav-brand-title" href="#hero">
+        <span class="brand-crest">🏛️</span>
+        <span>THE AI ATHENAEUM</span>
       </a>
 
-      <!-- Desktop Nav Links -->
-      <nav aria-label="Main Navigation">
-        <ul class="nav-links">
-          <li><a href="#problem" class="nav-link">The Gap</a></li>
-          <li><a href="#basic-vs-engineered" class="nav-link">Comparison</a></li>
-          <li><a href="#prompt-formula" class="nav-link">Formula</a></li>
-          <li><a href="#module-1" class="nav-link">Prompt Coding</a></li>
-          <li><a href="#module-2" class="nav-link">AI Workflows</a></li>
-          <li><a href="#skill-meter" class="nav-link">Skill Meter</a></li>
-          <li><a href="#cheat-sheet" class="nav-link">Cheat Sheet</a></li>
-          <li><a href="#quiz" class="nav-link">Quiz</a></li>
-        </ul>
-      </nav>
+      <!-- Mobile Hamburger Toggler -->
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <!-- Nav Actions -->
-      <div class="nav-actions">
-        <button class="btn-icon" id="btn-toggle-3d" title="Toggle 3D visual effects" aria-label="Toggle 3D visual effects">
-          <span>🔮</span>
-        </button>
-        <a href="#prompt-formula" class="btn-nav-cta">Start Engineering</a>
-        <button class="hamburger-btn" aria-label="Toggle mobile menu">☰</button>
+      <!-- Nav Links -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#section-volumes">The 3 Sections</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom fw-bold text-primary" href="#bookshelf-sec9">📚 Section 9 Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#ctco-framework">Prompt Formula</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#module-1">Prompt Coding</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#module-2">AI Workflows</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#cheat-sheet">Cheat Sheet</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#quiz">Quiz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#downloads">Downloads</a>
+          </li>
+        </ul>
+
+        <!-- Action Controls: Theme & Magic Sound Toggles -->
+        <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+          <button class="btn-sound-toggle" id="btn-sound-toggle" title="Toggle Magical Chime Sounds" aria-label="Toggle Magical Chime Sounds">
+            <span>🔊</span> <span>Magic Sound: ON</span>
+          </button>
+          <button class="btn-theme-toggle" id="btn-theme-toggle" title="Toggle Daylight / Midnight Reading Mode" aria-label="Toggle Reading Theme">
+            <span>🌙</span> <span>Midnight Scholar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==================== 1. HERO SECTION ==================== -->
+  <header class="hero-library" id="hero">
+    <div class="container">
+      <div class="academic-badge">
+        <span>📖</span>
+        <span>Curriculum &amp; Student Project Archive</span>
+      </div>
+
+      <h1 class="hero-main-title">
+        The AI Engineering <span class="highlight">Athenaeum</span>
+      </h1>
+
+      <p class="hero-lead-text">
+        A calm, pleasant scholarly environment designed for mastering Prompt Engineering, AI-assisted software development, and exploring student project volumes across <strong>Section 9</strong>, <strong>Section 17</strong>, and <strong>Section 53</strong>.
+      </p>
+
+      <!-- Quick Jump Pills -->
+      <div class="quick-jump-bar">
+        <a href="#bookshelf-sec9" class="jump-pill featured">
+          <span>📚</span> <span>Explore Section 9 Bookshelf (26 Projects)</span>
+        </a>
+        <a href="#section-volumes" class="jump-pill">
+          <span>🏛️</span> <span>Inspect All 3 Section Volumes</span>
+        </a>
+        <a href="#ctco-framework" class="jump-pill">
+          <span>🛠️</span> <span>C-T-C-O &amp; Prompt Builder</span>
+        </a>
+        <a href="#downloads" class="jump-pill">
+          <span>📄</span> <span>Word &amp; PowerPoint Resources</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- ==================== 1. HERO SECTION ==================== -->
-  <section class="hero-section" id="hero">
-    <div class="container hero-content">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>Advanced Software Engineering</span>
-      </div>
-
-      <h1 class="hero-title">
-        <span class="gradient-text-hero">Prompt Engineering</span><br>
-        <span class="glitch-text">for Developers</span>
-      </h1>
-
-      <p class="hero-subtitle">
-        You already know how to prompt. Now learn how to engineer.
-      </p>
-
-      <!-- Animated Typewriter Box -->
-      <div class="typewriter-box" aria-live="polite">
-        <span style="color: var(--neon-cyan);">&gt;</span>
-        <span id="typewriter-text">Stop asking. Start engineering.</span>
-        <span class="typewriter-cursor"></span>
-      </div>
-
-      <!-- Hero CTAs -->
-      <div class="hero-cta-group">
-        <a href="#basic-vs-engineered" class="btn-primary">
-          <span>⚡</span> <span>See the Difference</span>
-        </a>
-        <a href="#prompt-formula" class="btn-secondary">
-          <span>🛠️</span> <span>Explore the Formula</span>
-        </a>
-      </div>
-
-      <!-- Animated Stats Bar -->
-      <div class="hero-stats-row">
-        <div class="stat-item">
-          <div class="stat-num" data-target="10" data-suffix="x">0x</div>
-          <div class="stat-label">Faster Debugging</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num" data-target="5" data-prefix="" data-suffix=" Blocks">0</div>
-          <div class="stat-label">R-T-C-F-C Framework</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num" data-target="7" data-suffix=" Steps">0</div>
-          <div class="stat-label">AI SDLC Workflow</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num" data-target="100" data-suffix="%">0%</div>
-          <div class="stat-label">Type &amp; Edge-Case Safety</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 2. THE PROBLEM ==================== -->
-  <section class="section-padding" id="problem">
+  <!-- ==================== 2. THE THREE GRAND SECTION VOLUMES ==================== -->
+  <section class="section-volumes-wrapper" id="section-volumes">
     <div class="container">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>The Industry Dilemma</span>
+      <div class="section-header-block">
+        <div class="section-label">Academic Repository Directory</div>
+        <h2 class="section-heading">The Three Section Volumes</h2>
+        <p class="section-subheading">
+          Explore the master archives for each student section. Each volume functions as a central repository for student portfolios, AI coding demonstrations, and web components.
+        </p>
       </div>
-      <h2 class="section-title">Everyone Knows Basic Prompting</h2>
-      <p class="section-subtitle">
-        Typing "make a login page" or "write a Python script" gives you generic, untyped, and vulnerable code. When developers treat AI like a search engine, technical debt multiplies.
-      </p>
 
-      <div class="pain-points-grid">
-        <!-- Card 1 -->
-        <div class="glass-card pain-card">
-          <div class="pain-icon-wrapper">⚠️</div>
-          <h3 class="pain-title">Vague, Hallucinated Output</h3>
-          <p class="pain-desc">
-            Basic prompts yield monolithic placeholder code with hardcoded numbers, missing boundary conditions, and hallucinated APIs that fail under production load.
-          </p>
-          <div class="pain-code-snippet">
-            // "make a discount calculator"<br>
-            total = total * 0.95; // Floats drift!
+      <div class="row g-4 justify-content-center">
+        <!-- VOLUME IX: SECTION 9 (ACTIVE & POPULATED) -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="grand-volume-card">
+            <div class="grand-volume-inner volume-active">
+              <div class="volume-header">
+                <div class="volume-number-roman">VOL. IX</div>
+                <h3 class="volume-title">Section 9: The Pioneer Archive</h3>
+                <span class="volume-badge badge-active">🟢 Active • 26 Books Available</span>
+              </div>
+              <div class="volume-body">
+                <p>
+                  The foundational collection of 26 student-authored digital portfolios, futuristic web applications, and AI coding showcases. Each work is bound into an interactive book with the student's roll number.
+                </p>
+                <ul class="volume-meta-list">
+                  <li><span>✦</span> <strong>23 Local HTML Web Apps</strong></li>
+                  <li><span>✦</span> <strong>3 Special Cloud-Hosted Portals</strong></li>
+                  <li><span>✦</span> <strong>Interactive 3D Books with Magic Chime</strong></li>
+                </ul>
+              </div>
+              <a href="#bookshelf-sec9" class="volume-action-btn btn-open-active">
+                <span>📖</span> <span>Open Section 9 Bookshelf ↓</span>
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="glass-card pain-card">
-          <div class="pain-icon-wrapper">🐛</div>
-          <h3 class="pain-title">Unexplained Runtime Bugs</h3>
-          <p class="pain-desc">
-            Prompting "fix this error" leads to endless whack-a-mole patches. The AI introduces silent concurrency leaks and mutable state contamination without addressing root causes.
-          </p>
-          <div class="pain-code-snippet">
-            // ClientConnectorError on line 18<br>
-            RuntimeWarning: coroutine was never awaited
+        <!-- VOLUME XVII: SECTION 17 (SUBMISSION OPEN) -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="grand-volume-card">
+            <div class="grand-volume-inner">
+              <div class="volume-header">
+                <div class="volume-number-roman" style="color: var(--accent-navy);">VOL. XVII</div>
+                <h3 class="volume-title">Section 17: The Builder Guild</h3>
+                <span class="volume-badge badge-upcoming">🟡 Submissions Active</span>
+              </div>
+              <div class="volume-body">
+                <p>
+                  Repository for Section 17 students focusing on AI-assisted web components, decoupled architecture, and defensive validation using vanilla web standards.
+                </p>
+                <ul class="volume-meta-list">
+                  <li><span>✦</span> <strong>Directory:</strong> <code>./sec_17/</code></li>
+                  <li><span>✦</span> <strong>Format:</strong> <code>[RollNumber].html</code></li>
+                  <li><span>✦</span> <strong>Starter Template:</strong> Ready for deployment</li>
+                </ul>
+              </div>
+              <a href="./sec_17/template.html" target="_blank" class="volume-action-btn btn-open-template">
+                <span>📄</span> <span>View Section 17 Template ↗</span>
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="glass-card pain-card">
-          <div class="pain-icon-wrapper">🍝</div>
-          <h3 class="pain-title">Messy, Untestable Monoliths</h3>
-          <p class="pain-desc">
-            Code produced without explicit structural constraints violates SOLID principles, entangles database queries inside presentation logic, and cannot be unit-tested.
-          </p>
-          <div class="pain-code-snippet">
-            // 140 lines in one function<br>
-            Cyclomatic Complexity: 14+ (High risk)
+        <!-- VOLUME LIII: SECTION 53 (SUBMISSION OPEN) -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="grand-volume-card">
+            <div class="grand-volume-inner">
+              <div class="volume-header">
+                <div class="volume-number-roman" style="color: var(--accent-emerald);">VOL. LIII</div>
+                <h3 class="volume-title">Section 53: The Architect Hall</h3>
+                <span class="volume-badge badge-upcoming">🟡 Submissions Active</span>
+              </div>
+              <div class="volume-body">
+                <p>
+                  Archive for Section 53 students dedicated to advanced prompt-based program logic, distributed algorithms, concurrency throttles, and automated test suites.
+                </p>
+                <ul class="volume-meta-list">
+                  <li><span>✦</span> <strong>Directory:</strong> <code>./sec_53/</code></li>
+                  <li><span>✦</span> <strong>Format:</strong> <code>[RollNumber].html</code></li>
+                  <li><span>✦</span> <strong>Starter Template:</strong> Ready for deployment</li>
+                </ul>
+              </div>
+              <a href="./sec_53/template.html" target="_blank" class="volume-action-btn btn-open-template">
+                <span>📄</span> <span>View Section 53 Template ↗</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== 3. BASIC vs ENGINEERED ==================== -->
-  <section class="section-padding" id="basic-vs-engineered">
+  <!-- ==================== 3. SECTION 9 STUDENT BOOKSHELF ==================== -->
+  <section class="bookshelf-section" id="bookshelf-sec9">
     <div class="container">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>The Centerpiece</span>
+      <div class="section-header-block">
+        <div class="section-label">Interactive Student Library</div>
+        <h2 class="section-heading">Section IX: Books with Roll Numbers</h2>
+        <p class="section-subheading">
+          Click on any student's book to trigger the <strong>magic sound and animation</strong>, opening their live digital portfolio or hosted web application in the Athenaeum Reader.
+        </p>
       </div>
-      <h2 class="section-title">Basic vs. Engineered Prompting</h2>
-      <p class="section-subtitle">
-        Compare the results of a naive 4-word prompt against a structured C-T-C-O engineered prompt for the exact same task: <em>"Create a to-do list application."</em>
-      </p>
 
-      <div class="centerpiece-box">
-        <!-- Toggle Tabs -->
-        <div class="compare-toggle-bar">
-          <div class="toggle-switch-group" role="tablist">
-            <button class="btn-compare-tab" id="btn-tab-basic" role="tab" aria-selected="false">
-              ❌ BASIC PROMPT
+      <!-- Bookshelf Controls (Search & Category Filtering) -->
+      <div class="bookshelf-controls">
+        <div class="bookshelf-search-box">
+          <span class="search-icon-pos">🔍</span>
+          <input type="text" id="bookshelf-search" class="bookshelf-search-input" placeholder="Search by Roll Number (e.g., 4556, 4A, 4B) or Student Name..." aria-label="Search student books">
+        </div>
+
+        <div class="bookshelf-filter-pills" role="tablist" aria-label="Filter books by type">
+          <button class="filter-pill-btn active" data-filter="all" role="tab" aria-selected="true">
+            All Books (26)
+          </button>
+          <button class="filter-pill-btn" data-filter="hosted" role="tab" aria-selected="false">
+            ✨ Special Hosted Portals (3)
+          </button>
+          <button class="filter-pill-btn" data-filter="html" role="tab" aria-selected="false">
+            💻 HTML Web Apps (23)
+          </button>
+        </div>
+
+        <div class="bookshelf-count-label" id="bookshelf-count">
+          Showing 26 of 26 Books
+        </div>
+      </div>
+
+      <!-- The 3D Bookshelf Grid -->
+      <div class="books-shelf-grid" id="books-shelf-grid" aria-live="polite">
+        <!-- Rendered dynamically by script.js using window.SEC9_STUDENTS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. THE PROMPT ENGINEERING CURRICULUM ==================== -->
+  
+  <!-- THE DILEMMA: WHY BASIC PROMPTING FAILS -->
+  <section class="curriculum-section" id="the-gap">
+    <div class="container">
+      <div class="section-header-block">
+        <div class="section-label">The Core Educational Foundation</div>
+        <h2 class="section-heading">The Gap: Basic Prompting vs. Prompt Engineering</h2>
+        <p class="section-subheading">
+          Typing <em>"make a login page"</em> gives you generic, untyped code with silent security holes. Prompt engineering transforms ad-hoc requests into verifiable, production-ready specifications.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Pain Point 1 -->
+        <div class="col-12 col-md-4">
+          <div class="paper-card h-100">
+            <div class="paper-card-header">
+              <h3 class="paper-card-title text-danger">⚠️ Vague &amp; Hallucinated</h3>
+              <span class="badge bg-danger-subtle text-danger">High Risk</span>
+            </div>
+            <p style="color: var(--ink-secondary); font-size: 0.94rem;">
+              Basic prompts lack environment contracts, causing AI to hallucinate non-existent API endpoints and generate untyped variables that crash under runtime edge cases.
+            </p>
+            <div class="mt-3 p-2 rounded bg-light border font-monospace" style="font-size: 0.8rem;">
+              // Naive discount calculation<br>
+              total = total * 0.95; // Float precision drift!
+            </div>
+          </div>
+        </div>
+
+        <!-- Pain Point 2 -->
+        <div class="col-12 col-md-4">
+          <div class="paper-card h-100">
+            <div class="paper-card-header">
+              <h3 class="paper-card-title text-warning">🐛 Unexplained Bugs</h3>
+              <span class="badge bg-warning-subtle text-warning">Debugging Debt</span>
+            </div>
+            <p style="color: var(--ink-secondary); font-size: 0.94rem;">
+              Asking AI to "fix this error" applies fragile patches that mask symptoms without diagnosing the true root cause, creating subtle concurrency leaks.
+            </p>
+            <div class="mt-3 p-2 rounded bg-light border font-monospace" style="font-size: 0.8rem;">
+              // Leaked coroutine warning<br>
+              RuntimeWarning: coroutine was never awaited
+            </div>
+          </div>
+        </div>
+
+        <!-- Pain Point 3 -->
+        <div class="col-12 col-md-4">
+          <div class="paper-card h-100">
+            <div class="paper-card-header">
+              <h3 class="paper-card-title text-secondary">🍝 Monolithic Code</h3>
+              <button class="btn-pronounce" data-audio="monolithic.wav" title="Hear pronunciation">
+                <span>🔊 Pronounce</span>
+              </button>
+            </div>
+            <p style="color: var(--ink-secondary); font-size: 0.94rem;">
+              Unconstrained prompts dump 150 lines of presentation, business, and database queries into one gigantic function that violates SOLID principles and resists unit testing.
+            </p>
+            <div class="mt-3 p-2 rounded bg-light border font-monospace" style="font-size: 0.8rem;">
+              <span class="d-inline-flex align-items-center gap-1">
+                Cyclomatic Complexity: 14+
+                <button class="btn-pronounce p-0 border-0 bg-transparent" data-audio="cyclomatic_complexity.wav">🔊</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BASIC vs. ENGINEERED INTERACTIVE COMPARISON -->
+  <section class="curriculum-section" id="comparison">
+    <div class="container">
+      <div class="section-header-block">
+        <div class="section-label">Interactive Demonstration</div>
+        <h2 class="section-heading">Basic vs. Engineered Comparison</h2>
+        <p class="section-subheading">
+          Evaluate the exact difference in output quality when prompting for a simple web application: <em>"Create a to-do list."</em>
+        </p>
+      </div>
+
+      <div class="paper-card">
+        <!-- Toggle Switch -->
+        <div class="d-flex justify-content-center mb-4">
+          <div class="btn-group" role="group" aria-label="Comparison toggle">
+            <button type="button" class="btn btn-outline-danger fw-bold px-4 py-2" id="btn-tab-basic">
+              ❌ Basic Prompt
             </button>
-            <button class="btn-compare-tab active" id="btn-tab-engineered" role="tab" aria-selected="true">
-              ✅ ENGINEERED PROMPT
+            <button type="button" class="btn btn-primary fw-bold px-4 py-2 active" id="btn-tab-engineered">
+              ✅ Engineered C-T-C-O Prompt
             </button>
           </div>
         </div>
 
-        <!-- Split View: Prompt on Left, AI Output on Right -->
-        <div class="compare-split-display">
-          <div class="compare-column">
-            <div class="compare-col-header">
-              <span class="compare-col-title" id="compare-prompt-heading">Input Prompt</span>
-              <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-dim);">INPUT SPECIFICATION</span>
+        <!-- Side-by-Side Display -->
+        <div class="row g-4">
+          <div class="col-12 col-lg-5">
+            <div class="p-3 rounded bg-light border">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-bold text-uppercase" style="font-size: 0.82rem; color: var(--accent-navy);">Input Prompt</span>
+                <span class="badge bg-secondary-subtle text-secondary font-monospace">SPECIFICATION</span>
+              </div>
+              <pre class="code-block-content" id="compare-prompt-display"></pre>
             </div>
-            <div class="code-terminal-box" id="compare-prompt-display">// Engineered C-T-C-O Prompt:
-[ROLE]: Senior Frontend Architect.
-[TASK]: Build a to-do list web component using vanilla HTML, CSS & JS.
-[REQUIREMENTS]:
-1. Features: Add, delete, toggle complete, and persist in localStorage.
-2. Defensive Validation: Block empty submissions with inline error alerts.
-3. Accessibility: Full WCAG 2.1 AA keyboard support and aria-live announcements.
-4. Modular Structure: Decouple state management, DOM rendering, and storage.
-[OUTPUT]: Three cleanly annotated blocks (HTML, CSS, JS) with zero external libraries.</div>
           </div>
 
-          <div class="compare-column">
-            <div class="compare-col-header">
-              <span class="compare-col-title" id="compare-output-heading">AI Generated Result</span>
-              <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--neon-cyan);">LIVE CODE SYNTHESIS</span>
+          <div class="col-12 col-lg-7">
+            <div class="p-3 rounded bg-light border">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span class="fw-bold text-uppercase" style="font-size: 0.82rem; color: var(--accent-emerald);">AI Generated Result</span>
+                <span class="badge bg-success-subtle text-success font-monospace">SYNTHESIS</span>
+              </div>
+              <pre class="code-block-content" id="compare-output-display"></pre>
             </div>
-            <div class="code-terminal-box" id="compare-output-display">&lt;!-- Production-ready, modular, accessible Web Component --&gt;
-&lt;section class="todo-app" aria-labelledby="todo-title"&gt;
-  &lt;form id="todo-form" aria-label="Add new task"&gt;
-    &lt;input type="text" id="task-input" aria-required="true" placeholder="Enter task..."&gt;
-    &lt;button type="submit" aria-label="Add Task"&gt;Add&lt;/button&gt;
-  &lt;/form&gt;
-  &lt;ul id="task-list" aria-live="polite"&gt;&lt;/ul&gt;
-&lt;/section&gt;
-
-&lt;script&gt;
-class TodoStore {
-  constructor(storageKey = 'todos_v1') {
-    this.key = storageKey;
-  }
-  getTasks() { return JSON.parse(localStorage.getItem(this.key) || '[]'); }
-  saveTasks(tasks) { localStorage.setItem(this.key, JSON.stringify(tasks)); }
-}
-// Clean separation of concerns with full ARIA and localStorage persistence.
-&lt;/script&gt;</div>
           </div>
         </div>
 
-        <!-- Metric Bars Table -->
-        <div class="metric-bars-wrapper">
-          <h4 style="font-size: 1.05rem; font-family: var(--font-heading); color: #ffffff; margin-bottom: 1.25rem;">
+        <!-- Metric Bars -->
+        <div class="mt-4 pt-3 border-top">
+          <h4 class="h6 fw-bold mb-3" style="font-family: var(--font-serif); color: var(--ink-primary);">
             📊 Code Quality &amp; Maintainability Index
           </h4>
-
-          <div class="metric-row">
-            <span class="metric-label">Clarity</span>
-            <div class="metric-track"><div class="metric-fill engineered" id="bar-clarity"></div></div>
-            <span class="metric-val" id="val-clarity">98%</span>
-          </div>
-
-          <div class="metric-row">
-            <span class="metric-label">Code Quality</span>
-            <div class="metric-track"><div class="metric-fill engineered" id="bar-quality"></div></div>
-            <span class="metric-val" id="val-quality">95%</span>
-          </div>
-
-          <div class="metric-row">
-            <span class="metric-label">Bug Resistance</span>
-            <div class="metric-track"><div class="metric-fill engineered" id="bar-bugs"></div></div>
-            <span class="metric-val" id="val-bugs">96%</span>
-          </div>
-
-          <div class="metric-row">
-            <span class="metric-label">Maintainability</span>
-            <div class="metric-track"><div class="metric-fill engineered" id="bar-maintainability"></div></div>
-            <span class="metric-val" id="val-maintainability">94%</span>
-          </div>
-
-          <div class="metric-row">
-            <span class="metric-label">Reusability</span>
-            <div class="metric-track"><div class="metric-fill engineered" id="bar-reusability"></div></div>
-            <span class="metric-val" id="val-reusability">92%</span>
+          <div class="row g-3">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="d-flex justify-content-between small fw-bold mb-1">
+                <span>Clarity</span>
+                <span id="val-clarity">98%</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div class="progress-bar bg-success" id="bar-clarity" style="width: 98%;"></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="d-flex justify-content-between small fw-bold mb-1">
+                <span>Code Quality</span>
+                <span id="val-quality">95%</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div class="progress-bar bg-success" id="bar-quality" style="width: 95%;"></div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="d-flex justify-content-between small fw-bold mb-1">
+                <span>Bug Resistance</span>
+                <span id="val-bugs">96%</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div class="progress-bar bg-success" id="bar-bugs" style="width: 96%;"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== 4. THE PROMPT FORMULA ==================== -->
-  <section class="section-padding" id="prompt-formula">
+  <!-- ==================== 5. C-T-C-O & R-T-C-F-C PROMPT FORMULAS ==================== -->
+  <section class="curriculum-section" id="ctco-framework">
     <div class="container">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>The 5-Block Framework</span>
-      </div>
-      <h2 class="section-title">The R-T-C-F-C Prompt Formula</h2>
-      <p class="section-subtitle">
-        Professional prompt engineers construct queries as executable specifications. Click on any block to flip it and explore the technical invariants.
-      </p>
-
-      <!-- What is C-T-C-O Explanatory Callout Banner -->
-      <div style="background: rgba(14, 20, 36, 0.9); border: 1px solid var(--neon-cyan); border-left: 5px solid var(--neon-cyan); border-radius: var(--radius-md); padding: 1.5rem; margin-bottom: 2.5rem; box-shadow: 0 8px 30px rgba(0, 240, 255, 0.15);">
-        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
-          <span style="font-size: 1.4rem;">💡</span>
-          <h3 style="font-size: 1.2rem; color: #ffffff; font-family: var(--font-heading); margin: 0;">What is C-T-C-O? (The Foundational Prompting Framework)</h3>
-        </div>
-        <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
-          <strong>C-T-C-O</strong> is the industry-standard 4-part software engineering formula for writing prompts that prevent AI hallucinations, mathematical errors, and sloppy code:
-        </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; font-size: 0.88rem;">
-          <div style="background: rgba(5, 7, 13, 0.75); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid rgba(0, 240, 255, 0.25);">
-            <strong style="color: var(--neon-cyan); font-family: var(--font-mono); font-size: 0.95rem;">1. C = CONTEXT</strong>
-            <p style="color: var(--text-dim); margin-top: 0.35rem;">The system environment, language version, and architecture (e.g., <em>Python 3.11 checkout engine receiving CartItem dataclasses</em>).</p>
-          </div>
-          <div style="background: rgba(5, 7, 13, 0.75); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid rgba(0, 255, 157, 0.25);">
-            <strong style="color: var(--neon-green); font-family: var(--font-mono); font-size: 0.95rem;">2. T = TASK</strong>
-            <p style="color: var(--text-dim); margin-top: 0.35rem;">The single, unambiguous programming objective (e.g., <em>Write calculate_order_totals() with volume and tier discounts</em>).</p>
-          </div>
-          <div style="background: rgba(5, 7, 13, 0.75); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid rgba(255, 184, 0, 0.25);">
-            <strong style="color: var(--neon-amber); font-family: var(--font-mono); font-size: 0.95rem;">3. C = CONSTRAINTS</strong>
-            <p style="color: var(--text-dim); margin-top: 0.35rem;">Non-negotiable engineering rules and boundaries (e.g., <em>Use Decimal with ROUND_HALF_UP, no binary floats, O(N) complexity</em>).</p>
-          </div>
-          <div style="background: rgba(5, 7, 13, 0.75); padding: 0.85rem 1rem; border-radius: 8px; border: 1px solid rgba(168, 85, 247, 0.25);">
-            <strong style="color: var(--neon-purple); font-family: var(--font-mono); font-size: 0.95rem;">4. O = OUTPUT</strong>
-            <p style="color: var(--text-dim); margin-top: 0.35rem;">The exact schema required (e.g., <em>Pure typed Python code with dataclass models, docstrings, and 3 pytest test cases</em>).</p>
-          </div>
-        </div>
-        <p style="color: var(--neon-cyan); font-size: 0.82rem; margin-top: 0.85rem; font-family: var(--font-mono);">
-          ℹ️ <strong>R-T-C-F-C Connection:</strong> R-T-C-F-C below is the expanded 5-part version of C-T-C-O where <strong>Role</strong> is explicitly separated from Context, and <strong>Format</strong> is separated from Output!
+      <div class="section-header-block">
+        <div class="section-label">Architectural Blueprint</div>
+        <h2 class="section-heading">The C-T-C-O &amp; R-T-C-F-C Prompt Formulas</h2>
+        <p class="section-subheading">
+          Stop asking open-ended questions. Construct deterministic queries using structured engineering blocks.
         </p>
       </div>
 
+      <!-- Explainer Callout -->
+      <div class="ctco-explainer-card">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span style="font-size: 1.5rem;">💡</span>
+          <h3 class="h5 fw-bold m-0" style="font-family: var(--font-serif); color: var(--accent-navy);">
+            What is C-T-C-O? (The Industry Standard Formula)
+          </h3>
+        </div>
+        <p style="color: var(--ink-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
+          <strong>C-T-C-O</strong> is the 4-part software engineering methodology that eliminates AI hallucinations, type drift, and sloppy shortcuts:
+        </p>
+
+        <div class="ctco-pillar-grid">
+          <div class="ctco-pillar-item">
+            <span class="ctco-pillar-letter">1. C = CONTEXT</span>
+            <p style="font-size: 0.85rem; color: var(--ink-secondary); margin: 0;">
+              System runtime, language edition, and architectural boundaries (e.g., <em>Python 3.11 checkout engine receiving CartItem dataclasses</em>).
+            </p>
+          </div>
+          <div class="ctco-pillar-item">
+            <span class="ctco-pillar-letter text-success">2. T = TASK</span>
+            <p style="font-size: 0.85rem; color: var(--ink-secondary); margin: 0;">
+              The atomic, unambiguous objective (e.g., <em>Implement calculate_order_totals() with tiered discount rules</em>).
+            </p>
+          </div>
+          <div class="ctco-pillar-item">
+            <span class="ctco-pillar-letter text-warning">3. C = CONSTRAINTS</span>
+            <p style="font-size: 0.85rem; color: var(--ink-secondary); margin: 0;">
+              Non-negotiable invariants (e.g., <em>Use Decimal with ROUND_HALF_UP, no binary floats, O(N) complexity limit</em>).
+            </p>
+          </div>
+          <div class="ctco-pillar-item">
+            <span class="ctco-pillar-letter text-primary">4. O = OUTPUT</span>
+            <p style="font-size: 0.85rem; color: var(--ink-secondary); margin: 0;">
+              Exact syntax schema (e.g., <em>Pure typed code with dataclass models, docstrings, and 3 pytest verification cases</em>).
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-3 small text-muted">
+          ℹ️ <strong>R-T-C-F-C Expansion:</strong> The 5-block framework below refines C-T-C-O by splitting <strong>Role</strong> out of Context and <strong>Format</strong> out of Output for extreme precision!
+        </div>
+      </div>
 
       <!-- 5 Interactive Flip Cards -->
-      <div class="formula-cards-grid">
+      <div class="formula-cards-row">
         <!-- R: Role -->
-        <div class="formula-card" tabindex="0" role="button" aria-label="Role card">
-          <div class="formula-card-inner">
+        <div class="formula-flip-card" tabindex="0" role="button" aria-label="Role card: click to flip">
+          <div class="formula-flip-inner">
             <div class="formula-front">
-              <div class="formula-letter">R</div>
-              <div class="formula-word">ROLE</div>
-              <div class="formula-click-hint">Click to Flip ↷</div>
+              <div class="big-letter">R</div>
+              <div class="block-word">ROLE</div>
+              <div class="flip-hint">Click or Hover to Flip ↷</div>
             </div>
             <div class="formula-back">
-              <strong>Define the Identity:</strong>
-              <p style="margin-top: 0.5rem;">"Act as a Principal Distributed Systems Engineer with expertise in Go and microservices."</p>
-              <p style="margin-top: 0.5rem; color: var(--neon-cyan);">Pins domain tone, depth, and best practices.</p>
+              <strong style="color: var(--accent-navy);">Define Identity:</strong>
+              <p class="mt-2 mb-0">"Act as a Principal Financial Systems Engineer with expertise in precision arithmetic."</p>
             </div>
           </div>
         </div>
 
         <!-- T: Task -->
-        <div class="formula-card" tabindex="0" role="button" aria-label="Task card">
-          <div class="formula-card-inner">
+        <div class="formula-flip-card" tabindex="0" role="button" aria-label="Task card: click to flip">
+          <div class="formula-flip-inner">
             <div class="formula-front">
-              <div class="formula-letter" style="color: var(--neon-green);">T</div>
-              <div class="formula-word">TASK</div>
-              <div class="formula-click-hint">Click to Flip ↷</div>
+              <div class="big-letter" style="color: var(--accent-emerald);">T</div>
+              <div class="block-word">TASK</div>
+              <div class="flip-hint">Click or Hover to Flip ↷</div>
             </div>
             <div class="formula-back">
-              <strong>Atomic Objective:</strong>
-              <p style="margin-top: 0.5rem;">"Implement an order pricing calculation function with volume discounts."</p>
-              <p style="margin-top: 0.5rem; color: var(--neon-green);">Single responsibility; avoid vague multi-part goals.</p>
+              <strong style="color: var(--accent-emerald);">Atomic Objective:</strong>
+              <p class="mt-2 mb-0">"Implement an order pricing calculation function with tiered volume discounts."</p>
             </div>
           </div>
         </div>
 
         <!-- C: Context -->
-        <div class="formula-card" tabindex="0" role="button" aria-label="Context card">
-          <div class="formula-card-inner">
+        <div class="formula-flip-card" tabindex="0" role="button" aria-label="Context card: click to flip">
+          <div class="formula-flip-inner">
             <div class="formula-front">
-              <div class="formula-letter" style="color: var(--neon-violet);">C</div>
-              <div class="formula-word">CONTEXT</div>
-              <div class="formula-click-hint">Click to Flip ↷</div>
+              <div class="big-letter" style="color: var(--accent-navy);">C</div>
+              <div class="block-word">CONTEXT</div>
+              <div class="flip-hint">Click or Hover to Flip ↷</div>
             </div>
             <div class="formula-back">
-              <strong>Environment &amp; Inputs:</strong>
-              <p style="margin-top: 0.5rem;">"Python 3.11+ checkout engine. Input is a list of CartItem dataclasses with SKU, price, and count."</p>
-              <p style="margin-top: 0.5rem; color: var(--neon-violet);">Eliminates guesswork about data contracts.</p>
+              <strong style="color: var(--accent-navy);">System Invariants:</strong>
+              <p class="mt-2 mb-0">"Python 3.11+ e-commerce billing engine receiving CartItem dataclasses."</p>
             </div>
           </div>
         </div>
 
         <!-- F: Format -->
-        <div class="formula-card" tabindex="0" role="button" aria-label="Format card">
-          <div class="formula-card-inner">
+        <div class="formula-flip-card" tabindex="0" role="button" aria-label="Format card: click to flip">
+          <div class="formula-flip-inner">
             <div class="formula-front">
-              <div class="formula-letter" style="color: var(--neon-magenta);">F</div>
-              <div class="formula-word">FORMAT</div>
-              <div class="formula-click-hint">Click to Flip ↷</div>
+              <div class="big-letter" style="color: var(--accent-gold);">F</div>
+              <div class="block-word">FORMAT</div>
+              <div class="flip-hint">Click or Hover to Flip ↷</div>
             </div>
             <div class="formula-back">
-              <strong>Output Schema:</strong>
-              <p style="margin-top: 0.5rem;">"Return pure typed Python code with Google-style docstrings followed by 3 pytest cases."</p>
-              <p style="margin-top: 0.5rem; color: var(--neon-magenta);">Forbids conversational fluff and markdown clutter.</p>
+              <strong style="color: var(--accent-gold);">Output Schema:</strong>
+              <p class="mt-2 mb-0">"Return pure typed Python code with docstrings followed by 3 parameterized pytest cases."</p>
             </div>
           </div>
         </div>
 
         <!-- C: Constraints -->
-        <div class="formula-card" tabindex="0" role="button" aria-label="Constraints card">
-          <div class="formula-card-inner">
+        <div class="formula-flip-card" tabindex="0" role="button" aria-label="Constraints card: click to flip">
+          <div class="formula-flip-inner">
             <div class="formula-front">
-              <div class="formula-letter" style="color: var(--neon-amber);">C</div>
-              <div class="formula-word">CONSTRAINTS</div>
-              <div class="formula-click-hint">Click to Flip ↷</div>
+              <div class="big-letter" style="color: var(--accent-crimson);">C</div>
+              <div class="block-word">CONSTRAINTS</div>
+              <div class="flip-hint">Click or Hover to Flip ↷</div>
             </div>
             <div class="formula-back">
-              <strong>Strict Boundaries:</strong>
-              <p style="margin-top: 0.5rem;">"Use decimal.Decimal for currency. O(N) complexity. Raise ValueError on negative price. Zero external libs."</p>
-              <p style="margin-top: 0.5rem; color: var(--neon-amber);">Guarantees correctness and performance.</p>
+              <strong style="color: var(--accent-crimson);">Strict Rules:</strong>
+              <p class="mt-2 mb-0">"Use decimal.Decimal for currency. O(N) complexity. Raise ValueError on negative price. Zero external libs."</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Interactive Prompt Builder Mini-Tool -->
-      <div class="prompt-builder-tool">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.5rem;">
+      <!-- Live Interactive Prompt Builder -->
+      <div class="prompt-builder-wrapper">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
           <div>
-            <h3 style="font-size: 1.35rem; color: #ffffff;">🛠️ Interactive Prompt Builder</h3>
-            <p style="font-size: 0.88rem; color: var(--text-dim);">Fill the 5 formula fields to assemble an enterprise-grade prompt in real time.</p>
+            <h3 class="h5 fw-bold mb-1" style="font-family: var(--font-serif); color: var(--ink-primary);">
+              🛠️ Interactive Enterprise Prompt Builder
+            </h3>
+            <p class="small text-muted mb-0">Fill in the 5 parameters to automatically assemble an executable specification.</p>
           </div>
-          <button class="btn-primary" id="btn-copy-builder-prompt">
-            <span>📋</span> <span>Copy Assembled Prompt</span>
+          <button class="btn btn-primary btn-sm px-3 py-2 fw-bold" id="btn-copy-builder-prompt">
+            📋 Copy Assembled Prompt
           </button>
         </div>
 
-        <div class="builder-grid">
-          <!-- Inputs -->
-          <div class="builder-inputs">
-            <div class="builder-input-group">
-              <label for="pb-role">[ROLE]</label>
-              <input type="text" id="pb-role" value="Principal Financial Systems Engineer">
+        <div class="row g-3">
+          <div class="col-12 col-lg-6">
+            <div class="builder-field-group">
+              <label class="builder-field-label" for="pb-role">[ROLE]</label>
+              <input type="text" id="pb-role" class="builder-input" value="Principal Financial Systems Engineer">
             </div>
-            <div class="builder-input-group">
-              <label for="pb-task">[TASK]</label>
-              <input type="text" id="pb-task" value="Implement calculate_order_totals() with tiered discounts">
+            <div class="builder-field-group">
+              <label class="builder-field-label" for="pb-task">[TASK]</label>
+              <input type="text" id="pb-task" class="builder-input" value="Implement calculate_order_totals() with tiered discounts">
             </div>
-            <div class="builder-input-group">
-              <label for="pb-context">[CONTEXT]</label>
-              <input type="text" id="pb-context" value="Python 3.11 e-commerce billing engine receiving CartItem dataclasses">
+            <div class="builder-field-group">
+              <label class="builder-field-label" for="pb-context">[CONTEXT]</label>
+              <input type="text" id="pb-context" class="builder-input" value="Python 3.11 e-commerce engine receiving CartItem dataclasses">
             </div>
-            <div class="builder-input-group">
-              <label for="pb-format">[FORMAT]</label>
-              <input type="text" id="pb-format" value="Fully typed Python code with dataclass models and docstrings">
+            <div class="builder-field-group">
+              <label class="builder-field-label" for="pb-format">[FORMAT &amp; SCHEMA]</label>
+              <input type="text" id="pb-format" class="builder-input" value="Pure typed Python code with docstrings &amp; pytest cases">
             </div>
-            <div class="builder-input-group">
-              <label for="pb-constraints">[CONSTRAINTS]</label>
-              <textarea id="pb-constraints" rows="2">Use decimal.Decimal (ROUND_HALF_UP); validate negative prices; O(N) time.</textarea>
+            <div class="builder-field-group">
+              <label class="builder-field-label" for="pb-constraints">[CONSTRAINTS]</label>
+              <textarea id="pb-constraints" class="builder-textarea" rows="2">Use decimal.Decimal (ROUND_HALF_UP); validate negative prices; O(N) time complexity.</textarea>
             </div>
           </div>
 
-          <!-- Live Preview -->
-          <div class="builder-preview-box">
-            <div class="builder-preview-header">
-              <span style="font-size: 0.75rem; font-family: var(--font-mono); color: var(--neon-cyan);">LIVE ASSEMBLED PREVIEW</span>
-              <span class="status-pill" style="font-size: 0.68rem; padding: 0.2rem 0.5rem;">READY</span>
-            </div>
-            <div class="builder-preview-code" id="pb-preview-code"></div>
+          <div class="col-12 col-lg-6">
+            <label class="builder-field-label">LIVE ASSEMBLED SPECIFICATION</label>
+            <div class="assembled-prompt-box" id="pb-preview-code"></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== 5. MODULE 1: PROMPT-BASED CODING ==================== -->
-  <section class="section-padding" id="module-1">
+  <!-- ==================== 6. MODULE 1: PROMPT-BASED CODING ==================== -->
+  <section class="curriculum-section" id="module-1">
     <div class="container">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>Topic 1 // Deep Dive</span>
-      </div>
-      <h2 class="section-title">Module 1: Prompt-Based Coding</h2>
-      <p class="section-subtitle">
-        Explore concrete implementations of generating logic, debugging complex runtime errors, and refactoring monolithic code into clean architecture.
-      </p>
-
-      <!-- Module 1 Tabs -->
-      <div class="module-tabs-nav" role="tablist">
-        <button class="btn-module-tab active" data-tab="tab-logic" role="tab" aria-selected="true">
-          <span>1.1</span> <span>Generate Program Logic</span>
-        </button>
-        <button class="btn-module-tab" data-tab="tab-debug" role="tab" aria-selected="false">
-          <span>1.2</span> <span>Debug Errors</span>
-        </button>
-        <button class="btn-module-tab" data-tab="tab-refactor" role="tab" aria-selected="false">
-          <span>1.3</span> <span>Improve Code Structure</span>
-        </button>
+      <div class="section-header-block">
+        <div class="section-label">Curriculum Module 1</div>
+        <h2 class="section-heading">Prompt-Based Coding in Practice</h2>
+        <p class="section-subheading">
+          Concrete implementations demonstrating program logic generation, error debugging, and architectural refactoring.
+        </p>
       </div>
 
-      <!-- Tab Content 1: Logic -->
-      <div class="tab-pane active-pane" id="tab-logic">
-        <div class="glass-card">
-          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--neon-cyan);">
-            Task: Write a Prime Number Checker
-          </h3>
-          <p style="color: var(--text-dim); margin-bottom: 1.5rem; font-size: 0.95rem;">
-            Basic prompts produce slow $O(N)$ brute-force loops that crash on edge cases. The engineered prompt specifies mathematical efficiency and negative handling.
-          </p>
+      <!-- Topic 1.1: Logic Generation -->
+      <div class="paper-card">
+        <div class="paper-card-header">
+          <h3 class="paper-card-title">1.1 Generate Program Logic: Prime Number Checker</h3>
+          <span class="badge bg-primary-subtle text-primary">Algorithm Efficiency</span>
+        </div>
+        <p style="color: var(--ink-secondary); font-size: 0.94rem;">
+          Naive prompts result in $O(N)$ brute-force loops that fail on 0, 1, and negative numbers. Engineered prompts enforce $O(\sqrt{N})$ mathematical bounds and negative input validation.
+        </p>
 
-          <div class="diff-split-grid">
-            <div class="diff-card before">
-              <div class="diff-card-header">
-                <span>❌ Basic Prompt: "write prime check"</span>
-                <span>O(N) Brute Force &amp; Missing Guards</span>
-              </div>
-              <div class="diff-code-wrapper">
-<pre><code>def is_prime(n):
-    # Bug 1: Fails on 0, 1, and negative numbers!
+        <div class="code-diff-grid">
+          <div class="code-compare-card basic">
+            <div class="code-compare-header">
+              <span>❌ Basic Prompt: "write prime check"</span>
+              <span>O(N) Brute Force &amp; Missing Guards</span>
+            </div>
+            <pre class="code-block-content"><code>def is_prime(n):
+    # Bug 1: Returns True for 0, 1, and negative numbers!
     for i in range(2, n): # Inefficient O(N) loop
         if n % i == 0:
             return False
-    return True # Bug 2: Returns True for n <= 1</code></pre>
-              </div>
-            </div>
+    return True # Bug 2: Fails edge case guards</code></pre>
+          </div>
 
-            <div class="diff-card after">
-              <div class="diff-card-header">
-                <span>✅ Engineered Prompt: C-T-C-O Specified</span>
-                <span>O(√N) Time Complexity &amp; Boundary Proof</span>
-              </div>
-              <div class="diff-code-wrapper">
-<pre><code>import math
+          <div class="code-compare-card engineered">
+            <div class="code-compare-header">
+              <span>✅ Engineered Prompt: C-T-C-O Specified</span>
+              <span>O(√N) Time Complexity &amp; Boundary Proof</span>
+            </div>
+            <pre class="code-block-content"><code>import math
 
 def is_prime(n: int) -> bool:
     """Checks primality with O(sqrt(N)) time complexity and boundary validation."""
@@ -537,47 +640,46 @@ def is_prime(n: int) -> bool:
         if n % i == 0 or n % (i + 2) == 0:
             return False
     return True</code></pre>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      <!-- Tab Content 2: Debug -->
-      <div class="tab-pane" id="tab-debug">
-        <div class="glass-card">
-          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--neon-green);">
-            Task: Fix Async Concurrency Collision &amp; Socket Exhaustion
+      <!-- Topic 1.2: Debug Errors -->
+      <div class="paper-card">
+        <div class="paper-card-header">
+          <h3 class="paper-card-title">
+            1.2 Debug Errors: Async Concurrency Collision &amp; Socket Exhaustion
           </h3>
-          <p style="color: var(--text-dim); margin-bottom: 1.5rem; font-size: 0.95rem;">
-            A common bug: mutable default parameter <code>results=[]</code> plus unthrottled <code>asyncio.gather</code> crashing all 50 parallel microservice queries.
-          </p>
+          <button class="btn-pronounce" data-audio="semaphore.wav" title="Hear pronunciation">
+            <span>🔊 Semaphore</span>
+          </button>
+        </div>
+        <p style="color: var(--ink-secondary); font-size: 0.94rem;">
+          When firing 50+ concurrent requests, naive code exhausts OS sockets and leaks memory via mutable default arguments. The engineered prompt requests root cause isolation and an <code>asyncio.Semaphore</code> throttle.
+        </p>
 
-          <div class="diff-split-grid">
-            <div class="diff-card before">
-              <div class="diff-card-header">
-                <span>❌ Buggy Code &amp; Crash</span>
-                <span>ClientConnectorError &amp; State Contamination</span>
-              </div>
-              <div class="diff-code-wrapper">
-<pre><code># Bug: Mutable default argument leaks data!
+        <div class="code-diff-grid">
+          <div class="code-compare-card basic">
+            <div class="code-compare-header">
+              <span>❌ Buggy Snippet</span>
+              <span>ClientConnectorError &amp; State Contamination</span>
+            </div>
+            <pre class="code-block-content"><code># Bug 1: Mutable default argument results=[] leaks between runs!
 async def fetch_all(urls, results=[]):
     async with aiohttp.ClientSession() as s:
-        # Bug: 50+ sockets fire at once; 1 failure aborts all!
+        # Bug 2: 50+ sockets fire simultaneously; 1 failure aborts all!
         tasks = [s.get(u) for u in urls]
         responses = await asyncio.gather(*tasks)
         for r in responses: results.append(await r.json())
     return results</code></pre>
-              </div>
-            </div>
+          </div>
 
-            <div class="diff-card after">
-              <div class="diff-card-header">
-                <span>✅ AI-Debugged Terminal &amp; Patch</span>
-                <span>asyncio.Semaphore(10) &amp; Isolated Failures</span>
-              </div>
-              <div class="diff-code-wrapper">
-<pre><code>async def fetch_all(urls: List[str], max_concurrency: int = 10):
+          <div class="code-compare-card engineered">
+            <div class="code-compare-header">
+              <span>✅ AI-Debugged Patch</span>
+              <span>asyncio.Semaphore(10) &amp; Exception Isolation</span>
+            </div>
+            <pre class="code-block-content"><code>async def fetch_all(urls: List[str], max_concurrency: int = 10):
     if not urls: return []
     # FIX: Semaphore throttles concurrency to safe OS limit
     sem = asyncio.Semaphore(max_concurrency)
@@ -587,425 +689,341 @@ async def fetch_all(urls, results=[]):
         # FIX: return_exceptions=True isolates failures
         res = await asyncio.gather(*tasks, return_exceptions=True)
     return [r for r in res if isinstance(r, dict)]</code></pre>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      <!-- Tab Content 3: Refactor -->
-      <div class="tab-pane" id="tab-refactor">
-        <div class="glass-card">
-          <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--neon-magenta);">
-            Task: Animated Code Diff (Monolith &rarr; Strategy Pattern)
+      <!-- Topic 1.3: SOLID Refactoring -->
+      <div class="paper-card">
+        <div class="paper-card-header">
+          <h3 class="paper-card-title">
+            1.3 Improve Code Structure: SOLID Strategy Pattern
           </h3>
-          <p style="color: var(--text-dim); margin-bottom: 1.5rem; font-size: 0.95rem;">
-            Watch red procedural anti-patterns transition into clean, modular, and dependency-injected classes adhering to SOLID principles.
-          </p>
-
-          <div class="diff-container">
-            <div class="diff-line removed"><span>-</span> <span>def send_notification(user_id, channel, msg):</span></div>
-            <div class="diff-line removed"><span>-</span> <span>    conn = sqlite3.connect("prod.db") # Direct DB call inside dispatcher</span></div>
-            <div class="diff-line removed"><span>-</span> <span>    if channel == "email": smtplib.SMTP().sendmail(...)</span></div>
-            <div class="diff-line removed"><span>-</span> <span>    elif channel == "sms": requests.post("sms.com", ...)</span></div>
-            <div class="diff-line removed"><span>-</span> <span>    # Cyclomatic Complexity: 14+ // Violates Open/Closed</span></div>
-            <div class="diff-line added"><span>+</span> <span>class NotificationChannel(ABC):</span></div>
-            <div class="diff-line added"><span>+</span> <span>    @abstractmethod def send(self, user: UserProfile, msg: str) -> bool: pass</span></div>
-            <div class="diff-line added"><span>+</span> <span>class EmailChannel(NotificationChannel): ...</span></div>
-            <div class="diff-line added"><span>+</span> <span>class SmsChannel(NotificationChannel): ...</span></div>
-            <div class="diff-line added"><span>+</span> <span>class NotificationService:</span></div>
-            <div class="diff-line added"><span>+</span> <span>    def __init__(self, repo: UserRepo, channels: Dict[str, NotificationChannel]):</span></div>
-            <div class="diff-line added"><span>+</span> <span>        # 100% Mock Testable &amp; Extensible without modifying core</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Animated Debug Loop Diagram -->
-      <div class="debug-loop-diagram">
-        <h4 style="font-size: 1.05rem; font-family: var(--font-heading); color: #ffffff;">
-          🔄 The Continuous AI Debugging Loop
-        </h4>
-        <div class="loop-steps-row">
-          <div class="loop-step-badge">1. Run Code</div>
-          <span class="loop-arrow">&rarr;</span>
-          <div class="loop-step-badge">2. Capture Traceback</div>
-          <span class="loop-arrow">&rarr;</span>
-          <div class="loop-step-badge">3. Contextual Prompt</div>
-          <span class="loop-arrow">&rarr;</span>
-          <div class="loop-step-badge">4. Targeted Patch</div>
-          <span class="loop-arrow">&rarr;</span>
-          <div class="loop-step-badge">5. Automated Test</div>
-          <span class="loop-arrow">&rarr;</span>
-          <div class="loop-step-badge" style="color: var(--neon-green);">6. Ship</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 6. MODULE 2: AI-SUPPORTED PROGRAM DEV ==================== -->
-  <section class="section-padding" id="module-2">
-    <div class="container">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>Topic 2 // Full SDLC Workflows</span>
-      </div>
-      <h2 class="section-title">Module 2: AI-Supported Program Development</h2>
-      <p class="section-subtitle">
-        Building applications and web components by guiding AI through a structured 7-step engineering timeline. Click any timeline node to reveal the operational tip and sample prompt.
-      </p>
-
-      <!-- 7-Step Animated Connected Interactive Stepper -->
-      <div class="timeline-horizontal" role="tablist" aria-label="AI Software Development Lifecycle Stepper">
-        <button type="button" class="timeline-node active" data-step="1" role="tab" aria-selected="true" title="Step 1: Plan">
-          <div class="timeline-dot">1</div>
-          <div class="timeline-label">Plan</div>
-        </button>
-        <button type="button" class="timeline-node" data-step="2" role="tab" aria-selected="false" title="Step 2: Prompt">
-          <div class="timeline-dot">2</div>
-          <div class="timeline-label">Prompt</div>
-        </button>
-        <button type="button" class="timeline-node" data-step="3" role="tab" aria-selected="false" title="Step 3: Generate">
-          <div class="timeline-dot">3</div>
-          <div class="timeline-label">Generate</div>
-        </button>
-        <button type="button" class="timeline-node" data-step="4" role="tab" aria-selected="false" title="Step 4: Run & Test">
-          <div class="timeline-dot">4</div>
-          <div class="timeline-label">Run &amp; Test</div>
-        </button>
-        <button type="button" class="timeline-node" data-step="5" role="tab" aria-selected="false" title="Step 5: Debug">
-          <div class="timeline-dot">5</div>
-          <div class="timeline-label">Debug</div>
-        </button>
-        <button type="button" class="timeline-node" data-step="6" role="tab" aria-selected="false" title="Step 6: Refine">
-          <div class="timeline-dot">6</div>
-          <div class="timeline-label">Refine</div>
-        </button>
-        <button type="button" class="timeline-node" data-step="7" role="tab" aria-selected="false" title="Step 7: Ship">
-          <div class="timeline-dot">7</div>
-          <div class="timeline-label">Ship</div>
-        </button>
-      </div>
-
-      <!-- Timeline Tip Card -->
-      <div class="timeline-tip-box">
-        <h4 id="timeline-tip-title" style="color: var(--neon-cyan); font-family: var(--font-heading); margin-bottom: 0.5rem;">
-          Step 1: Plan
-        </h4>
-        <p id="timeline-tip-text" style="color: var(--text-secondary); margin-bottom: 0.75rem;">
-          Map data contracts and error boundaries before opening your AI chat.
-        </p>
-        <div style="background: rgba(3, 5, 10, 0.9); border: 1px dashed var(--border-card); border-radius: var(--radius-sm); padding: 0.75rem 1rem; font-family: var(--font-mono); font-size: 0.85rem; color: var(--neon-green);" id="timeline-tip-prompt">
-          'Given this functional requirement, decompose it into 4 atomic architectural stages.'
-        </div>
-      </div>
-
-      <!-- 3 Mini-Projects Grid -->
-      <div class="projects-grid">
-        <!-- Project 1 -->
-        <div class="glass-card project-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h4 style="font-size: 1.15rem; color: #ffffff;">1. Precision Calculator</h4>
-            <span class="prompt-level-badge starter">STARTER</span>
-          </div>
-          <p style="font-size: 0.88rem; color: var(--text-dim);">A clean CLI or GUI calculator enforcing Decimal arithmetic and zero division protection.</p>
-          <div class="pain-code-snippet" style="background: rgba(2,4,8,0.9); border-color: var(--border-card); color: #cbd5e1;">
-            <strong>Starter Prompt:</strong> "Build a Python calculator supporting +, -, *, / using Decimal."
-          </div>
-          <div class="pain-code-snippet" style="background: rgba(2,4,8,0.9); border-color: rgba(0,255,157,0.3); color: #86efac;">
-            <strong>Level-Up Prompt:</strong> "Add memory recall, PEMDAS parsing via Shunting-Yard algorithm, and pytest suites."
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="glass-card project-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h4 style="font-size: 1.15rem; color: #ffffff;">2. Cyber Theme Switcher</h4>
-            <span class="prompt-level-badge levelup">LEVEL-UP</span>
-          </div>
-          <p style="font-size: 0.88rem; color: var(--text-dim);">A reactive component respecting system color scheme preference with smooth CSS transitions.</p>
-          <div class="pain-code-snippet" style="background: rgba(2,4,8,0.9); border-color: var(--border-card); color: #cbd5e1;">
-            <strong>Starter Prompt:</strong> "Create a toggle button that changes page background color."
-          </div>
-          <div class="pain-code-snippet" style="background: rgba(2,4,8,0.9); border-color: rgba(0,255,157,0.3); color: #86efac;">
-            <strong>Level-Up Prompt:</strong> "Use CSS variables, matchMedia('(prefers-color-scheme)'), localStorage, and aria-pressed."
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="glass-card project-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h4 style="font-size: 1.15rem; color: #ffffff;">3. Accessible Nav Component</h4>
-            <span class="prompt-level-badge starter">STARTER</span>
-          </div>
-          <p style="font-size: 0.88rem; color: var(--text-dim);">Mobile-first navbar with animated hamburger menu and full keyboard focus trapping.</p>
-          <div class="pain-code-snippet" style="background: rgba(2,4,8,0.9); border-color: var(--border-card); color: #cbd5e1;">
-            <strong>Starter Prompt:</strong> "Write a responsive HTML/CSS navbar with a mobile menu."
-          </div>
-          <div class="pain-code-snippet" style="background: rgba(2,4,8,0.9); border-color: rgba(0,255,157,0.3); color: #86efac;">
-            <strong>Level-Up Prompt:</strong> "Implement WCAG 2.1 AA keyboard Esc close, focus-trap, and zero framework dependencies."
-          </div>
-        </div>
-      </div>
-
-      <!-- Live Sandboxed Component Demo -->
-      <div class="live-demo-card" id="demo-sandbox-box">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-          <div>
-            <span class="status-pill">LIVE SANDBOXED WORKING DEMO</span>
-            <h3 style="font-size: 1.35rem; color: #ffffff; margin-top: 0.4rem;">Interactive Neon Theme Switcher Component</h3>
-            <p style="font-size: 0.88rem; color: var(--text-dim);">Built completely with vanilla JavaScript, CSS custom properties, and ARIA attributes.</p>
-          </div>
-          <button class="btn-primary" id="demo-theme-btn">
-            <span>🎨</span> <span>Switch to Neon Magenta</span>
+          <button class="btn-pronounce" data-audio="decoupled.wav" title="Hear pronunciation">
+            <span>🔊 Decoupled</span>
           </button>
         </div>
-      </div>
-    </div>
-  </section>
+        <p style="color: var(--ink-secondary); font-size: 0.94rem;">
+          Refactor tangled procedural code containing hardcoded database queries into decoupled, dependency-injected notification channels.
+        </p>
 
-  <!-- ==================== 7. BEFORE vs AFTER SKILL METER ==================== -->
-  <section class="section-padding" id="skill-meter">
-    <div class="container">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>Competency Matrix</span>
-      </div>
-      <h2 class="section-title">Before vs. After Skill Meter</h2>
-      <p class="section-subtitle">
-        Quantifying the tangible engineering capabilities gained after transitioning from basic ad-hoc prompts to structured engineering workflows.
-      </p>
-
-      <div class="skill-meters-grid">
-        <!-- Meter 1 -->
-        <div class="skill-meter-card" data-percent="95">
-          <h4 style="font-size: 1.05rem; color: #ffffff;">Code Generation</h4>
-          <div class="radial-meter-box">
-            <svg class="radial-svg" width="120" height="120" viewBox="0 0 100 100">
-              <circle class="radial-bg" cx="50" cy="50" r="45"></circle>
-              <circle class="radial-progress" cx="50" cy="50" r="45"></circle>
-            </svg>
-            <div class="radial-text">0%</div>
-          </div>
-          <div style="font-size: 0.82rem; color: var(--text-dim);">Before: 25% &rarr; <strong style="color: var(--neon-green);">After: 95%</strong></div>
-          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem;">Zero float drift, strict typing contracts.</p>
-        </div>
-
-        <!-- Meter 2 -->
-        <div class="skill-meter-card" data-percent="92">
-          <h4 style="font-size: 1.05rem; color: #ffffff;">Debugging Speed</h4>
-          <div class="radial-meter-box">
-            <svg class="radial-svg" width="120" height="120" viewBox="0 0 100 100">
-              <circle class="radial-bg" cx="50" cy="50" r="45"></circle>
-              <circle class="radial-progress" cx="50" cy="50" r="45" style="stroke: var(--neon-cyan);"></circle>
-            </svg>
-            <div class="radial-text">0%</div>
-          </div>
-          <div style="font-size: 0.82rem; color: var(--text-dim);">Before: 20% &rarr; <strong style="color: var(--neon-cyan);">After: 92%</strong></div>
-          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem;">Root cause isolation in seconds.</p>
-        </div>
-
-        <!-- Meter 3 -->
-        <div class="skill-meter-card" data-percent="90">
-          <h4 style="font-size: 1.05rem; color: #ffffff;">SOLID Refactoring</h4>
-          <div class="radial-meter-box">
-            <svg class="radial-svg" width="120" height="120" viewBox="0 0 100 100">
-              <circle class="radial-bg" cx="50" cy="50" r="45"></circle>
-              <circle class="radial-progress" cx="50" cy="50" r="45" style="stroke: var(--neon-violet);"></circle>
-            </svg>
-            <div class="radial-text">0%</div>
-          </div>
-          <div style="font-size: 0.82rem; color: var(--text-dim);">Before: 15% &rarr; <strong style="color: var(--neon-violet);">After: 90%</strong></div>
-          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem;">Clean decoupling &amp; 100% mock tests.</p>
-        </div>
-
-        <!-- Meter 4 -->
-        <div class="skill-meter-card" data-percent="96">
-          <h4 style="font-size: 1.05rem; color: #ffffff;">Full-App Scaffolding</h4>
-          <div class="radial-meter-box">
-            <svg class="radial-svg" width="120" height="120" viewBox="0 0 100 100">
-              <circle class="radial-bg" cx="50" cy="50" r="45"></circle>
-              <circle class="radial-progress" cx="50" cy="50" r="45" style="stroke: var(--neon-magenta);"></circle>
-            </svg>
-            <div class="radial-text">0%</div>
-          </div>
-          <div style="font-size: 0.82rem; color: var(--text-dim);">Before: 30% &rarr; <strong style="color: var(--neon-magenta);">After: 96%</strong></div>
-          <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem;">Staged milestones, verified persistence.</p>
+        <div class="p-3 rounded bg-light border font-monospace small">
+          <div class="text-danger">- def send_notification(user_id, channel, msg):</div>
+          <div class="text-danger">-     conn = sqlite3.connect("prod.db") # Direct DB call inside dispatcher</div>
+          <div class="text-danger">-     if channel == "email": smtplib.SMTP().sendmail(...)</div>
+          <div class="text-danger">-     elif channel == "sms": requests.post("sms.com", ...)</div>
+          <div class="text-success mt-2">+ class NotificationChannel(ABC):</div>
+          <div class="text-success">+     @abstractmethod def send(self, user: UserProfile, msg: str) -> bool: pass</div>
+          <div class="text-success">+ class EmailChannel(NotificationChannel): ...</div>
+          <div class="text-success">+ class SmsChannel(NotificationChannel): ...</div>
+          <div class="text-success">+ class NotificationService:</div>
+          <div class="text-success">+     def __init__(self, repo: UserRepo, channels: Dict[str, NotificationChannel]):</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== 8. PROMPT CHEAT SHEET ==================== -->
-  <section class="section-padding" id="cheat-sheet">
+  <!-- ==================== 7. MODULE 2: AI-SUPPORTED PROGRAM DEV ==================== -->
+  <section class="curriculum-section" id="module-2">
     <div class="container">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>Developer Toolkit</span>
+      <div class="section-header-block">
+        <div class="section-label">Curriculum Module 2</div>
+        <h2 class="section-heading">AI-Supported Program Development &amp; SDLC</h2>
+        <p class="section-subheading">
+          A disciplined 7-step software lifecycle for directing AI from concept to deployment. Click each step node to reveal best practices.
+        </p>
       </div>
-      <h2 class="section-title">Prompt Engineering Cheat Sheet</h2>
-      <p class="section-subtitle">
-        6 ready-to-use production prompt templates. Click the copy button to copy any template to your clipboard.
-      </p>
 
-      <div class="cheat-sheet-grid">
-        <!-- 1. Logic Synthesis -->
-        <div class="glass-card cheat-card">
+      <div class="paper-card">
+        <!-- 7-Step Interactive Stepper -->
+        <div class="sdlc-stepper-row" role="tablist" aria-label="AI Software Development Lifecycle Stepper">
+          <button type="button" class="sdlc-step-node active" data-step="1" role="tab" aria-selected="true">
+            <div class="sdlc-step-circle">1</div>
+            <div class="sdlc-step-title">Plan</div>
+          </button>
+          <button type="button" class="sdlc-step-node" data-step="2" role="tab" aria-selected="false">
+            <div class="sdlc-step-circle">2</div>
+            <div class="sdlc-step-title">Prompt</div>
+          </button>
+          <button type="button" class="sdlc-step-node" data-step="3" role="tab" aria-selected="false">
+            <div class="sdlc-step-circle">3</div>
+            <div class="sdlc-step-title">Generate</div>
+          </button>
+          <button type="button" class="sdlc-step-node" data-step="4" role="tab" aria-selected="false">
+            <div class="sdlc-step-circle">4</div>
+            <div class="sdlc-step-title">Run &amp; Test</div>
+          </button>
+          <button type="button" class="sdlc-step-node" data-step="5" role="tab" aria-selected="false">
+            <div class="sdlc-step-circle">5</div>
+            <div class="sdlc-step-title">Debug</div>
+          </button>
+          <button type="button" class="sdlc-step-node" data-step="6" role="tab" aria-selected="false">
+            <div class="sdlc-step-circle">6</div>
+            <div class="sdlc-step-title">Refine</div>
+          </button>
+          <button type="button" class="sdlc-step-node" data-step="7" role="tab" aria-selected="false">
+            <div class="sdlc-step-circle">7</div>
+            <div class="sdlc-step-title">Ship</div>
+          </button>
+        </div>
+
+        <!-- Dynamic Tip Panel -->
+        <div class="sdlc-tip-panel">
+          <h4 id="timeline-tip-title" class="h6 fw-bold text-primary mb-1">
+            Step 1: Plan
+          </h4>
+          <p id="timeline-tip-text" class="text-secondary small mb-2">
+            Define data contracts, system boundaries, and error invariants before opening your AI chat.
+          </p>
+          <div class="p-2 rounded bg-light border font-monospace small" id="timeline-tip-prompt">
+            'Decompose this checkout feature into 4 atomic architectural stages with isolated failure boundaries.'
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 8. CHEAT SHEET & QUICK QUIZ ==================== -->
+  <section class="curriculum-section" id="cheat-sheet">
+    <div class="container">
+      <div class="section-header-block">
+        <div class="section-label">Developer Toolkit</div>
+        <h2 class="section-heading">Prompt Engineering Cheat Sheet</h2>
+        <p class="section-subheading">
+          6 copyable templates for logic generation, root-cause debugging, SOLID refactoring, and automated testing.
+        </p>
+      </div>
+
+      <div class="cheatsheet-grid">
+        <!-- Template 1 -->
+        <div class="cheat-card">
           <div class="cheat-card-header">
             <div class="cheat-card-title">1. Logic Synthesis</div>
-            <button class="btn-icon btn-copy-cheat" title="Copy template">📋</button>
+            <button class="btn-copy-template">📋 Copy</button>
           </div>
-          <div class="cheat-prompt-text">[ROLE]: Senior [Language] Architect.
+          <div class="cheat-code-text">[ROLE]: Senior [Language] Architect.
 [TASK]: Implement [Functionality].
 [CONSTRAINTS]: O([Complexity]) time, handle edge cases [X, Y, Z], zero external dependencies.
 [OUTPUT]: Fully typed code with docstrings.</div>
         </div>
 
-        <!-- 2. Debug & Root Cause -->
-        <div class="glass-card cheat-card">
+        <!-- Template 2 -->
+        <div class="cheat-card">
           <div class="cheat-card-header">
             <div class="cheat-card-title">2. Error Debugging &amp; RCA</div>
-            <button class="btn-icon btn-copy-cheat" title="Copy template">📋</button>
+            <button class="btn-copy-template">📋 Copy</button>
           </div>
-          <div class="cheat-prompt-text">[CONTEXT]: [Runtime/Env].
+          <div class="cheat-code-text">[CONTEXT]: [Runtime/Env].
 [ERROR]: [Paste exact Traceback].
 [CODE]: [Paste snippet].
 [TASK]: 1) Root cause analysis. 2) Provide a targeted patch. 3) Write a unit test verifying the bug fix.</div>
         </div>
 
-        <!-- 3. SOLID Refactor -->
-        <div class="glass-card cheat-card">
+        <!-- Template 3 -->
+        <div class="cheat-card">
           <div class="cheat-card-header">
             <div class="cheat-card-title">3. Structural Refactoring</div>
-            <button class="btn-icon btn-copy-cheat" title="Copy template">📋</button>
+            <button class="btn-copy-template">📋 Copy</button>
           </div>
-          <div class="cheat-prompt-text">[TASK]: Refactor this function to the Strategy Pattern.
+          <div class="cheat-code-text">[TASK]: Refactor this function to the Strategy Pattern.
 [DIRECTIVES]: Decouple [A] from [B] using Dependency Injection. Keep cyclomatic complexity under 3. Do not break external interfaces.</div>
         </div>
 
-        <!-- 4. Code Explanation -->
-        <div class="glass-card cheat-card">
+        <!-- Template 4 -->
+        <div class="cheat-card">
           <div class="cheat-card-header">
             <div class="cheat-card-title">4. Code Audit &amp; Explanation</div>
-            <button class="btn-icon btn-copy-cheat" title="Copy template">📋</button>
+            <button class="btn-copy-template">📋 Copy</button>
           </div>
-          <div class="cheat-prompt-text">[ROLE]: Security &amp; Systems Auditor.
+          <div class="cheat-code-text">[ROLE]: Security &amp; Systems Auditor.
 [TASK]: Explain how this code works step-by-step.
 [AUDIT]: Highlight any potential memory leaks, race conditions, or unhandled exceptions under high concurrency.</div>
         </div>
 
-        <!-- 5. Automated Tests -->
-        <div class="glass-card cheat-card">
+        <!-- Template 5 -->
+        <div class="cheat-card">
           <div class="cheat-card-header">
             <div class="cheat-card-title">5. Automated Test Generation</div>
-            <button class="btn-icon btn-copy-cheat" title="Copy template">📋</button>
+            <button class="btn-copy-template">📋 Copy</button>
           </div>
-          <div class="cheat-prompt-text">[TASK]: Write a parameterized [pytest/jest] test suite for [Class/Function].
+          <div class="cheat-code-text">[TASK]: Write a parameterized [pytest/jest] test suite for [Class/Function].
 [COVERAGE]: Happy path, null inputs, boundary values, and mock network failures using in-memory mocks.</div>
         </div>
 
-        <!-- 6. Optimization -->
-        <div class="glass-card cheat-card">
+        <!-- Template 6 -->
+        <div class="cheat-card">
           <div class="cheat-card-header">
             <div class="cheat-card-title">6. Performance Optimization</div>
-            <button class="btn-icon btn-copy-cheat" title="Copy template">📋</button>
+            <button class="btn-copy-template">📋 Copy</button>
           </div>
-          <div class="cheat-prompt-text">[TASK]: Optimize this algorithm for [Latency / Memory].
-[CONSTRAINTS]: Reduce time complexity from O(N^2) to O(N log N) or O(N). Avoid redundant allocations. Provide before/after benchmarks.</div>
+          <div class="cheat-code-text">[TASK]: Optimize this algorithm for [Latency / Memory].
+[CONSTRAINTS]: Reduce time complexity from O(N^2) to O(N log N) or O(N). Avoid redundant allocations. Provide benchmarks.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== 9. QUICK QUIZ ==================== -->
-  <section class="section-padding" id="quiz">
+  <!-- QUICK QUIZ SECTION -->
+  <section class="curriculum-section" id="quiz">
     <div class="container">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>Knowledge Check</span>
+      <div class="section-header-block">
+        <div class="section-label">Self-Assessment</div>
+        <h2 class="section-heading">Quick Interactive Quiz</h2>
+        <p class="section-subheading">
+          Test your prompt engineering instincts with 5 multiple-choice questions. Score 4 or higher to unlock the celebratory sparkle burst!
+        </p>
       </div>
-      <h2 class="section-title">Quick Interactive Quiz</h2>
-      <p class="section-subtitle">
-        Test your prompt engineering instincts with 5 multiple-choice questions. Score 4 or higher to unlock the celebratory confetti!
-      </p>
 
-      <div class="quiz-box">
-        <div class="quiz-question-box">
-          <div class="quiz-q-num" id="quiz-q-num">Question 1 of 5</div>
-          <h3 class="quiz-question-text" id="quiz-question-text">Loading question...</h3>
-
-          <div class="quiz-options-list" id="quiz-options-list"></div>
-          <div class="quiz-feedback" id="quiz-feedback"></div>
+      <div class="quiz-wrapper">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="badge bg-primary-subtle text-primary" id="quiz-q-num">Question 1 of 5</span>
+          <span class="small text-muted font-monospace" id="quiz-score-display">Score: 0 / 0</span>
         </div>
 
-        <div class="quiz-controls-row">
-          <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim);" id="quiz-score-display">
-            Instant evaluation with detailed explanations
-          </span>
-          <button class="btn-primary" id="btn-quiz-next" disabled>
-            <span>Next Question</span> <span>&rarr;</span>
+        <h3 class="h5 fw-bold mb-4" id="quiz-question-text" style="font-family: var(--font-serif); color: var(--ink-primary);">
+          Loading question...
+        </h3>
+
+        <div id="quiz-options-list"></div>
+        <div id="quiz-feedback"></div>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button class="btn btn-primary px-4 py-2 fw-bold" id="btn-quiz-next" disabled>
+            Next Question &rarr;
           </button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== 10. RESOURCES & FOOTER ==================== -->
-  <section class="section-padding" id="resources">
+  <!-- ==================== 9. CURRICULUM DOWNLOADS ==================== -->
+  <section class="curriculum-section" id="downloads">
     <div class="container">
-      <div class="section-badge">
-        <span class="badge-dot"></span>
-        <span>Curriculum Materials &amp; Downloads</span>
-      </div>
-      <h2 class="section-title">Further Reading &amp; Resources</h2>
-      <p class="section-subtitle">
-        Download the full academic guide, PowerPoint presentation, or explore external references.
-      </p>
-
-      <div class="resources-grid">
-        <a href="./Prompt_Based_Coding_and_AI_Development_Guide.docx" class="resource-link-card" download>
-          <div style="font-size: 1.5rem;">📄</div>
-          <div>
-            <div style="font-weight: 700; color: #ffffff;">Comprehensive Word Guide (.docx)</div>
-            <div style="font-size: 0.8rem; color: var(--text-dim);">Full curriculum narrative, code samples, and rubrics</div>
-          </div>
-        </a>
-
-        <a href="./Prompt_Based_Coding_and_AI_Development_Overview.pptx" class="resource-link-card" download>
-          <div style="font-size: 1.5rem;">📊</div>
-          <div>
-            <div style="font-weight: 700; color: #ffffff;">PowerPoint Presentation (.pptx)</div>
-            <div style="font-size: 0.8rem; color: var(--text-dim);">19 widescreen slides with native audio shapes</div>
-          </div>
-        </a>
-
-        <a href="#prompt-formula" class="resource-link-card">
-          <div style="font-size: 1.5rem;">📚</div>
-          <div>
-            <div style="font-weight: 700; color: #ffffff;">R-T-C-F-C Prompt Guide</div>
-            <div style="font-size: 0.8rem; color: var(--text-dim);">Interactive prompt construction blueprint</div>
-          </div>
-        </a>
-
-        <a href="#hero" class="resource-link-card" id="btn-back-to-top">
-          <div style="font-size: 1.5rem;">⬆️</div>
-          <div>
-            <div style="font-weight: 700; color: #ffffff;">Back to Top</div>
-            <div style="font-size: 0.8rem; color: var(--text-dim);">Return to the 3D Hero and navigation</div>
-          </div>
-        </a>
-      </div>
-
-      <!-- Footer -->
-      <footer class="footer">
-        <p>PROMPT ENGINEERING FOR DEVELOPERS // PRODUCTION-READY STATIC SITE</p>
-        <p style="margin-top: 0.35rem; color: var(--text-muted);">
-          Built with AI + Prompt Engineering // Three.js &amp; GSAP // Compatible with GitHub Pages (username.github.io)
+      <div class="section-header-block">
+        <div class="section-label">Academic Resources &amp; Guides</div>
+        <h2 class="section-heading">Download Complete Course Materials</h2>
+        <p class="section-subheading">
+          Official Word guide document and widescreen PowerPoint presentation prepared for offline study, lab exercises, and classroom lectures.
         </p>
-      </footer>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <!-- Word Guide -->
+        <div class="col-12 col-md-6 col-lg-5">
+          <a href="./Prompt_Based_Coding_and_AI_Development_Guide.docx" download class="download-card text-decoration-none">
+            <span class="download-icon">📄</span>
+            <div>
+              <div class="fw-bold" style="font-family: var(--font-serif); font-size: 1.15rem;">
+                Comprehensive Word Guide (.docx)
+              </div>
+              <div class="small text-muted mt-1">
+                Full curriculum narrative, code samples, rubrics, and technical appendices.
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- PowerPoint Presentation -->
+        <div class="col-12 col-md-6 col-lg-5">
+          <a href="./Prompt_Based_Coding_and_AI_Development_Overview.pptx" download class="download-card text-decoration-none">
+            <span class="download-icon">📊</span>
+            <div>
+              <div class="fw-bold" style="font-family: var(--font-serif); font-size: 1.15rem;">
+                PowerPoint Presentation (.pptx)
+              </div>
+              <div class="small text-muted mt-1">
+                19 widescreen slides with visual architectures, comparisons, and native audio shapes.
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Main ES Module Script -->
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="athenaeum-footer">
+    <div class="container">
+      <div class="mb-2">
+        <strong>THE AI DEVELOPER ATHENAEUM</strong> // SECTIONS 9, 17 &amp; 53 DIRECTORY
+      </div>
+      <div class="text-muted small">
+        Designed for GitHub Pages (<code>khadershaworkgit.github.io</code>) // Zero external build dependencies // Built with Semantic HTML5, CSS3 &amp; Vanilla JavaScript
+      </div>
+      <div class="mt-3">
+        <a href="#hero" class="btn btn-sm btn-outline-secondary">⬆️ Return to Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== GRAND ATHENAEUM BOOK READER MODAL ==================== -->
+  <div class="modal fade" id="readerModal" tabindex="-1" aria-labelledby="modal-book-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-reader modal-dialog-centered">
+      <div class="modal-content modal-content-reader">
+        <!-- Header -->
+        <div class="reader-modal-header">
+          <div class="reader-header-info">
+            <span class="reader-roll-badge" id="modal-roll-badge">ROLL</span>
+            <div>
+              <h3 class="reader-header-title" id="modal-book-title">Student Name</h3>
+              <p class="reader-header-subtitle" id="modal-book-subtitle">Project Title</p>
+            </div>
+          </div>
+
+          <div class="reader-controls-group">
+            <!-- Viewport Switcher -->
+            <div class="viewport-btn-group" role="group" aria-label="Device viewport switcher">
+              <button class="btn-viewport active" data-viewport="desktop" title="Desktop view (100%)">🖥️ Desktop</button>
+              <button class="btn-viewport" data-viewport="tablet" title="Tablet view (768px)">📟 Tablet</button>
+              <button class="btn-viewport" data-viewport="mobile" title="Mobile view (375px)">📱 Mobile</button>
+            </div>
+
+            <!-- Open in New Tab -->
+            <a href="#" target="_blank" class="btn-open-external" id="btn-open-external-tab" title="Open full project in new browser tab">
+              <span>Open in New Tab ↗</span>
+            </a>
+
+            <!-- Close Modal -->
+            <button type="button" class="btn-close ms-2" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        </div>
+
+        <!-- Body: Live Iframe Viewport or Hosted Launch Screen -->
+        <div class="reader-modal-body">
+          <!-- Local HTML Iframe Viewport -->
+          <div class="reader-iframe-wrapper" id="modal-iframe-wrapper">
+            <iframe id="reader-project-iframe" class="reader-iframe" src="about:blank" title="Student Live Project Preview"></iframe>
+          </div>
+
+          <!-- Special Hosted Portal Screen (for 4567, 4749, 551) -->
+          <div class="hosted-launch-screen" id="modal-hosted-screen" style="display: none;">
+            <div class="hosted-launch-icon">🌐</div>
+            <h4 class="h4 fw-bold" style="font-family: var(--font-serif); color: var(--ink-primary);">
+              Special Cloud-Hosted Student Project
+            </h4>
+            <p class="text-secondary small mt-2">
+              This student has deployed their project directly to a live cloud portal (Google Cloud / Gemini Share). Click below to teleport directly to their hosted deployment.
+            </p>
+            <div class="p-2 rounded bg-light border font-monospace small text-truncate mt-3 text-muted" id="hosted-url-display">
+              https://...
+            </div>
+            <button class="hosted-launch-btn" id="btn-hosted-teleport">
+              <span>🚀 Teleport to Hosted Website</span>
+              <span>&rarr;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3 Bundle JS via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Student Data Manifest -->
+  <script src="./sec9_data.js"></script>
+
+  <!-- Athenaeum Controller Script -->
   <script src="./script.js" defer></script>
 </body>
 </html>

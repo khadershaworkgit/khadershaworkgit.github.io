@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sai Vinay Vardhan | Futuristic Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #050816;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Animated background */
+body {
+    background-image:
+      linear-gradient(rgba(0,229,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,.035) 1px, transparent 1px);
+    background-size: 45px 45px;
+}
+
+.glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.glow1 {
+    background: #006aff;
+    top: -100px;
+    left: -100px;
+}
+
+.glow2 {
+    background: #9200ff;
+    bottom: -100px;
+    right: -100px;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 8%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5,8,22,.9);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #18334f;
+}
+
+.logo {
+    color: #00e5ff;
+    font-size: 27px;
+    font-weight: bold;
+    text-shadow: 0 0 15px #00e5ff;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #00e5ff;
+}
+
+/* Home */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+.tag {
+    color: #00e5ff;
+    letter-spacing: 5px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 7vw, 75px);
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #00e5ff;
+    text-shadow: 0 0 25px #0077ff;
+}
+
+.hero p {
+    color: #b7c6dc;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+.btn {
+    display: inline-block;
+    padding: 13px 30px;
+    margin-top: 30px;
+    border: 1px solid #00e5ff;
+    border-radius: 30px;
+    color: #00e5ff;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: #00e5ff;
+    color: #050816;
+    box-shadow: 0 0 25px #00e5ff;
+}
+
+/* Common sections */
+section {
+    padding: 85px 9%;
+}
+
+.heading {
+    text-align: center;
+    font-size: 36px;
+    color: #00e5ff;
+    margin-bottom: 45px;
+    text-shadow: 0 0 15px #0077ff;
+}
+
+/* About */
+.about-box {
+    max-width: 850px;
+    margin: auto;
+    padding: 35px;
+    text-align: center;
+    line-height: 2;
+    color: #c4d4e9;
+    background: rgba(15,30,60,.65);
+    border: 1px solid #17618a;
+    border-radius: 18px;
+    box-shadow: 0 0 20px rgba(0,229,255,.1);
+}
+
+.about-box strong {
+    color: #00e5ff;
+}
+
+/* Education */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    padding: 30px;
+    text-align: center;
+    background: rgba(15,30,60,.7);
+    border: 1px solid #17618a;
+    border-radius: 15px;
+    transition: .4s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #00e5ff;
+    box-shadow: 0 0 25px #0077ff;
+}
+
+.card h3 {
+    color: #00e5ff;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #b7c6dc;
+    line-height: 1.8;
+}
+
+.marks {
+    font-size: 38px;
+    color: #00e5ff;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+/* Skills */
+.skill {
+    max-width: 750px;
+    margin: 20px auto;
+}
+
+.skill p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.bar {
+    height: 10px;
+    background: #192b48;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    background: linear-gradient(90deg, #0077ff, #00e5ff);
+    border-radius: 20px;
+}
+
+/* Future goals */
+.future {
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+    padding: 35px;
+    border: 1px solid #8b42ff;
+    border-radius: 18px;
+    background: rgba(50,15,90,.25);
+    line-height: 2;
+}
+
+.future h3 {
+    color: #c18aff;
+    margin-bottom: 15px;
+}
+
+/* Contact */
+.contact {
+    text-align: center;
+    color: #b7c6dc;
+    line-height: 2;
+}
+
+.contact h3 {
+    color: #00e5ff;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+    padding: 25px;
+    text-align: center;
+    color: #91a7c5;
+    border-top: 1px solid #18334f;
+}
+
+/* Mobile responsive */
+@media(max-width:650px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 7px;
+        font-size: 13px;
+    }
+
+    .hero {
+        min-height: 75vh;
+    }
+
+    section {
+        padding: 60px 6%;
+    }
+
+    .heading {
+        font-size: 29px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow glow1"></div>
+<div class="glow glow2"></div>
+
+<!-- Navigation -->
+<nav>
+    <div class="logo">SVV.</div>
+
+    <div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<!-- Home Section -->
+<div class="hero" id="home">
+
+    <div class="tag">WELCOME TO MY DIGITAL WORLD</div>
+
+    <h1>I'm <span>Sai Vinay Vardhan</span></h1>
+
+    <p>
+        B.Tech CSE Student | Future Software Engineer<br>
+        Passionate about Technology, Innovation and Coding.
+    </p>
+
+    <a href="#about" class="btn">Explore My Portfolio</a>
+
+</div>
+
+<!-- About Section -->
+<section id="about">
+
+    <h2 class="heading">ABOUT ME</h2>
+
+    <div class="about-box">
+
+        <p>
+            Hello! I'm <strong>Sai Vinay Vardhan</strong>,
+            a Computer Science Engineering student with an
+            interest in programming and modern technology.
+            I enjoy learning new technical skills, solving
+            problems and exploring innovative ideas.
+            My goal is to become a skilled software engineer
+            and build technology that makes a difference.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- Education Section -->
+<section id="education">
+
+    <h2 class="heading">MY EDUCATION</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>10th Standard</h3>
+            <p>Jawahar Navodaya Vidyalaya</p>
+            <div class="marks">74.2%</div>
+            <p>Secondary School Education</p>
+        </div>
+
+        <div class="card">
+            <h3>Intermediate</h3>
+            <p>Narayana College</p>
+            <div class="marks">92.9%</div>
+            <p>Intermediate Education</p>
+        </div>
+
+        <div class="card">
+            <h3>B.Tech CSE</h3>
+            <p>Computer Science and Engineering</p>
+            <div class="marks">01</div>
+            <p>Currently Pursuing</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Technical Skills -->
+<section id="skills">
+
+    <h2 class="heading">TECHNICAL SKILLS</h2>
+
+    <div class="skill">
+        <p><span>C Programming</span><span>Learning</span></p>
+        <div class="bar">
+            <div class="fill" style="width:45%"></div>
+        </div>
+    </div>
+
+    <div class="skill">
+        <p><span>HTML</span><span>Learning</span></p>
+        <div class="bar">
+            <div class="fill" style="width:35%"></div>
+        </div>
+    </div>
+
+    <div class="skill">
+        <p><span>CSS</span><span>Learning</span></p>
+        <div class="bar">
+            <div class="fill" style="width:30%"></div>
+        </div>
+    </div>
+
+    <div class="skill">
+        <p><span>Computer Fundamentals</span><span>Learning</span></p>
+        <div class="bar">
+            <div class="fill" style="width:50%"></div>
+        </div>
+    </div>
+
+    <div class="skill">
+        <p><span>Problem Solving</span><span>Developing</span></p>
+        <div class="bar">
+            <div class="fill" style="width:35%"></div>
+        </div>
+    </div>
+
+</section>
+
+<!-- Future Goals -->
+<section>
+
+    <h2 class="heading">MY FUTURE VISION</h2>
+
+    <div class="future">
+        <h3>BUILDING TOMORROW'S TECHNOLOGY</h3>
+
+        <p>
+            My ambition is to become a successful software
+            engineer in a leading technology company.
+            I want to improve my programming knowledge,
+            develop real-world projects, explore Artificial
+            Intelligence and contribute to the future of technology.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- Contact -->
+<section id="contact">
+
+    <h2 class="heading">CONTACT ME</h2>
+
+    <div class="contact">
+        <h3>Let's Connect!</h3>
+
+        <p>
+            Thank you for visiting my personal portfolio.<br>
+            I'm always ready to learn, grow and explore new ideas.
+        </p>
+    </div>
+
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>© 2026 Sai Vinay Vardhan | Designed with Innovation</p>
+    <p>Future Starts Here 🚀</p>
+</footer>
+
+</body>
+</html>

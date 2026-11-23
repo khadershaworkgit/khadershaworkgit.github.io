@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070b18">
+  <meta name="description" content="Portfolio of Innamuri Sumana Sri — B.Tech student, C language learner and creative artist.">
+  <title>Innamuri Sumana Sri | Digital Portfolio</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070b18;
+      --panel: rgba(15, 24, 48, .78);
+      --text: #eef4ff;
+      --muted: #a8b4ce;
+      --cyan: #42e8f5;
+      --violet: #a78bfa;
+      --mint: #55f0bd;
+      --line: rgba(91, 224, 245, .32);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 15% 10%, rgba(84, 45, 180, .24), transparent 34rem),
+        radial-gradient(ellipse at 90% 40%, rgba(0, 204, 224, .13), transparent 32rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: -1;
+      opacity: .2;
+      background-image: linear-gradient(rgba(103, 132, 190, .12) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(103, 132, 190, .12) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(7, 11, 24, .78);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(140, 170, 220, .12);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-weight: 800; letter-spacing: .04em; }
+    .brand span { color: var(--cyan); }
+    .navlinks { display: flex; flex-wrap: wrap; gap: clamp(12px, 3vw, 28px); color: var(--muted); font-size: .92rem; }
+    .navlinks a:hover { color: var(--cyan); }
+    .hero { min-height: 78vh; display: grid; align-items: center; padding-block: 78px 64px; }
+    .hero-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 48px; align-items: center; }
+    .eyebrow { color: var(--mint); text-transform: uppercase; letter-spacing: .2em; font-size: .76rem; font-weight: 800; }
+    h1 { margin: 14px 0 18px; font-size: clamp(2.6rem, 7vw, 5.6rem); line-height: 1.04; letter-spacing: -.055em; }
+    h1 .gradient { background: linear-gradient(100deg, var(--cyan), #b5a0ff 55%, var(--mint)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .intro { max-width: 650px; color: var(--muted); font-size: clamp(1rem, 2vw, 1.2rem); }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 12px; font-weight: 750; border: 1px solid var(--line); transition: transform .2s, box-shadow .2s; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(66, 232, 245, .13); }
+    .btn.primary { color: #06111c; border: 0; background: linear-gradient(100deg, var(--cyan), var(--mint)); }
+    .orb-wrap { display: grid; place-items: center; min-height: 310px; }
+    .orb {
+      width: min(290px, 70vw); aspect-ratio: 1; border-radius: 50%; position: relative;
+      display: grid; place-items: center; text-align: center;
+      background: radial-gradient(circle at 35% 30%, rgba(66,232,245,.2), rgba(25,31,69,.18) 48%, rgba(7,11,24,.5) 70%);
+      border: 1px solid rgba(66,232,245,.45);
+      box-shadow: 0 0 55px rgba(66,232,245,.15), inset 0 0 45px rgba(167,139,250,.13);
+    }
+    .orb::before, .orb::after { content: ""; position: absolute; inset: -18px; border: 1px solid rgba(167,139,250,.55); border-radius: 50%; transform: rotate(-28deg) scaleY(.38); }
+    .orb::after { inset: -38px; border-color: rgba(66,232,245,.4); transform: rotate(42deg) scaleY(.34); }
+    .orb-core { position: relative; z-index: 1; }
+    .orb-core strong { display: block; font-size: 3.3rem; letter-spacing: -.08em; }
+    .orb-core small { color: var(--cyan); letter-spacing: .18em; text-transform: uppercase; }
+    section { padding-block: 64px; scroll-margin-top: 82px; }
+    .section-head { margin-bottom: 26px; }
+    .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 5px 0; letter-spacing: -.04em; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      min-width: 0; padding: 25px; border-radius: 20px; position: relative; overflow: hidden;
+      background: var(--panel); border: 1px solid var(--line);
+      box-shadow: 0 18px 55px rgba(0,0,0,.18);
+    }
+    .card::after { content: ""; position: absolute; width: 120px; height: 120px; right: -65px; top: -65px; border-radius: 50%; background: rgba(66,232,245,.09); filter: blur(2px); }
+    .icon { font-size: 1.8rem; }
+    .card h3 { margin: 12px 0 7px; font-size: 1.15rem; }
+    .card p { color: var(--muted); margin: 0; }
+    .tag { display: inline-block; margin-top: 17px; padding: 5px 10px; border-radius: 99px; color: var(--mint); background: rgba(85,240,189,.08); border: 1px solid rgba(85,240,189,.2); font-size: .78rem; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .info-line { display: flex; justify-content: space-between; gap: 18px; padding: 13px 0; border-bottom: 1px solid rgba(160,180,220,.13); }
+    .info-line span:first-child { color: var(--muted); }
+    .info-line span:last-child { text-align: right; font-weight: 650; }
+    .skill { margin: 18px 0; }
+    .skill-top { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; font-weight: 650; }
+    .track { height: 8px; background: rgba(150,170,210,.15); border-radius: 99px; overflow: hidden; }
+    .fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--violet)); }
+    .note { color: var(--muted); font-size: .88rem; margin-top: 16px; }
+    .contact { text-align: center; padding: 38px 24px; }
+    .contact p { color: var(--muted); max-width: 600px; margin: 0 auto 22px; }
+    footer { padding: 28px 0 38px; text-align: center; color: #8794b1; font-size: .88rem; border-top: 1px solid rgba(140,170,220,.12); }
+    .glow { color: var(--cyan); }
+    @media (max-width: 760px) {
+      .hero { min-height: auto; padding-top: 62px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .orb-wrap { min-height: 250px; }
+      .orb { width: 220px; }
+      .cards { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .nav { align-items: flex-start; padding-block: 15px; flex-direction: column; gap: 10px; }
+      .navlinks { gap: 16px; font-size: .86rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#home">SUMANA<span>.SRI</span></a>
+      <div class="navlinks">
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#interests">Interests</a><a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="home">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Personal portfolio / 2026</div>
+          <h1>Hello, I'm<br><span class="gradient">Innamuri<br>Sumana Sri.</span></h1>
+          <p class="intro">A B.Tech student who enjoys learning technology, exploring the world of programming, and expressing creativity through drawing. Curious mind. Creative spirit. Always learning.</p>
+          <div class="actions">
+            <a class="btn primary" href="#about">Explore my profile ↘</a>
+            <a class="btn" href="#contact">Say hello</a>
+          </div>
+        </div>
+        <div class="orb-wrap" aria-label="Decorative futuristic graphic">
+          <div class="orb"><div class="orb-core"><strong>IS</strong><small>Think · Create · Learn</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="about">
+      <div class="section-head">
+        <div class="eyebrow">01 / Identity</div>
+        <h2>A little about me</h2>
+        <p>Building knowledge one step at a time.</p>
+      </div>
+      <div class="about-grid">
+        <article class="card">
+          <div class="icon">👩‍💻</div>
+          <h3>My journey</h3>
+          <p>I'm currently pursuing a Bachelor of Technology (B.Tech). I enjoy discovering how technology works and improving my skills through practice and learning.</p>
+        </article>
+        <article class="card">
+          <div class="info-line"><span>Name</span><span>Innamuri Sumana Sri</span></div>
+          <div class="info-line"><span>Education</span><span>B.Tech student</span></div>
+          <div class="info-line"><span>Programming</span><span>C language</span></div>
+          <div class="info-line"><span>Creative interest</span><span>Drawing</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="skills">
+      <div class="section-head">
+        <div class="eyebrow">02 / Skills</div>
+        <h2>What I'm learning & doing</h2>
+        <p>My current strengths and areas of interest.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="icon">⌘</div><h3>C Programming</h3>
+          <p>I know the fundamentals of C language and enjoy practising programming logic and problem-solving.</p>
+          <span class="tag">Programming</span>
+        </article>
+        <article class="card">
+          <div class="icon">✏️</div><h3>Drawing</h3>
+          <p>Drawing is one of my passions. It gives me a way to express ideas, imagination, and creativity.</p>
+          <span class="tag">Creativity</span>
+        </article>
+        <article class="card">
+          <div class="icon">🧠</div><h3>Learning mindset</h3>
+          <p>I'm curious about technology and motivated to keep learning, experimenting, and growing.</p>
+          <span class="tag">Curiosity</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="interests">
+      <div class="section-head">
+        <div class="eyebrow">03 / Beyond the code</div>
+        <h2>My interests</h2>
+        <p>A balance of logic and imagination.</p>
+      </div>
+      <div class="card">
+        <h3><span class="glow">01.</span> Technology & programming</h3>
+        <p>I like exploring technology and strengthening my programming foundation, starting with C language.</p>
+        <h3><span class="glow">02.</span> Art & drawing</h3>
+        <p>I enjoy drawing and using creativity to turn thoughts into something visual.</p>
+        <h3><span class="glow">03.</span> Personal growth</h3>
+        <p>Every new concept I learn is another step towards becoming more confident and capable.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="contact">
+      <div class="card contact">
+        <div class="eyebrow">04 / Connect</div>
+        <h2>Let's connect and create.</h2>
+        <p>Thank you for visiting my portfolio. I'm always happy to learn, share ideas, and connect with people who enjoy technology and creativity.</p>
+        <a class="btn primary" href="mailto:">Contact me</a>
+        <p class="note">Add your email address to the contact button when you're ready to publish.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Designed with curiosity by <span class="glow">Innamuri Sumana Sri</span> · © 2026</div>
+  </footer>
+</body>
+</html>

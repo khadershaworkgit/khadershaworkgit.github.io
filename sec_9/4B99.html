@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b20">
+  <title>Duggi Prabhu Kumar | Portfolio</title>
+  <style>
+    :root {
+      --bg: #080b20;
+      --panel: rgba(19, 25, 57, .72);
+      --text: #f4f6ff;
+      --muted: #aab3d4;
+      --cyan: #55e7ff;
+      --violet: #a78bfa;
+      --pink: #ff70c8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh; color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(71, 54, 174, .34), transparent 30rem),
+        radial-gradient(circle at 85% 30%, rgba(0, 190, 220, .18), transparent 28rem),
+        linear-gradient(135deg, #080b20 0%, #111331 52%, #080b20 100%);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .17;
+      background-image: linear-gradient(rgba(140,160,255,.13) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(140,160,255,.13) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: auto; position: relative; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 27px 0; }
+    .logo { font-weight: 900; letter-spacing: .08em; font-size: 1.1rem; }
+    .logo span { color: var(--cyan); }
+    nav { display: flex; gap: 28px; color: var(--muted); font-size: .92rem; }
+    nav a:hover { color: var(--cyan); }
+    .hero { min-height: 690px; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 35px; padding: 55px 0 95px; }
+    .eyebrow { display: inline-flex; gap: 9px; align-items: center; color: var(--cyan); border: 1px solid rgba(85,231,255,.28); background: rgba(85,231,255,.07); border-radius: 30px; padding: 9px 15px; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+    .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
+    h1 { font-size: clamp(3.1rem, 7vw, 6.3rem); line-height: .99; letter-spacing: -.065em; margin: 25px 0 22px; font-weight: 900; }
+    h1 .gradient { background: linear-gradient(95deg, #fff 5%, var(--cyan) 48%, var(--violet) 85%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { color: var(--muted); max-width: 570px; line-height: 1.8; font-size: 1.08rem; }
+    .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 32px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 13px 21px; border-radius: 12px; font-weight: 800; font-size: .92rem; transition: .25s; }
+    .primary { color: #07101d; background: linear-gradient(100deg, var(--cyan), #9c9aff); box-shadow: 0 8px 30px rgba(85,231,255,.2); }
+    .secondary { border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.04); }
+    .btn:hover { transform: translateY(-3px); }
+    .visual { min-height: 420px; display: grid; place-items: center; position: relative; }
+    .orbit { width: min(390px, 78vw); aspect-ratio: 1; border: 1px solid rgba(85,231,255,.28); border-radius: 50%; display: grid; place-items: center; position: relative; box-shadow: 0 0 80px rgba(95,90,255,.12), inset 0 0 70px rgba(85,231,255,.06); }
+    .orbit::before, .orbit::after { content: ""; position: absolute; border: 1px solid rgba(167,139,250,.32); border-radius: 50%; inset: 28px; transform: rotateX(65deg) rotateZ(25deg); }
+    .orbit::after { inset: 55px; transform: rotateX(65deg) rotateZ(-35deg); border-color: rgba(85,231,255,.34); }
+    .core { width: 205px; height: 205px; border-radius: 50%; display: grid; place-items: center; text-align: center; background: linear-gradient(145deg, rgba(85,231,255,.2), rgba(167,139,250,.2)); border: 1px solid rgba(255,255,255,.22); box-shadow: 0 0 65px rgba(85,231,255,.18), inset 0 0 35px rgba(255,255,255,.06); backdrop-filter: blur(12px); z-index: 1; }
+    .core strong { display: block; font-size: 3.4rem; line-height: 1; letter-spacing: -.08em; }
+    .core span { color: var(--cyan); font-size: .72rem; letter-spacing: .2em; font-weight: 800; }
+    .orbit-tag { position: absolute; padding: 9px 13px; border: 1px solid rgba(255,255,255,.15); background: rgba(11,15,40,.9); border-radius: 10px; color: #dce7ff; font-size: .8rem; box-shadow: 0 10px 35px rgba(0,0,0,.2); }
+    .tag-one { top: 12%; right: -4%; } .tag-two { bottom: 15%; left: -5%; } .tag-three { bottom: 3%; right: 16%; }
+    section { padding: 65px 0; }
+    .section-kicker { color: var(--cyan); text-transform: uppercase; letter-spacing: .2em; font-size: .75rem; font-weight: 900; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.045em; margin: 10px 0 30px; }
+    .about-card, .skill-card { background: var(--panel); border: 1px solid rgba(180,190,255,.14); border-radius: 22px; backdrop-filter: blur(14px); }
+    .about-card { padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+    .about-card p { color: var(--muted); line-height: 1.85; }
+    .details { display: grid; gap: 13px; }
+    .detail { padding: 13px 15px; background: rgba(255,255,255,.035); border-radius: 12px; border: 1px solid rgba(255,255,255,.07); }
+    .detail small { display: block; color: var(--muted); margin-bottom: 4px; }
+    .detail strong { font-size: .98rem; }
+    .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .skill-card { padding: 25px; transition: .25s; }
+    .skill-card:hover { transform: translateY(-6px); border-color: rgba(85,231,255,.5); box-shadow: 0 18px 45px rgba(0,0,0,.2); }
+    .skill-icon { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; font-weight: 900; font-size: 1.15rem; margin-bottom: 20px; color: #081020; background: linear-gradient(135deg, var(--cyan), var(--violet)); }
+    .skill-card h3 { font-size: 1.25rem; margin-bottom: 9px; }
+    .skill-card p { color: var(--muted); font-size: .92rem; line-height: 1.65; }
+    .journey { padding: 28px; border-left: 2px solid rgba(85,231,255,.55); background: linear-gradient(90deg, rgba(85,231,255,.08), transparent); border-radius: 0 18px 18px 0; }
+    .journey strong { font-size: 1.2rem; } .journey p { color: var(--muted); margin-top: 8px; line-height: 1.7; }
+    footer { padding: 35px 0 45px; border-top: 1px solid rgba(255,255,255,.1); color: var(--muted); text-align: center; font-size: .88rem; }
+    footer b { color: var(--cyan); }
+    @media (max-width: 760px) {
+      nav { gap: 14px; font-size: .8rem; }
+      .hero { grid-template-columns: 1fr; padding-top: 45px; min-height: auto; }
+      .visual { min-height: 340px; }
+      .orbit { width: 300px; }
+      .core { width: 165px; height: 165px; }
+      .core strong { font-size: 2.8rem; }
+      .about-card { grid-template-columns: 1fr; }
+      .skills { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 420px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+      header { align-items: flex-start; gap: 16px; flex-direction: column; }
+      nav { width: 100%; justify-content: space-between; }
+      .tag-one { right: -2%; } .tag-two { left: -2%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="logo" href="#home">DPK<span>.</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#journey">Journey</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div>
+          <div class="eyebrow"><span class="pulse"></span> Future-ready learner</div>
+          <h1>Hello, I'm<br><span class="gradient">Duggi Prabhu Kumar</span></h1>
+          <p>I'm a first-year B.Tech student exploring the world of technology and programming. I'm building my foundation in coding, learning step by step, and looking forward to creating meaningful digital experiences.</p>
+          <div class="actions">
+            <a class="btn primary" href="#skills">Explore my skills&nbsp; ↘</a>
+            <a class="btn secondary" href="#about">Know about me</a>
+          </div>
+        </div>
+        <div class="visual" aria-label="Decorative futuristic technology graphic">
+          <div class="orbit">
+            <div class="core"><div><strong>DPK</strong><span>CODE • CREATE • GROW</span></div></div>
+            <div class="orbit-tag tag-one">✦ Innovation</div>
+            <div class="orbit-tag tag-two">⌘ Programming</div>
+            <div class="orbit-tag tag-three">∞ Learning</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-kicker">A little about me</div>
+        <h2>Curious mind. Future builder.</h2>
+        <div class="about-card">
+          <p>My name is <strong>Duggi Prabhu Kumar</strong>. I am currently pursuing <strong>B.Tech — 1st Year</strong>. I enjoy learning programming and understanding how technology can solve real-world problems. My goal is to keep improving my skills, work on practical projects, and grow into a confident technology professional.</p>
+          <div class="details">
+            <div class="detail"><small>NAME</small><strong>Duggi Prabhu Kumar</strong></div>
+            <div class="detail"><small>QUALIFICATION</small><strong>B.Tech — 1st Year</strong></div>
+            <div class="detail"><small>INTEREST</small><strong>Technology & Programming</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-kicker">My tech toolkit</div>
+        <h2>Programming skills</h2>
+        <div class="skills">
+          <article class="skill-card">
+            <div class="skill-icon">C</div>
+            <h3>C Programming</h3>
+            <p>Learning programming fundamentals, logic building, loops, functions, and problem-solving with C.</p>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon">Java</div>
+            <h3>Java</h3>
+            <p>Exploring object-oriented programming concepts and developing a strong foundation in Java.</p>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon">Py</div>
+            <h3>Python</h3>
+            <p>Learning Python syntax, core concepts, and how to write clear and useful programs.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="journey">
+        <div class="section-kicker">What's next</div>
+        <h2>My learning journey</h2>
+        <div class="journey">
+          <strong>Building my future, one line of code at a time.</strong>
+          <p>I'm at the beginning of my B.Tech journey. I aim to strengthen my programming fundamentals, practise consistently, explore new technologies, and create projects that turn ideas into reality.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>Designed with ambition by <b>Duggi Prabhu Kumar</b> · <span id="year"></span></footer>
+  </div>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

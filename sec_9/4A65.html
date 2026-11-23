@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070b18">
+  <meta name="description" content="Manvitha's futuristic student portfolio.">
+  <title>Manvitha | Future Developer</title>
+  <style>
+    :root {
+      --bg: #070b18;
+      --panel: rgba(15, 24, 48, .72);
+      --text: #edf4ff;
+      --muted: #a7b5d1;
+      --cyan: #53e7ff;
+      --purple: #a78bfa;
+      --line: rgba(125, 177, 255, .2);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(65, 91, 190, .22), transparent 35%),
+        radial-gradient(ellipse at 85% 35%, rgba(0, 217, 255, .12), transparent 32%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .18;
+      background-image: linear-gradient(rgba(115,160,255,.12) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(115,160,255,.12) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1100px, calc(100% - 40px)); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(7, 11, 24, .78); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { font-weight: 800; letter-spacing: .08em; color: var(--cyan); }
+    .navlinks { display: flex; gap: 24px; color: var(--muted); font-size: .92rem; }
+    .navlinks a:hover { color: var(--cyan); }
+    .hero { min-height: 690px; display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 50px; padding: 90px 0; }
+    .eyebrow { color: var(--cyan); text-transform: uppercase; letter-spacing: .22em; font-size: .76rem; font-weight: 700; }
+    h1 { font-size: clamp(3.2rem, 8vw, 6.3rem); line-height: .98; letter-spacing: -.065em; margin: 18px 0 22px; }
+    h1 span { display: block; color: transparent; -webkit-text-stroke: 1px var(--cyan); }
+    .intro { max-width: 600px; color: var(--muted); font-size: 1.08rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+    .btn { padding: 12px 20px; border-radius: 10px; border: 1px solid var(--cyan); font-weight: 700; transition: .2s; }
+    .btn.primary { color: #06101b; background: var(--cyan); box-shadow: 0 0 28px rgba(83,231,255,.22); }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 0 28px rgba(83,231,255,.25); }
+    .orbit-area { min-height: 390px; display: grid; place-items: center; position: relative; }
+    .orb {
+      width: min(310px, 72vw); aspect-ratio: 1; border-radius: 50%; position: relative;
+      background: radial-gradient(circle at 35% 30%, #263e70, #111a39 48%, #070b18 72%);
+      border: 1px solid rgba(83,231,255,.6);
+      box-shadow: 0 0 35px rgba(83,231,255,.22), inset 0 0 45px rgba(83,231,255,.12);
+      display: grid; place-items: center;
+    }
+    .orb::before, .orb::after { content: ""; position: absolute; inset: -25px; border: 1px solid rgba(83,231,255,.45); border-radius: 50%; transform: rotate(-25deg) scaleY(.34); }
+    .orb::after { inset: -48px; border-color: rgba(167,139,250,.5); transform: rotate(48deg) scaleY(.34); }
+    .orb-core { text-align: center; z-index: 1; }
+    .orb-core strong { display: block; font-size: 4rem; letter-spacing: -.08em; color: var(--cyan); }
+    .orb-core small { color: var(--muted); letter-spacing: .2em; }
+    section { padding: 72px 0; }
+    .section-head { margin-bottom: 28px; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.04em; }
+    .section-head p { color: var(--muted); margin-top: 6px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 18px;
+      padding: 25px; backdrop-filter: blur(12px);
+      box-shadow: 0 15px 45px rgba(0,0,0,.16);
+    }
+    .card h3 { color: var(--cyan); margin-bottom: 10px; font-size: 1.08rem; }
+    .card p, .card li { color: var(--muted); }
+    .card ul { padding-left: 20px; }
+    .score { font-size: 2.5rem; font-weight: 800; color: var(--cyan); margin: 4px 0; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+    .chip { border: 1px solid rgba(83,231,255,.35); color: #d8faff; background: rgba(83,231,255,.07); padding: 8px 13px; border-radius: 999px; font-size: .9rem; }
+    .future { border-left: 3px solid var(--purple); }
+    footer { padding: 30px 0 45px; color: var(--muted); text-align: center; border-top: 1px solid var(--line); }
+    .glow { color: var(--cyan); }
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 75px 0 50px; gap: 35px; }
+      .orbit-area { min-height: 310px; }
+      .grid { grid-template-columns: 1fr; }
+      .navlinks { gap: 12px; font-size: .82rem; }
+    }
+    @media (max-width: 430px) {
+      .wrap { width: min(100% - 28px, 1100px); }
+      nav { align-items: flex-start; padding: 18px 0; flex-direction: column; }
+      .navlinks { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="logo" href="#home">MANVITHA<span class="glow">.DEV</span></a>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#future">Future</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="hero" id="home">
+        <div>
+          <p class="eyebrow">Student • Curious mind • Future developer</p>
+          <h1>Hi, I'm <span>Manvitha.</span></h1>
+          <p class="intro">I’m a first-year B.Tech student exploring the world of technology. I enjoy solving problems, learning new things, and building the skills to turn ideas into meaningful digital experiences.</p>
+          <div class="actions">
+            <a class="btn primary" href="#education">Explore my profile</a>
+            <a class="btn" href="#skills">View my skills</a>
+          </div>
+        </div>
+        <div class="orbit-area" aria-label="Decorative futuristic initials graphic">
+          <div class="orb">
+            <div class="orb-core"><strong>M.</strong><small>FUTURE IN PROGRESS</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-head">
+          <p class="eyebrow">01 / About me</p>
+          <h2>A little about my journey</h2>
+          <p>Learning today. Creating tomorrow.</p>
+        </div>
+        <div class="card">
+          <p>I am currently pursuing my B.Tech in Computer Science at Vignan University. As a first-year student, I am building my foundation in technology while developing the confidence, communication, and problem-solving abilities that will help me grow as a developer.</p>
+        </div>
+      </section>
+
+      <section id="education">
+        <div class="section-head">
+          <p class="eyebrow">02 / Education</p>
+          <h2>My academic journey</h2>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>B.Tech — First Year</h3>
+            <p><strong>Vignan University</strong></p>
+            <p>Currently pursuing a Bachelor of Technology degree.</p>
+          </article>
+          <article class="card">
+            <h3>Intermediate</h3>
+            <p><strong>Sri Chaitanya Junior College</strong></p>
+            <p>Vijayawada</p>
+            <div class="score">97%</div>
+            <p>Intermediate academic score</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-head">
+          <p class="eyebrow">03 / Skills</p>
+          <h2>What I bring</h2>
+          <p>Skills I value and continue to improve.</p>
+        </div>
+        <div class="card">
+          <div class="skill-list">
+            <span class="chip">Problem-solving</span>
+            <span class="chip">Communication skills</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="future">
+        <div class="section-head">
+          <p class="eyebrow">04 / Looking ahead</p>
+          <h2>My next chapter</h2>
+        </div>
+        <div class="card future">
+          <h3>Always learning. Always growing.</h3>
+          <p>My goal is to strengthen my technical knowledge, gain practical experience, and become a capable developer who creates useful solutions. This is just the beginning of my journey.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>Designed with curiosity and a futuristic vision.</p>
+    <p class="glow">© <span id="year"></span> Manvitha</p>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

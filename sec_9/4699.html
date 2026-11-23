@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shaik Sameer | Futuristic Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:Arial,sans-serif;background:#050816;color:white;overflow-x:hidden}
+body::before{content:"";position:fixed;width:500px;height:500px;background:#0077ff;filter:blur(180px);opacity:.18;top:10%;left:-150px;z-index:-1;pointer-events:none}
+body::after{content:"";position:fixed;width:400px;height:400px;background:#00e5ff;filter:blur(180px);opacity:.12;bottom:0;right:-100px;z-index:-1;pointer-events:none}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 8%;background:rgba(5,8,22,.9);border-bottom:1px solid #163b5c;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.logo{font-size:25px;font-weight:bold;color:#00e5ff}
+nav a{color:white;text-decoration:none;margin-left:20px;font-size:14px;transition:.3s}
+nav a:hover{color:#00e5ff}
+.hero{min-height:90vh;display:flex;align-items:center;justify-content:space-between;padding:60px 10%;gap:30px}
+.hero-text{max-width:650px}
+.hero-text h3{color:#00e5ff;letter-spacing:3px;margin-bottom:20px}
+.hero-text h1{font-size:clamp(40px,6vw,65px);margin-bottom:15px}
+.hero-text h1 span{color:#00e5ff;text-shadow:0 0 20px #008cff}
+.hero-text h2{color:#b7c8db;font-size:25px;margin-bottom:20px}
+.hero-text p{color:#a9b9cc;line-height:1.8;margin-bottom:30px}
+.btn{display:inline-block;padding:13px 25px;background:#00cfff;color:#03101d;border-radius:7px;text-decoration:none;font-weight:bold;transition:.3s}
+.btn:hover{background:white;box-shadow:0 0 25px #00cfff;transform:translateY(-3px)}
+.hero-circle{width:280px;height:280px;min-width:280px;border:3px solid #00e5ff;border-radius:50%;display:flex;justify-content:center;align-items:center;box-shadow:0 0 35px #0077ff,inset 0 0 30px #0077ff;animation:glow 3s infinite alternate}
+.hero-circle span{font-size:90px;font-weight:bold;color:#00e5ff}
+@keyframes glow{from{box-shadow:0 0 15px #0077ff}to{box-shadow:0 0 50px #00e5ff}}
+section{padding:80px 10%}
+.section-title{text-align:center;font-size:35px;margin-bottom:45px}
+.section-title span{color:#00e5ff}
+.about-box{background:rgba(13,27,50,.8);border:1px solid #164e75;padding:35px;border-radius:15px;line-height:1.9;color:#b9c8d9;text-align:center;box-shadow:0 0 20px rgba(0,200,255,.08)}
+.education-container{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}
+.card{background:rgba(13,27,50,.85);padding:30px;border:1px solid #164e75;border-radius:12px;transition:.3s;text-align:center}
+.card:hover{transform:translateY(-10px);border-color:#00e5ff;box-shadow:0 0 25px rgba(0,229,255,.2)}
+.card h3{color:#00e5ff;margin-bottom:15px}
+.card h2{font-size:35px;margin:15px 0}
+.card p{color:#a9b9cc;line-height:1.7}
+.skills-container{display:flex;justify-content:center;flex-wrap:wrap;gap:20px}
+.skill{padding:20px 30px;border:1px solid #00bfff;background:#0b1c35;border-radius:10px;color:#00e5ff;font-weight:bold;transition:.3s}
+.skill:hover{background:#00cfff;color:#06101e;transform:scale(1.08);box-shadow:0 0 20px #00cfff}
+.goal-box{text-align:center;background:linear-gradient(120deg,#0b1d38,#102e4d);padding:35px;border-radius:15px;border:1px solid #00bfff}
+.goal-box h3{color:#00e5ff;margin-bottom:15px}
+.goal-box p{color:#b9c8d9;line-height:1.8}
+.contact{text-align:center}
+.contact p{color:#b9c8d9;margin:15px 0 25px}
+footer{padding:25px;text-align:center;border-top:1px solid #164e75;color:#8298ad;line-height:2}
+.cursor{width:18px;height:18px;position:fixed;top:0;left:0;border:2px solid #00e5ff;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 12px #00e5ff,0 0 25px #0077ff;transition:width .2s,height .2s}
+.cursor-dot{width:5px;height:5px;position:fixed;top:0;left:0;background:#00e5ff;border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%)}
+.cursor.active{width:45px;height:45px;background:rgba(0,229,255,.15)}
+.particle{position:fixed;width:5px;height:5px;background:#00e5ff;border-radius:50%;pointer-events:none;z-index:9998;box-shadow:0 0 10px #00e5ff;animation:particleFade .7s linear forwards}
+@keyframes particleFade{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0)}}
+@media(max-width:800px){nav{flex-direction:column;gap:15px}nav a{margin:0 7px}.hero{flex-direction:column-reverse;text-align:center;padding-top:50px}.hero-circle{width:200px;height:200px;min-width:200px}.hero-circle span{font-size:65px}.education-container{grid-template-columns:1fr}section{padding:65px 7%}}
+@media(max-width:400px){nav a{font-size:12px;margin:0 4px}}
+@media(hover:none),(pointer:coarse){.cursor,.cursor-dot,.particle{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">SAMEER.</div>
+  <div>
+    <a href="#home">Home</a><a href="#about">About</a><a href="#education">Education</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+  </div>
+</nav>
+<section class="hero" id="home">
+  <div class="hero-text">
+    <h3>WELCOME TO MY DIGITAL WORLD</h3>
+    <h1>Hi, I'm <span>Shaik Sameer</span></h1>
+    <h2>B.Tech Student | Future Innovator</h2>
+    <p>I am a first-year Computer Science and Engineering student with an interest in technology, problem solving and continuous learning. I believe in improving my knowledge and building a successful future through discipline and consistency.</p>
+    <a href="#about" class="btn">Explore My Portfolio</a>
+  </div>
+  <div class="hero-circle"><span>S</span></div>
+</section>
+<section id="about">
+  <h2 class="section-title">About <span>Me</span></h2>
+  <div class="about-box"><p>My name is <b>Shaik Sameer</b>. I am currently pursuing my first year of B.Tech in Computer Science and Engineering. I completed my 10th standard with 81.5% and my Intermediate with 95.4%. I am passionate about learning new technologies, developing my technical knowledge and improving my problem-solving abilities. My goal is to become a skilled professional and achieve success through hard work, discipline and consistency.</p></div>
+</section>
+<section id="education">
+  <h2 class="section-title">My <span>Education</span></h2>
+  <div class="education-container">
+    <div class="card"><h3>10th Standard</h3><h2>81.5%</h2><p>Successfully completed my Secondary School Education.</p></div>
+    <div class="card"><h3>Intermediate</h3><h2>95.4%</h2><p>Successfully completed my Intermediate Education.</p></div>
+    <div class="card"><h3>B.Tech</h3><h2>1st Year</h2><p>Currently pursuing Computer Science and Engineering.</p></div>
+  </div>
+</section>
+<section id="skills">
+  <h2 class="section-title">Technical <span>Skills</span></h2>
+  <div class="skills-container">
+    <div class="skill">Problem Solving</div><div class="skill">Logical Thinking</div><div class="skill">Basic Programming</div><div class="skill">Continuous Learning</div>
+  </div>
+</section>
+<section id="goals">
+  <h2 class="section-title">My Future <span>Vision</span></h2>
+  <div class="goal-box">
+    <h3>Dream Big. Learn Every Day. Build the Future.</h3>
+    <p>My vision is to develop strong technical skills, improve my communication and problem-solving abilities, explore emerging technologies and create something meaningful for society. I believe that consistency and dedication are the keys to success.</p>
+  </div>
+</section>
+<section class="contact" id="contact">
+  <h2 class="section-title">Contact <span>Me</span></h2>
+  <p>Thank you for visiting my portfolio. Let's connect and grow together!</p>
+  <a href="mailto:yourmail@example.com" class="btn">Email Me</a>
+</section>
+<footer>
+  <p>© 2026 Shaik Sameer | Personal Portfolio</p>
+  <p>Designed with HTML, CSS &amp; JavaScript</p>
+  <p>Dream • Learn • Innovate • Achieve</p>
+</footer>
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
+<script>
+const cursor=document.querySelector(".cursor");
+const dot=document.querySelector(".cursor-dot");
+let lastParticle=0;
+document.addEventListener("mousemove",function(e){
+  const x=e.clientX,y=e.clientY;
+  cursor.style.left=x+"px";cursor.style.top=y+"px";
+  dot.style.left=x+"px";dot.style.top=y+"px";
+  if(Math.random()>.75 && Date.now()-lastParticle>25){
+    lastParticle=Date.now();
+    const particle=document.createElement("div");
+    particle.className="particle";
+    particle.style.left=x+"px";particle.style.top=y+"px";
+    document.body.appendChild(particle);
+    setTimeout(()=>particle.remove(),700);
+  }
+});
+document.querySelectorAll("a,.card,.skill,.btn").forEach(item=>{
+  item.addEventListener("mouseenter",()=>cursor.classList.add("active"));
+  item.addEventListener("mouseleave",()=>cursor.classList.remove("active"));
+});
+</script>
+</body>
+</html>
