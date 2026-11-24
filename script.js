@@ -293,6 +293,19 @@
 
     renderBooks(students);
 
+    // Dynamic Pill Count Updater
+    const totalCount = students.length;
+    const hostedCount = students.filter(s => s.is_link).length;
+    const htmlCount = students.filter(s => !s.is_link).length;
+    const pillAll = document.querySelector('.filter-pill-btn[data-filter="all"]');
+    const pillHosted = document.querySelector('.filter-pill-btn[data-filter="hosted"]');
+    const pillHtml = document.querySelector('.filter-pill-btn[data-filter="html"]');
+    const countLabel = document.getElementById('bookshelf-count');
+    if (pillAll) pillAll.innerHTML = `📚 All Books (${totalCount})`;
+    if (pillHosted) pillHosted.innerHTML = `✦ Hosted Portals (${hostedCount})`;
+    if (pillHtml) pillHtml.innerHTML = `💻 HTML Web Apps (${htmlCount})`;
+    if (countLabel) countLabel.textContent = `Showing ${totalCount} of ${totalCount} Books`;
+
     // Search Input Listener
     const searchInput = document.getElementById('bookshelf-search');
     if (searchInput) {

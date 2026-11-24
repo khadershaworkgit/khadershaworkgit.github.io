@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Geethika's futuristic B.Tech portfolio">
+  <title>Geethika | Futuristic Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: #eef4ff;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #070b19;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -2;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(0, 229, 255, .17), transparent 28%),
+        radial-gradient(circle at 85% 75%, rgba(155, 76, 255, .20), transparent 30%),
+        linear-gradient(135deg, #070b19, #10152d 55%, #080b1b);
+    }
+    body::after {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      opacity: .22;
+      background-image: linear-gradient(rgba(80, 220, 255, .12) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(80, 220, 255, .12) 1px, transparent 1px);
+      background-size: 45px 45px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+    nav {
+      width: min(1100px, 90%); margin: 24px auto 0; padding: 16px 22px;
+      display: flex; justify-content: space-between; align-items: center;
+      border: 1px solid rgba(112, 225, 255, .2); border-radius: 16px;
+      background: rgba(13, 21, 45, .72); backdrop-filter: blur(14px);
+    }
+    .logo { color: #6eeaff; font-weight: 800; letter-spacing: 2px; }
+    nav a { color: #dce8ff; text-decoration: none; margin-left: 22px; font-size: .92rem; }
+    nav a:hover { color: #6eeaff; }
+    main { width: min(1100px, 90%); margin: auto; }
+    .hero {
+      min-height: 76vh; display: grid; place-items: center; text-align: center;
+      padding: 80px 10px 60px;
+    }
+    .eyebrow { color: #70eaff; letter-spacing: 4px; text-transform: uppercase; font-size: .78rem; }
+    h1 {
+      margin: 20px 0 12px; font-size: clamp(3.2rem, 10vw, 6.8rem);
+      line-height: 1; letter-spacing: -4px;
+      background: linear-gradient(90deg, #fff, #70eaff 48%, #b68aff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      text-shadow: 0 0 35px rgba(70, 220, 255, .12);
+    }
+    .subtitle { font-size: clamp(1.1rem, 3vw, 1.5rem); color: #c3d1ed; }
+    .hero p.note { max-width: 620px; margin: 22px auto 30px; color: #9eaccb; line-height: 1.8; }
+    .button {
+      display: inline-block; padding: 13px 24px; border-radius: 30px;
+      color: #06101d; font-weight: 700; text-decoration: none;
+      background: linear-gradient(90deg, #65eaff, #b48aff);
+      box-shadow: 0 0 25px rgba(87, 221, 255, .25);
+    }
+    section { padding: 35px 0 75px; }
+    .section-title { font-size: 1.8rem; margin-bottom: 22px; }
+    .section-title span { color: #70eaff; }
+    .panel {
+      padding: 28px; border-radius: 20px;
+      border: 1px solid rgba(112, 225, 255, .2);
+      background: rgba(15, 24, 50, .72);
+      box-shadow: 0 15px 50px rgba(0, 0, 0, .18);
+    }
+    .about-text { color: #b7c5e1; line-height: 1.8; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card {
+      padding: 24px; min-height: 155px; border-radius: 18px;
+      border: 1px solid rgba(112, 225, 255, .2);
+      background: linear-gradient(145deg, rgba(22, 35, 70, .88), rgba(17, 17, 43, .85));
+    }
+    .card .symbol { font-size: 1.7rem; margin-bottom: 16px; }
+    .card h3 { margin-bottom: 9px; color: #8cecff; }
+    .card p { color: #aebbd7; line-height: 1.6; font-size: .94rem; }
+    footer { text-align: center; padding: 25px; color: #8291b2; border-top: 1px solid rgba(112,225,255,.13); }
+    @media (max-width: 700px) {
+      nav { align-items: flex-start; gap: 14px; flex-direction: column; }
+      nav a { margin: 0 14px 0 0; }
+      .cards { grid-template-columns: 1fr; }
+      h1 { letter-spacing: -2px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">GEETHIKA<span style="color:#b68aff">.TECH</span></div>
+    <div>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div>
+        <div class="eyebrow">Welcome to my digital world</div>
+        <h1>GEETHIKA</h1>
+        <div class="subtitle">B.Tech Student · Future Innovator</div>
+        <p class="note">Exploring technology, learning new skills, and turning creative ideas into meaningful digital experiences.</p>
+        <a class="button" href="#about">Explore My Portfolio</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title"><span>01.</span> About Me</h2>
+      <div class="panel">
+        <p class="about-text">
+          Hello! I'm Geethika, a B.Tech student with an interest in technology and innovation.
+          I enjoy learning, solving problems, and discovering how technology can make a positive
+          difference. This portfolio is my space to share my learning journey and future goals.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title"><span>02.</span> Skills & Interests</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="symbol">⌘</div>
+          <h3>Technology</h3>
+          <p>Interested in modern technology, digital tools, and emerging innovations.</p>
+        </article>
+        <article class="card">
+          <div class="symbol">◇</div>
+          <h3>Problem Solving</h3>
+          <p>Building logical thinking and learning to approach challenges step by step.</p>
+        </article>
+        <article class="card">
+          <div class="symbol">✦</div>
+          <h3>Creative Learning</h3>
+          <p>Exploring fresh ideas, developing new abilities, and growing every day.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Geethika · Designed for the future</footer>
+</body>
+</html>
