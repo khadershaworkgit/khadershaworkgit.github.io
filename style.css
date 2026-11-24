@@ -693,13 +693,13 @@ code, pre {
 }
 
 /* ==========================================================================
-   3D REALISTIC BOOK STYLING
+   3D REALISTIC BOOKSHELF & PHYSICAL BOOK-OPENING ENGINE
    ========================================================================== */
 .books-shelf-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 2.2rem 1.8rem;
-  perspective: 1200px;
+  gap: 2.8rem 1.8rem;
+  perspective: 1400px;
 }
 
 /* The Book Item Container */
@@ -708,6 +708,12 @@ code, pre {
   flex-direction: column;
   align-items: center;
   position: relative;
+  perspective: 1400px;
+  transition: z-index 0.3s ease;
+}
+
+.book-item-container.is-elevated {
+  z-index: 80;
 }
 
 /* 3D Book Object */
@@ -718,32 +724,338 @@ code, pre {
   border-radius: 4px 10px 10px 4px;
   cursor: pointer;
   transform-style: preserve-3d;
-  transform: perspective(1000px) rotateY(-5deg) translateY(0);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  transform: rotateY(-6deg) translateY(0);
+  transition: transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.65s ease;
   box-shadow: var(--shadow-book);
   user-select: none;
 }
 
 /* Hover Lift & 3D Tilt */
-.interactive-book:hover {
-  transform: perspective(1000px) rotateY(-14deg) translateY(-14px) scale(1.04);
+.interactive-book:hover:not(.is-book-opening) {
+  transform: translateY(-14px) rotateY(-13deg) scale(1.04);
   box-shadow: var(--shadow-book-hover);
 }
 
-/* Active Click Effect */
-.interactive-book.clicked-magic {
-  transform: perspective(1000px) rotateY(-22deg) translateY(-20px) scale(1.08);
-  box-shadow: var(--shadow-special-book);
-  animation: bookMagicPulse 0.8s ease-in-out infinite alternate;
+/* --------------------------------------------------------------------------
+   PHYSICAL BOOK OPENING ANIMATION:
+   1. Book slides forward out of shelf towards reader (translateZ & translateY)
+   2. Front cover swings open 155 degrees on its left spine hinge
+   3. Turning page flips 130 degrees revealing parchment contents
+   4. Golden/warm manuscript illumination radiates outward
+   -------------------------------------------------------------------------- */
+.interactive-book.is-book-opening {
+  transform: translateY(-40px) translateZ(95px) rotateY(-18deg) scale(1.14);
+  box-shadow: -24px 34px 55px rgba(0, 0, 0, 0.45), 0 0 40px rgba(217, 119, 6, 0.5);
+  z-index: 60;
+  animation: bookMagicFloat 1.8s ease-in-out infinite alternate;
 }
 
-@keyframes bookMagicPulse {
-  0% { filter: drop-shadow(0 0 10px rgba(217, 119, 6, 0.4)); }
-  100% { filter: drop-shadow(0 0 25px rgba(217, 119, 6, 0.9)); }
+@keyframes bookMagicFloat {
+  0% {
+    filter: drop-shadow(0 0 12px rgba(217, 119, 6, 0.4));
+  }
+  100% {
+    filter: drop-shadow(0 0 28px rgba(217, 119, 6, 0.85));
+  }
 }
 
-/* Hardcover Front Surface */
+/* Rear Hardcover (anchored to back of the volume) */
+.book-back-cover {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px 10px 10px 4px;
+  background: #0F172A;
+  z-index: 1;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Spine Hinge Ridge on the Left */
+.book-spine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    rgba(0, 0, 0, 0.6) 0%, 
+    rgba(255, 255, 255, 0.18) 45%, 
+    rgba(0, 0, 0, 0.55) 100%);
+  border-radius: 4px 0 0 4px;
+  z-index: 12;
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Paper Page Edge Thickness on Right */
+.interactive-book::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: -9px;
+  width: 9px;
+  height: calc(100% - 8px);
+  background: repeating-linear-gradient(
+    180deg,
+    #F4EFE6,
+    #F4EFE6 2px,
+    #E2DAC6 2px,
+    #E2DAC6 4px
+  );
+  border-radius: 0 3px 3px 0;
+  box-shadow: inset 1px 0 2px rgba(0, 0, 0, 0.25);
+  transform: rotateY(70deg);
+  z-index: 3;
+}
+
+/* --------------------------------------------------------------------------
+   STATIONARY INSIDE PARCHMENT PAGE (Right Page revealed on open)
+   -------------------------------------------------------------------------- */
+.book-page-base {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  width: calc(100% - 16px);
+  height: calc(100% - 8px);
+  background: #FAF7F0;
+  background-image: radial-gradient(rgba(180, 160, 130, 0.25) 0.75px, transparent 0.75px);
+  background-size: 6px 6px;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: inset 5px 0 10px rgba(0, 0, 0, 0.18), 2px 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 4;
+  overflow: hidden;
+  padding: 0.85rem 0.75rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.6s ease;
+}
+
+.interactive-book.is-book-opening .book-page-base {
+  box-shadow: inset 4px 0 10px rgba(0, 0, 0, 0.15), 0 0 28px rgba(251, 191, 36, 0.4);
+}
+
+.parchment-sheet {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  border: 1px dashed rgba(168, 152, 126, 0.55);
+  border-radius: 4px;
+  padding: 0.65rem 0.5rem;
+  box-sizing: border-box;
+}
+
+.parchment-corner-fold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, transparent 50%, rgba(180, 160, 130, 0.45) 50%);
+}
+
+.parchment-folio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.62rem;
+  font-family: var(--font-display);
+  color: #8C7B65;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.parchment-roll-stamp {
+  background: rgba(180, 83, 9, 0.08);
+  border: 1px solid #D97706;
+  border-radius: 4px;
+  padding: 0.28rem 0.4rem;
+  text-align: center;
+  margin: 0.3rem 0;
+  box-shadow: inset 0 1px 2px rgba(180, 83, 9, 0.15);
+}
+
+.parchment-roll-stamp .stamp-lbl {
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  color: #92400E;
+  font-weight: 800;
+  display: block;
+}
+
+.parchment-roll-stamp .stamp-num {
+  font-size: 1.25rem;
+  font-weight: 900;
+  font-family: var(--font-display);
+  color: #B45309;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+}
+
+.parchment-student-name {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1E293B;
+  text-align: center;
+  line-height: 1.22;
+  margin-top: 0.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.parchment-project-title {
+  font-size: 0.68rem;
+  color: #64748B;
+  text-align: center;
+  line-height: 1.25;
+  margin-top: 0.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.parchment-rule-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0.35rem 0.4rem;
+}
+
+.parchment-rule-lines span {
+  height: 1px;
+  background: rgba(180, 160, 130, 0.35);
+  width: 100%;
+}
+
+.parchment-rule-lines span:nth-child(2) { width: 75%; }
+.parchment-rule-lines span:nth-child(3) { width: 88%; }
+
+.parchment-status-cue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #B45309;
+  letter-spacing: 0.04em;
+  border-top: 1px solid rgba(180, 160, 130, 0.35);
+  padding-top: 0.3rem;
+}
+
+.cue-feather {
+  display: inline-block;
+  animation: quillWrite 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes quillWrite {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-3px) rotate(-14deg); }
+}
+
+/* --------------------------------------------------------------------------
+   TURNING MIDDLE PAGE (Smooth 3D page flip with parchment physics)
+   -------------------------------------------------------------------------- */
+.book-page-turning {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  width: calc(100% - 16px);
+  height: calc(100% - 8px);
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 0.72s cubic-bezier(0.25, 1, 0.5, 1) 0.08s, opacity 0.25s ease;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.interactive-book.is-book-opening .book-page-turning {
+  opacity: 1;
+  transform: rotateY(-130deg);
+}
+
+.page-face {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  padding: 0.85rem;
+  background: linear-gradient(90deg, #EFE8DA 0%, #FAF6EE 15%, #F4EFE6 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.page-face.page-front {
+  border-radius: 0 4px 4px 0;
+  box-shadow: inset 4px 0 8px rgba(0, 0, 0, 0.15), 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.page-face.page-back {
+  transform: rotateY(180deg);
+  border-radius: 4px 0 0 4px;
+  background: linear-gradient(270deg, #EFE8DA 0%, #FAF6EE 15%, #F4EFE6 100%);
+  box-shadow: inset -4px 0 8px rgba(0, 0, 0, 0.15), -1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.page-front-content, .page-back-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
+}
+
+.page-ghost-seal { font-size: 1.1rem; margin-bottom: 0.25rem; opacity: 0.65; }
+
+.page-ghost-heading {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: #64748B;
+  margin-bottom: 0.45rem;
+}
+
+.page-ghost-line {
+  height: 2px;
+  background: rgba(100, 116, 139, 0.22);
+  border-radius: 2px;
+  margin: 3px 0;
+}
+
+.page-ghost-line.long { width: 85%; }
+.page-ghost-line.med { width: 65%; }
+.page-ghost-line.short { width: 45%; }
+
+/* --------------------------------------------------------------------------
+   HARDCOVER FRONT (Hinged on the left, swings open 155 degrees)
+   -------------------------------------------------------------------------- */
 .book-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px 10px 10px 4px;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 0.78s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 10;
+}
+
+.interactive-book.is-book-opening .book-cover {
+  transform: rotateY(-155deg);
+}
+
+/* Outside Hardcover Surface */
+.book-cover-front {
   position: absolute;
   top: 0;
   left: 0;
@@ -756,62 +1068,99 @@ code, pre {
   justify-content: space-between;
   overflow: hidden;
   box-sizing: border-box;
-  
-  /* Rich Leather/Paper Texture */
-  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  background: inherit;
   color: #F8FAFC;
   border: 1px solid rgba(255, 255, 255, 0.15);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Book Spine Ridge (Left Hinge) */
-.book-cover::before {
-  content: "";
+/* Inside Hardcover Surface (Ex Libris Pasted Endpaper) */
+.book-cover-inside {
   position: absolute;
   top: 0;
   left: 0;
-  width: 16px;
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, 
-    rgba(0,0,0,0.4) 0%, 
-    rgba(255,255,255,0.18) 40%, 
-    rgba(0,0,0,0.5) 100%);
-  box-shadow: inset 1px 0 0 rgba(255,255,255,0.2);
+  border-radius: 10px 4px 4px 10px;
+  background: linear-gradient(135deg, #1A1F2C 0%, #0F172A 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  padding: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: inset -6px 0 14px rgba(0, 0, 0, 0.55);
 }
 
-/* Page Edges Thickness on Right */
-.interactive-book::after {
-  content: "";
-  position: absolute;
-  top: 4px;
-  right: -8px;
-  width: 8px;
-  height: calc(100% - 8px);
-  background: repeating-linear-gradient(
-    180deg,
-    #F3EFE6,
-    #F3EFE6 2px,
-    #E4DEC9 2px,
-    #E4DEC9 4px
-  );
-  border-radius: 0 3px 3px 0;
-  box-shadow: inset 1px 0 2px rgba(0,0,0,0.25);
-  transform: rotateY(70deg);
+.book-endpaper-lining {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed rgba(251, 191, 36, 0.35);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.ex-libris-box {
+  text-align: center;
+  color: #FBBF24;
+}
+
+.ex-libris-seal { font-size: 1.35rem; margin-bottom: 0.2rem; }
+
+.ex-libris-title {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  font-weight: 800;
+  color: #F8FAFC;
+}
+
+.ex-libris-roll {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #F59E0B;
+  margin: 0.2rem 0;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.ex-libris-sub {
+  font-size: 0.56rem;
+  color: #94A3B8;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ex-libris-filigree {
+  font-size: 0.65rem;
+  color: #D97706;
+  margin-top: 0.35rem;
+  letter-spacing: 0.22em;
 }
 
 /* COLOR SCHEMES FOR COVERS (Varied Academic Leather Binders) */
-.book-cover.theme-navy {
+.book-cover.theme-navy, .book-back-cover.theme-navy {
   background: linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%);
 }
-.book-cover.theme-burgundy {
+.book-cover.theme-burgundy, .book-back-cover.theme-burgundy {
   background: linear-gradient(135deg, #881337 0%, #4C0519 100%);
 }
-.book-cover.theme-forest {
+.book-cover.theme-forest, .book-back-cover.theme-forest {
   background: linear-gradient(135deg, #064E3B 0%, #022C22 100%);
 }
-.book-cover.theme-slate {
+.book-cover.theme-slate, .book-back-cover.theme-slate {
   background: linear-gradient(135deg, #334155 0%, #1E293B 100%);
 }
-.book-cover.theme-amber {
+.book-cover.theme-amber, .book-back-cover.theme-amber {
   background: linear-gradient(135deg, #78350F 0%, #451A03 100%);
 }
 
@@ -820,7 +1169,8 @@ code, pre {
   box-shadow: var(--shadow-special-book);
 }
 
-.interactive-book.is-special-hosted .book-cover {
+.interactive-book.is-special-hosted .book-cover,
+.interactive-book.is-special-hosted .book-back-cover {
   background: linear-gradient(135deg, #78350F 0%, #B45309 50%, #451A03 100%);
   border: 2px solid #F59E0B;
 }
@@ -858,8 +1208,8 @@ code, pre {
   letter-spacing: 0.06em;
   padding: 0.2rem 0.5rem;
   border-radius: 4px 0 0 4px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 15;
   display: flex;
   align-items: center;
   gap: 0.25rem;
@@ -970,15 +1320,26 @@ code, pre {
   background: linear-gradient(180deg, #A8987E 0%, #6E5C46 100%);
   border-radius: 0 0 4px 4px;
   box-shadow: 0 6px 12px rgba(44, 30, 14, 0.2);
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
 }
 
+@media (max-width: 576px) {
+  .interactive-book.is-book-opening {
+    transform: translateY(-24px) translateZ(50px) rotateY(-14deg) scale(1.08);
+  }
+}
 /* ==========================================================================
    INTERACTIVE BOOK READER MODAL (LIVE PROJECT VIEWER)
    ========================================================================== */
 .modal-dialog-reader {
   max-width: 1100px;
   margin: 1.75rem auto;
+  transform: perspective(1200px) scale(0.94) rotateY(4deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.modal.show .modal-dialog-reader {
+  transform: perspective(1200px) scale(1) rotateY(0deg);
 }
 
 .modal-content-reader {

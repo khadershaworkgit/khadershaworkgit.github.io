@@ -78,6 +78,90 @@
   }
 
   /**
+   * Realistic tactile page-turn swoosh & paper flutter using Web Audio API.
+   * Generates bandpass-filtered noise swept across parchment frequencies.
+   */
+  function playPageTurnSound() {
+    if (!isSoundEnabled) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+
+      // Parchment friction noise
+      const duration = 0.34;
+      const bufferSize = Math.floor(ctx.sampleRate * duration);
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * 0.85;
+      }
+
+      const noiseSource = ctx.createBufferSource();
+      noiseSource.buffer = buffer;
+
+      // Dynamic Bandpass sweep mimicking page sliding
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(650, now);
+      filter.frequency.exponentialRampToValueAtTime(2400, now + 0.12);
+      filter.frequency.exponentialRampToValueAtTime(800, now + duration);
+      filter.Q.setValueAtTime(2.8, now);
+
+      // Volume envelope with crisp flutter
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(0.25, now + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+      noiseSource.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+
+      noiseSource.start(now);
+      noiseSource.stop(now + duration + 0.02);
+    } catch (err) {
+      console.warn('Page sound note:', err);
+    }
+  }
+
+  /**
+   * Gentle soft page-close sound when closing the book
+   */
+  function playBookCloseSound() {
+    if (!isSoundEnabled) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const duration = 0.22;
+      const bufferSize = Math.floor(ctx.sampleRate * duration);
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * 0.45;
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(950, now);
+      filter.frequency.exponentialRampToValueAtTime(320, now + duration);
+
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(0.14, now + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start(now);
+      noise.stop(now + duration + 0.01);
+    } catch (e) {}
+  }
+
+  /**
    * Play technical vocabulary spoken pronunciation
    */
   function playPronunciation(wordFile) {
@@ -304,27 +388,100 @@
             </div>
           ` : ''}
 
+          <!-- 3D Rear Hardcover -->
+          <div class="book-back-cover ${themeClass}"></div>
+
+          <!-- 3D Left Spine Ridge -->
+          <div class="book-spine"></div>
+
+          <!-- 3D Inside Stationary Parchment Page -->
+          <div class="book-page-base">
+            <div class="parchment-sheet">
+              <div class="parchment-corner-fold"></div>
+              <div class="parchment-folio-header">
+                <span class="folio-dept">VOL. IX</span>
+                <span class="folio-seal">❦</span>
+                <span class="folio-class">ATHENAEUM</span>
+              </div>
+
+              <div class="parchment-roll-stamp">
+                <span class="stamp-lbl">STUDENT ID</span>
+                <span class="stamp-num">${s.roll}</span>
+              </div>
+
+              <div class="parchment-body">
+                <div class="parchment-student-name">${escapeHtml(s.name)}</div>
+                <div class="parchment-project-title">${escapeHtml(s.title)}</div>
+                <div class="parchment-rule-lines">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+
+              <div class="parchment-status-cue">
+                <span class="cue-feather">🪶</span>
+                <span class="cue-text">Opening Folio...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D Turning Middle Page -->
+          <div class="book-page-turning">
+            <div class="page-face page-front">
+              <div class="page-front-content">
+                <div class="page-ghost-seal">🏛️</div>
+                <div class="page-ghost-heading">STUDENT ARCHIVE</div>
+                <div class="page-ghost-line long"></div>
+                <div class="page-ghost-line med"></div>
+                <div class="page-ghost-line short"></div>
+              </div>
+            </div>
+            <div class="page-face page-back">
+              <div class="page-back-content">
+                <div class="page-ghost-line med"></div>
+                <div class="page-ghost-line long"></div>
+                <div class="page-ghost-line short"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D Front Hardcover (Swings Open -155deg on Left Spine) -->
           <div class="book-cover ${themeClass}">
-            <div class="book-foil-border">
-              <div class="book-top-crest">
-                <span>VOL. IX</span>
-                <span>🏛️ ATHENAEUM</span>
-              </div>
+            <!-- Outside Front Cover Face -->
+            <div class="book-cover-front">
+              <div class="book-foil-border">
+                <div class="book-top-crest">
+                  <span>VOL. IX</span>
+                  <span>🏛️ ATHENAEUM</span>
+                </div>
 
-              <!-- ROLL NUMBER GOLD EMBOSSED PLATE -->
-              <div class="book-roll-plate">
-                <span class="book-roll-label">ROLL NUMBER</span>
-                <div class="book-roll-number">${s.roll}</div>
-              </div>
+                <!-- ROLL NUMBER GOLD EMBOSSED PLATE -->
+                <div class="book-roll-plate">
+                  <span class="book-roll-label">ROLL NUMBER</span>
+                  <div class="book-roll-number">${s.roll}</div>
+                </div>
 
-              <div>
-                <div class="book-student-name">${escapeHtml(s.name)}</div>
-                <div class="book-project-title">${escapeHtml(s.title)}</div>
-              </div>
+                <div>
+                  <div class="book-student-name">${escapeHtml(s.name)}</div>
+                  <div class="book-project-title">${escapeHtml(s.title)}</div>
+                </div>
 
-              <div class="book-bottom-footer">
-                <span class="book-type-badge">${isHosted ? '🌐 Live Cloud' : '📄 HTML App'}</span>
-                <span>${s.size_kb} KB</span>
+                <div class="book-bottom-footer">
+                  <span class="book-type-badge">${isHosted ? '🌐 Live Cloud' : '📄 HTML App'}</span>
+                  <span>${s.size_kb} KB</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inside Cover Face (Ex Libris Pasted Endpaper) -->
+            <div class="book-cover-inside">
+              <div class="book-endpaper-lining">
+                <div class="ex-libris-box">
+                  <div class="ex-libris-seal">🏛️</div>
+                  <div class="ex-libris-title">EX LIBRIS</div>
+                  <div class="ex-libris-roll">${s.roll}</div>
+                  <div class="ex-libris-sub">Prompt Engineering Archive</div>
+                  <div class="ex-libris-filigree">❖ ❦ ❖</div>
+                </div>
               </div>
             </div>
           </div>
@@ -354,34 +511,60 @@
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
+  let isOpeningInProgress = false;
+
   /**
-   * Triggers Magic Chime, Particle Burst, and opens the Reader Modal
+   * Orchestrates the 3D Book Opening Sequence:
+   * 1. Plays tactile page turn swish + magic chime arpeggio
+   * 2. Emits sparkle particle burst from the opening seam
+   * 3. Pulls book forward out of the shelf (translateZ & translateY)
+   * 4. Swings front hardcover open 155deg and turns middle page 130deg
+   * 5. Smoothly transitions into the Grand Athenaeum Reader Modal
    */
   function handleBookActivation(bookElem, evt) {
-    // 1. Play Magic Audio
+    if (isOpeningInProgress) return;
+    isOpeningInProgress = true;
+
+    // Reset any previously opened books first
+    document.querySelectorAll('.interactive-book.is-book-opening').forEach(b => {
+      if (b !== bookElem) {
+        b.classList.remove('is-book-opening');
+        const c = b.closest('.book-item-container');
+        if (c) c.classList.remove('is-elevated');
+      }
+    });
+
+    // 1. Audio: Tactile Page Turn Swoosh + Celestial Chime
+    playPageTurnSound();
     playMagicChime();
 
-    // 2. Spawn Magic Sparkles at coordinates
+    // 2. Sparkle Particle Burst at book center
     const rect = bookElem.getBoundingClientRect();
-    const clickX = evt.clientX || (rect.left + rect.width / 2);
-    const clickY = evt.clientY || (rect.top + rect.height / 2);
+    const clickX = evt && evt.clientX ? evt.clientX : (rect.left + rect.width / 2);
+    const clickY = evt && evt.clientY ? evt.clientY : (rect.top + rect.height / 2);
     spawnSparkleBurst(clickX, clickY);
 
-    // 3. Add Magic CSS animation class
-    bookElem.classList.add('clicked-magic');
-    setTimeout(() => {
-      bookElem.classList.remove('clicked-magic');
-    }, 700);
+    // 3. Elevate parent container in stacking context
+    const container = bookElem.closest('.book-item-container');
+    if (container) {
+      container.classList.add('is-elevated');
+    }
 
-    // 4. Retrieve Book Data
+    // 4. Trigger 3D Book Pull-Out and Page Opening Animation
+    bookElem.classList.add('is-book-opening');
+
+    // 5. Retrieve Book Data
     const roll = bookElem.getAttribute('data-roll');
     const name = bookElem.getAttribute('data-name');
     const title = bookElem.getAttribute('data-title');
     const url = bookElem.getAttribute('data-url');
     const isLink = bookElem.getAttribute('data-islink') === 'true';
 
-    // 5. Open Reader Modal with appropriate presentation
-    openReaderModal({ roll, name, title, url, isLink });
+    // 6. Allow 720ms for the full physical book opening experience before modal appears
+    setTimeout(() => {
+      openReaderModal({ roll, name, title, url, isLink });
+      isOpeningInProgress = false;
+    }, 720);
   }
 
   /* ==========================================================================
@@ -438,6 +621,24 @@
     document.querySelectorAll('.btn-viewport').forEach(btn => btn.classList.remove('active'));
     const defBtn = document.querySelector('.btn-viewport[data-viewport="desktop"]');
     if (defBtn) defBtn.classList.add('active');
+
+    // Attach close listener once to smoothly close open books when modal closes
+    if (!modalElem._hasBookCloseListener) {
+      modalElem._hasBookCloseListener = true;
+      modalElem.addEventListener('hidden.bs.modal', function () {
+        document.querySelectorAll('.interactive-book.is-book-opening').forEach(b => {
+          b.classList.remove('is-book-opening');
+          const c = b.closest('.book-item-container');
+          if (c) {
+            setTimeout(() => { c.classList.remove('is-elevated'); }, 700);
+          }
+        });
+        playBookCloseSound();
+        if (modalIframe) {
+          modalIframe.src = 'about:blank';
+        }
+      });
+    }
 
     // Show Bootstrap Modal
     if (window.bootstrap && window.bootstrap.Modal) {
