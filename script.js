@@ -524,7 +524,9 @@
     const toggleBtn = document.getElementById('btn-theme-toggle');
     if (!toggleBtn) return;
     const isMidnight = document.documentElement.getAttribute('data-theme') === 'midnight';
-    toggleBtn.innerHTML = isMidnight ? '<span>☀️</span> <span>Daylight Mode</span>' : '<span>🌙</span> <span>Midnight Scholar</span>';
+    toggleBtn.innerHTML = isMidnight ? '☀️' : '🌙';
+    toggleBtn.setAttribute('title', isMidnight ? 'Switch to Daylight Paper Mode' : 'Switch to Midnight Scholar Mode');
+    toggleBtn.setAttribute('aria-label', isMidnight ? 'Switch to Daylight Paper Mode' : 'Switch to Midnight Scholar Mode');
   }
 
   function updateSoundToggleUI() {
@@ -532,10 +534,14 @@
     if (!soundBtn) return;
     if (isSoundEnabled) {
       soundBtn.classList.remove('muted');
-      soundBtn.innerHTML = '<span>🔊</span> <span>Magic Sound: ON</span>';
+      soundBtn.innerHTML = '🔊';
+      soundBtn.setAttribute('title', 'Magic Sound: ON (Click to mute)');
+      soundBtn.setAttribute('aria-label', 'Magic Sound: ON');
     } else {
       soundBtn.classList.add('muted');
-      soundBtn.innerHTML = '<span>🔇</span> <span>Magic Sound: OFF</span>';
+      soundBtn.innerHTML = '🔇';
+      soundBtn.setAttribute('title', 'Magic Sound: MUTED (Click to activate)');
+      soundBtn.setAttribute('aria-label', 'Magic Sound: MUTED');
     }
   }
 
@@ -768,7 +774,7 @@ class TodoStore {
   }
 
   /* ==========================================================================
-     11. QUICK QUIZ ENGINE
+     11. QUICK QUIZ ENGINE (10 PRACTICE QUESTIONS)
      ========================================================================== */
   const quizData = [
     {
@@ -780,7 +786,7 @@ class TodoStore {
         "Character and Comments"
       ],
       correct: 1,
-      explanation: "In C-T-C-O, the two C's represent Context (the environment and inputs) and Constraints (the strict non-negotiable rules)."
+      explanation: "In C-T-C-O, the two C's represent Context (the environment, language, and contracts) and Constraints (strict non-negotiable rules)."
     },
     {
       q: "Why does prompting 'fix this error' usually lead to poor software quality?",
@@ -802,7 +808,7 @@ class TodoStore {
         "Slow CPU cache misses"
       ],
       correct: 1,
-      explanation: "Standard IEEE 754 floats cause fractional rounding drift; financial systems enforce Decimal arithmetic."
+      explanation: "Standard IEEE 754 floats cause fractional rounding drift; financial systems enforce Decimal arithmetic with ROUND_HALF_UP."
     },
     {
       q: "In prompt engineering, what is the role of the [FORMAT] block?",
@@ -825,6 +831,61 @@ class TodoStore {
       ],
       correct: 0,
       explanation: "Refactoring improves internal structure without altering external observable behavior."
+    },
+    {
+      q: "When asking AI to fetch 50+ network URLs concurrently, what synchronization primitive should you instruct it to use to avoid socket exhaustion?",
+      options: [
+        "while True loop with time.sleep()",
+        "asyncio.Semaphore with a bounded concurrency limit (e.g., 10)",
+        "Global recursive counter variables",
+        "Operating system process kill signals"
+      ],
+      correct: 1,
+      explanation: "An asyncio.Semaphore throttles simultaneous active network sockets to a safe threshold, preventing OS EMFILE socket exhaustion and rate limits."
+    },
+    {
+      q: "In the 7-step AI Software Development Lifecycle (SDLC), what must a developer do BEFORE generating code with AI?",
+      options: [
+        "Deploy immediately to production servers",
+        "Plan: Decompose functional requirements, establish data contracts, and set architectural boundaries",
+        "Run automated unit tests on an empty repository",
+        "Write user manuals before knowing the architecture"
+      ],
+      correct: 1,
+      explanation: "The Plan phase maps error invariants and data boundaries first, avoiding massive rework and architectural hallucinations."
+    },
+    {
+      q: "Why must an engineered prompt explicitly mandate parameterized queries when asking for database logic?",
+      options: [
+        "To increase server RAM consumption",
+        "Because unconstrained prompts often use raw string interpolation, introducing severe SQL injection vulnerabilities",
+        "Because modern databases forbid SELECT statements",
+        "To prevent SQL keywords from being highlighted"
+      ],
+      correct: 1,
+      explanation: "Without explicit parameterized query constraints, AI models frequently concatenate raw user strings, exposing databases to SQL injection."
+    },
+    {
+      q: "What typically occurs when you omit the [CONSTRAINTS] block when prompting AI for an algorithmic function?",
+      options: [
+        "The AI generates binary machine code automatically",
+        "The AI defaults to naive O(N) or O(N^2) brute-force loops with missing guards for zero, negative, or null inputs",
+        "The browser window crashes instantly",
+        "The model returns an empty string"
+      ],
+      correct: 1,
+      explanation: "Without strict constraints, AI generates naive brute-force loops that fail under load and crash on edge cases."
+    },
+    {
+      q: "When prompting AI to build an interactive Modal or Dialog component, which accessibility standard prevents keyboard users from getting trapped?",
+      options: [
+        "Flashing CSS neon borders",
+        "WCAG 2.1 AA focus trapping (cycling Tab inside dialog) and restoring focus to trigger on Escape close",
+        "Disabling CSS stylesheets completely",
+        "Deleting all HTML button elements"
+      ],
+      correct: 1,
+      explanation: "Accessible modals must trap keyboard focus while active, declare role='dialog', and return focus to the trigger element upon closing."
     }
   ];
 
@@ -897,15 +958,15 @@ class TodoStore {
       if (qNum) qNum.textContent = 'Quiz Completed';
       qText.textContent = `You scored ${quizScore} out of ${quizData.length}!`;
       optList.innerHTML = '';
-      if (quizScore >= 4) {
+      if (quizScore >= 7) {
         spawnSparkleBurst(window.innerWidth / 2, window.innerHeight / 2);
-        showToast('🎉 Mastery Achieved! Excellent prompt engineering instincts.');
+        showToast('🎉 Mastery Achieved! Outstanding prompt engineering instincts.');
       }
       if (feedback) {
         feedback.innerHTML = `
           <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 1.5rem; text-align: center;">
             <p style="font-size: 1.1rem; color: var(--ink-primary); margin-bottom: 1rem;">
-              ${quizScore >= 4 ? '🌟 Outstanding work! You have mastered the foundational engineering invariants.' : '📚 Good effort! Review the C-T-C-O and SDLC sections above to sharpen your skills.'}
+              ${quizScore >= 7 ? '🌟 Outstanding work! You scored ' + quizScore + '/10 and mastered the foundational engineering invariants.' : '📚 Good effort! You scored ' + quizScore + '/10. Review the C-T-C-O and SDLC sections above to sharpen your skills.'}
             </p>
             <button class="btn-primary" id="btn-restart-quiz" style="padding: 0.6rem 1.5rem; border-radius: 50px; background: var(--accent-navy); color: #fff; border: none; cursor: pointer;">
               Restart Quiz 🔄
@@ -928,7 +989,7 @@ class TodoStore {
   }
 
   /* ==========================================================================
-     12. CHEAT SHEET COPY BUTTONS & PRONUNCIATIONS
+     12. CHEAT SHEET & TRANSFORMATION LAB COPY BUTTONS
      ========================================================================== */
   function initCheatSheetAndAudio() {
     document.querySelectorAll('.btn-copy-template').forEach(btn => {
@@ -936,6 +997,16 @@ class TodoStore {
         const text = this.closest('.cheat-card').querySelector('.cheat-code-text').textContent;
         navigator.clipboard.writeText(text).then(() => {
           showToast('Template Copied to Clipboard! 📋');
+        });
+      });
+    });
+
+    document.querySelectorAll('.btn-copy-prompt').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const targetBox = this.closest('.prompt-col-card').querySelector('.prompt-text-box');
+        const text = targetBox ? targetBox.textContent.trim() : '';
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Prompt Copied to Clipboard! 📋');
         });
       });
     });
@@ -949,7 +1020,61 @@ class TodoStore {
   }
 
   /* ==========================================================================
-     13. INITIALIZATION ON DOM READY
+     13. MAIN PROCTORED EXAM PASSWORD GATE
+     ========================================================================== */
+  function initMainTestPasswordGate() {
+    const pwdInput = document.getElementById('main-test-password');
+    const btnStart = document.getElementById('btn-start-main-test');
+    const btnTogglePwd = document.getElementById('btn-toggle-main-pwd');
+    const errorEl = document.getElementById('main-pwd-error');
+    const REQUIRED_KEY = 'sec_9_17_53';
+
+    if (btnTogglePwd && pwdInput) {
+      btnTogglePwd.addEventListener('click', () => {
+        const isPwd = pwdInput.type === 'password';
+        pwdInput.type = isPwd ? 'text' : 'password';
+        btnTogglePwd.textContent = isPwd ? '🙈' : '👁️';
+      });
+    }
+
+    function checkAndLaunch() {
+      const entered = pwdInput ? pwdInput.value.trim() : '';
+      if (entered === REQUIRED_KEY) {
+        if (errorEl) errorEl.style.display = 'none';
+        showToast('Password Verified! Launching Proctored Exam... 🚀');
+        setTimeout(() => {
+          window.location.href = './quiz.html';
+        }, 600);
+      } else {
+        if (errorEl) {
+          errorEl.textContent = '❌ Invalid access password! Please enter the key provided by your instructor.';
+          errorEl.style.display = 'block';
+        }
+        if (pwdInput) {
+          pwdInput.classList.add('is-invalid');
+          pwdInput.focus();
+        }
+      }
+    }
+
+    if (btnStart) {
+      btnStart.addEventListener('click', checkAndLaunch);
+    }
+    if (pwdInput) {
+      pwdInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          checkAndLaunch();
+        }
+      });
+      pwdInput.addEventListener('input', () => {
+        if (errorEl) errorEl.style.display = 'none';
+        pwdInput.classList.remove('is-invalid');
+      });
+    }
+  }
+
+  /* ==========================================================================
+     14. INITIALIZATION ON DOM READY
      ========================================================================== */
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
@@ -961,6 +1086,7 @@ class TodoStore {
     initSDLCStepper();
     initQuiz();
     initCheatSheetAndAudio();
+    initMainTestPasswordGate();
   });
 
 })();

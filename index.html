@@ -36,14 +36,11 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Nav Links -->
+      <!-- Nav Links (Clean, Uncluttered Menu) -->
       <div class="collapse navbar-collapse" id="navbarContent">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0 align-items-center">
           <li class="nav-item">
             <a class="nav-link nav-link-custom" href="#section-volumes">The 3 Sections</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-custom fw-bold text-primary" href="#bookshelf-sec9">📚 Section 9 Books</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav-link-custom" href="#ctco-framework">Prompt Formula</a>
@@ -52,26 +49,29 @@
             <a class="nav-link nav-link-custom" href="#module-1">Prompt Coding</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-link-custom" href="#module-2">AI Workflows</a>
+            <a class="nav-link nav-link-custom" href="#module-2">Workflows</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#prompt-lab">Prompt Lab</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav-link-custom" href="#cheat-sheet">Cheat Sheet</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav-link-custom" href="#quiz">Quiz</a>
+            <a class="nav-link nav-link-custom fw-bold" href="#quiz" style="color: var(--accent-gold);">🛡️ Main Exam</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav-link-custom" href="#downloads">Downloads</a>
           </li>
         </ul>
 
-        <!-- Action Controls: Theme & Magic Sound Toggles -->
+        <!-- Action Controls: Minimalist Symbol-Only Toggles -->
         <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
-          <button class="btn-sound-toggle" id="btn-sound-toggle" title="Toggle Magical Chime Sounds" aria-label="Toggle Magical Chime Sounds">
-            <span>🔊</span> <span>Magic Sound: ON</span>
+          <button class="btn-icon-nav" id="btn-sound-toggle" title="Magic Sound: ON (Click to mute)" aria-label="Toggle Magic Sound">
+            🔊
           </button>
-          <button class="btn-theme-toggle" id="btn-theme-toggle" title="Toggle Daylight / Midnight Reading Mode" aria-label="Toggle Reading Theme">
-            <span>🌙</span> <span>Midnight Scholar</span>
+          <button class="btn-icon-nav" id="btn-theme-toggle" title="Switch to Midnight Scholar Mode" aria-label="Toggle Reading Theme">
+            🌙
           </button>
         </div>
       </div>
@@ -98,6 +98,9 @@
       <div class="quick-jump-bar">
         <a href="#bookshelf-sec9" class="jump-pill featured">
           <span>📚</span> <span>Explore Section 9 Bookshelf (26 Projects)</span>
+        </a>
+        <a href="#quiz" class="jump-pill" style="border-color: var(--accent-gold); color: var(--accent-gold); font-weight: 600;">
+          <span>🛡️</span> <span>Official Proctored Exam</span>
         </a>
         <a href="#section-volumes" class="jump-pill">
           <span>🏛️</span> <span>Inspect All 3 Section Volumes</span>
@@ -863,20 +866,354 @@ async def fetch_all(urls, results=[]):
     </div>
   </section>
 
-  <!-- QUICK QUIZ SECTION -->
+  <!-- ==================== 8. PROMPT TRANSFORMATION LAB (5 BAD VS 5 GOOD) ==================== -->
+  <section class="curriculum-section" id="prompt-lab">
+    <div class="container">
+      <div class="section-header-block">
+        <div class="section-label">Interactive Prompt Engineering Laboratory</div>
+        <h2 class="section-heading">5 Naive Prompts Transformed to 5 Engineered Prompts</h2>
+        <p class="section-subheading">
+          Explore how 5 common, vulnerability-prone developer prompts are re-architected into bulletproof production specifications using our <strong>C-T-C-O / R-T-C-F-C</strong> concepts.
+        </p>
+      </div>
+
+      <!-- PAIR 1: Financial & Arithmetic Precision -->
+      <div class="lab-card-wrapper">
+        <div class="lab-header-row">
+          <div>
+            <span class="concept-pill-badge">Case 1 // Financial Logic</span>
+            <h3 class="h5 fw-bold mt-1 mb-0" style="font-family: var(--font-serif); color: var(--ink-primary);">
+              E-Commerce Cart Calculation &amp; Tax Engine
+            </h3>
+          </div>
+          <span class="small text-muted font-monospace">Invariant: Decimal Precision &amp; Bounds</span>
+        </div>
+
+        <div class="lab-pair-grid">
+          <!-- Bad Prompt 1 -->
+          <div class="prompt-col-card bad">
+            <div class="prompt-col-header">
+              <span>❌ Naive Prompt (Ad-Hoc)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy naive prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">write a function to calculate discounts and tax on a shopping cart</div>
+            <div class="prompt-why-fails">
+              <strong>⚠️ Why It Fails:</strong> Standard floats drift (e.g. <code>0.1 + 0.2 != 0.3</code>), negative quantities are unhandled, tax percentage is hardcoded, and missing type contracts cause silent runtime failures.
+            </div>
+          </div>
+
+          <!-- Good Prompt 1 -->
+          <div class="prompt-col-card good">
+            <div class="prompt-col-header">
+              <span>✅ Engineered Specification (C-T-C-O)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy engineered prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">[ROLE]: Principal Financial Software Engineer.
+[TASK]: Implement calculate_cart_totals(items, discount_code).
+[CONTEXT]: Python 3.11 checkout engine receiving a list of CartItem dataclasses (sku: str, unit_price: Decimal, quantity: int).
+[CONSTRAINTS]:
+- Currency arithmetic MUST use decimal.Decimal with ROUND_HALF_UP (zero binary floats).
+- Validate unit_price &gt; 0 and quantity &gt;= 1; raise ValueError on negative or zero inputs.
+- Apply tiered volume discounts (10% over $100, 15% over $250).
+- Time complexity MUST be O(N); zero external dependencies.
+[OUTPUT]: Fully typed Python code with Google-style docstrings followed by 3 parameterized pytest test cases.</div>
+            <div class="prompt-why-fails" style="background: rgba(5, 150, 105, 0.08); color: var(--accent-emerald);">
+              <strong>🛡️ Concept Applied:</strong> Exact decimal representation, explicit type contracts, boundary validation, and parameterized test verification.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAIR 2: Database Query & SQL Injection Defense -->
+      <div class="lab-card-wrapper">
+        <div class="lab-header-row">
+          <div>
+            <span class="concept-pill-badge">Case 2 // API &amp; Database Security</span>
+            <h3 class="h5 fw-bold mt-1 mb-0" style="font-family: var(--font-serif); color: var(--ink-primary);">
+              Database User Search &amp; Pagination
+            </h3>
+          </div>
+          <span class="small text-muted font-monospace">Invariant: Parameterization &amp; Keyset Limits</span>
+        </div>
+
+        <div class="lab-pair-grid">
+          <!-- Bad Prompt 2 -->
+          <div class="prompt-col-card bad">
+            <div class="prompt-col-header">
+              <span>❌ Naive Prompt (Ad-Hoc)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy naive prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">make an api endpoint to search users in database</div>
+            <div class="prompt-why-fails">
+              <strong>⚠️ Why It Fails:</strong> AI generates raw f-strings (<code>SELECT * FROM users WHERE name LIKE '%{query}%'</code>) vulnerable to SQL injection, returns unlimited rows causing memory exhaustion, and omits authentication checks.
+            </div>
+          </div>
+
+          <!-- Good Prompt 2 -->
+          <div class="prompt-col-card good">
+            <div class="prompt-col-header">
+              <span>✅ Engineered Specification (C-T-C-O)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy engineered prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">[ROLE]: Senior Security Architect &amp; Backend Lead.
+[TASK]: Build an async search_users(query: str, cursor: Optional[int], limit: int) API endpoint.
+[CONTEXT]: FastAPI + PostgreSQL using SQLAlchemy 2.0 async engine and AsyncSession.
+[CONSTRAINTS]:
+- Parameterized queries ONLY; zero raw SQL string interpolation or concatenations.
+- Enforce mandatory keyset pagination with max limit capped at 50 records.
+- Sanitize input against regex injection and escape database wildcards (%, _).
+- Return HTTP 422 on query strings under 2 characters; log all queries with masked PII.
+[OUTPUT]: Production FastAPI router module with Pydantic v2 response schemas and an async unit test.</div>
+            <div class="prompt-why-fails" style="background: rgba(5, 150, 105, 0.08); color: var(--accent-emerald);">
+              <strong>🛡️ Concept Applied:</strong> SQL parameterization, Keyset pagination limits, PII sanitization, and structured validation schemas.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAIR 3: High-Throughput Concurrency -->
+      <div class="lab-card-wrapper">
+        <div class="lab-header-row">
+          <div>
+            <span class="concept-pill-badge">Case 3 // Concurrency &amp; Networking</span>
+            <h3 class="h5 fw-bold mt-1 mb-0" style="font-family: var(--font-serif); color: var(--ink-primary);">
+              Batch Telemetry Ingestion from 100+ Endpoints
+            </h3>
+          </div>
+          <span class="small text-muted font-monospace">Invariant: Semaphore Throttling &amp; Isolated Failures</span>
+        </div>
+
+        <div class="lab-pair-grid">
+          <!-- Bad Prompt 3 -->
+          <div class="prompt-col-card bad">
+            <div class="prompt-col-header">
+              <span>❌ Naive Prompt (Ad-Hoc)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy naive prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">fetch data from 100 urls fast in python</div>
+            <div class="prompt-why-fails">
+              <strong>⚠️ Why It Fails:</strong> Fires 100+ simultaneous OS sockets exhausting file descriptors (<code>EMFILE</code>), triggers remote rate limits (HTTP 429), and 1 failure aborts the entire batch.
+            </div>
+          </div>
+
+          <!-- Good Prompt 3 -->
+          <div class="prompt-col-card good">
+            <div class="prompt-col-header">
+              <span>✅ Engineered Specification (C-T-C-O)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy engineered prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">[ROLE]: Principal Distributed Systems Engineer.
+[TASK]: Implement fetch_batch_endpoints(urls: List[str], max_concurrency: int = 10).
+[CONTEXT]: Python 3.11+ using aiohttp to query microservice telemetry.
+[CONSTRAINTS]:
+- Throttle concurrency to max 10 parallel sockets using asyncio.Semaphore(10).
+- Configure aiohttp.TCPConnector(limit=10, ttl_dns_cache=300) to reuse connection pools.
+- Wrap calls in asyncio.gather(*tasks, return_exceptions=True) to isolate failures.
+- Implement exponential backoff with jitter on HTTP 429/503 responses.
+- Mutable default arguments are forbidden.
+[OUTPUT]: Decoupled async module with structured logging and mock aiohttp unit test.</div>
+            <div class="prompt-why-fails" style="background: rgba(5, 150, 105, 0.08); color: var(--accent-emerald);">
+              <strong>🛡️ Concept Applied:</strong> Semaphore concurrency bound, socket connection pooling, backoff jitter, and exception isolation.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAIR 4: Accessible Web Component -->
+      <div class="lab-card-wrapper">
+        <div class="lab-header-row">
+          <div>
+            <span class="concept-pill-badge">Case 4 // Web Component Engineering</span>
+            <h3 class="h5 fw-bold mt-1 mb-0" style="font-family: var(--font-serif); color: var(--ink-primary);">
+              Zero-Dependency Accessible Modal Dialog
+            </h3>
+          </div>
+          <span class="small text-muted font-monospace">Invariant: WCAG 2.1 AA &amp; Keyboard Focus Trap</span>
+        </div>
+
+        <div class="lab-pair-grid">
+          <!-- Bad Prompt 4 -->
+          <div class="prompt-col-card bad">
+            <div class="prompt-col-header">
+              <span>❌ Naive Prompt (Ad-Hoc)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy naive prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">make a modal popup window in html css and js</div>
+            <div class="prompt-why-fails">
+              <strong>⚠️ Why It Fails:</strong> Produces an inaccessible <code>&lt;div&gt;</code> that traps keyboard users outside, ignores screen reader state, doesn't close on Escape, and allows background scroll.
+            </div>
+          </div>
+
+          <!-- Good Prompt 4 -->
+          <div class="prompt-col-card good">
+            <div class="prompt-col-header">
+              <span>✅ Engineered Specification (C-T-C-O)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy engineered prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">[ROLE]: Staff Accessibility (a11y) &amp; Frontend Architect.
+[TASK]: Build a reusable, zero-dependency Modal Dialog web component.
+[CONTEXT]: Vanilla HTML5, modern CSS custom properties, and ES6 JavaScript.
+[CONSTRAINTS]:
+- WCAG 2.1 AA compliant: role="dialog", aria-modal="true", aria-labelledby, aria-describedby.
+- Implement strict keyboard focus trapping (Tab/Shift+Tab cycles only within modal).
+- Close on Escape key or backdrop click, restoring focus to the triggering element.
+- Disable background scrolling while modal is open (overflow: hidden on body).
+- Zero external libraries or jQuery.
+[OUTPUT]: Cleanly decoupled HTML structure, accessible CSS, and a vanilla JS Modal class.</div>
+            <div class="prompt-why-fails" style="background: rgba(5, 150, 105, 0.08); color: var(--accent-emerald);">
+              <strong>🛡️ Concept Applied:</strong> WCAG 2.1 AA keyboard focus management, ARIA announcement attributes, and clean DOM cleanup.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAIR 5: Error Debugging & RCA -->
+      <div class="lab-card-wrapper">
+        <div class="lab-header-row">
+          <div>
+            <span class="concept-pill-badge">Case 5 // Production Debugging</span>
+            <h3 class="h5 fw-bold mt-1 mb-0" style="font-family: var(--font-serif); color: var(--ink-primary);">
+              Null Pointer Isolation &amp; Defensive Patch
+            </h3>
+          </div>
+          <span class="small text-muted font-monospace">Invariant: Root Cause Analysis &amp; Regression Test</span>
+        </div>
+
+        <div class="lab-pair-grid">
+          <!-- Bad Prompt 5 -->
+          <div class="prompt-col-card bad">
+            <div class="prompt-col-header">
+              <span>❌ Naive Prompt (Ad-Hoc)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy naive prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">fix this error TypeError: cannot read properties of undefined</div>
+            <div class="prompt-why-fails">
+              <strong>⚠️ Why It Fails:</strong> Yields a naive band-aid (<code>if (!data) return;</code>) that silences the exception without addressing why the object was null, causing downstream data corruption.
+            </div>
+          </div>
+
+          <!-- Good Prompt 5 -->
+          <div class="prompt-col-card good">
+            <div class="prompt-col-header">
+              <span>✅ Engineered Specification (C-T-C-O)</span>
+              <button type="button" class="btn-copy-prompt" title="Copy engineered prompt">📋 Copy</button>
+            </div>
+            <div class="prompt-text-box">[ROLE]: Principal Fullstack Debugging Specialist.
+[TASK]: Perform Root Cause Analysis (RCA) and patch the TypeError in user_hydrator.ts:42.
+[CONTEXT]: Node.js 20 microservice consuming async Kafka events where user.billing_address is undefined for guest accounts.
+[ERROR TRACEBACK]: TypeError: Cannot read properties of undefined (reading 'postal_code') at hydrateProfile (user_hydrator.ts:42:28).
+[CONSTRAINTS]:
+1. Identify root cause in 2 sentences explaining why the invariant broke.
+2. Implement defensive optional chaining with a typed fallback object.
+3. Write a Jest test reproducing the guest checkout null state and verifying the fix.
+[OUTPUT]: Root cause diagnosis, targeted patch, and regression test case.</div>
+            <div class="prompt-why-fails" style="background: rgba(5, 150, 105, 0.08); color: var(--accent-emerald);">
+              <strong>🛡️ Concept Applied:</strong> Root Cause Analysis (RCA) protocol, defensive optional chaining, and automated regression test reproduction.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 9. QUIZ & OFFICIAL EXAMINATION SECTION ==================== -->
   <section class="curriculum-section" id="quiz">
     <div class="container">
       <div class="section-header-block">
-        <div class="section-label">Self-Assessment</div>
-        <h2 class="section-heading">Quick Interactive Quiz</h2>
+        <div class="section-label">Examination &amp; Self-Assessment</div>
+        <h2 class="section-heading">Official Proctored Exam &amp; Practice Quiz</h2>
         <p class="section-subheading">
-          Test your prompt engineering instincts with 5 multiple-choice questions. Score 4 or higher to unlock the celebratory sparkle burst!
+          Take the mandatory proctored examination for Sections 9, 17, and 53, or practice your prompt engineering instincts with the interactive quiz below.
         </p>
+      </div>
+
+      <!-- ==================== MAIN PROCTORED EXAMINATION CARD ==================== -->
+      <div class="paper-card mb-5" style="border: 2px solid var(--accent-gold); box-shadow: var(--shadow-md); background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-surface-elevated) 100%);">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+          <div class="d-flex align-items-center gap-3">
+            <span style="font-size: 2.2rem;">🏛️</span>
+            <div>
+              <span class="badge" style="background: var(--accent-gold); color: #fff; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 0.75rem;">
+                Official Main Examination
+              </span>
+              <h3 class="h4 fw-bold mt-1 mb-0" style="font-family: var(--font-serif); color: var(--ink-primary);">
+                Spreadsheet Processing &amp; AI Tools Quiz
+              </h3>
+            </div>
+          </div>
+          <span class="badge bg-danger-subtle text-danger p-2 px-3 fw-bold">
+            🛡️ Live Proctored • Sections 9, 17 &amp; 53
+          </span>
+        </div>
+
+        <p style="color: var(--ink-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.25rem;">
+          This is the official curriculum examination covering spreadsheet functions (SUM, AVERAGE, IF, MIN), pivot tables, filtering, formula syntax, and modern AI spreadsheet technologies (Rows AI, SheetAI, Formula Bot). Submissions and scores are permanently stored in the official Google examination database.
+        </p>
+
+        <!-- Proctoring Protocols Bullet Grid -->
+        <div class="row g-2 mb-4 font-monospace small">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="p-2 rounded bg-light border text-secondary h-100">
+              🔒 <strong>Full-Screen Lock:</strong> Mandatory full-screen session.
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="p-2 rounded bg-light border text-secondary h-100">
+              🚫 <strong>Anti-Copy / Paste:</strong> Right-click &amp; clipboard locked.
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="p-2 rounded bg-light border text-secondary h-100">
+              👁️ <strong>Tab Tracking:</strong> Navigating away records strikes.
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="p-2 rounded bg-light border text-secondary h-100">
+              ⚠️ <strong>3-Strike Rule:</strong> 3 infractions locks the session.
+            </div>
+          </div>
+        </div>
+
+        <!-- Password Input Gate -->
+        <div class="p-3 rounded bg-light border">
+          <div class="row g-3 align-items-center">
+            <div class="col-12 col-md-6 col-lg-5">
+              <label for="main-test-password" class="form-label small fw-bold text-uppercase text-secondary mb-1">
+                🔑 Examination Access Password *
+              </label>
+              <div class="input-group">
+                <input type="password" id="main-test-password" class="form-control" placeholder="Enter session access password" autocomplete="off">
+                <button class="btn btn-outline-secondary" type="button" id="btn-toggle-main-pwd" title="Toggle password visibility">👁️</button>
+              </div>
+              <div id="main-pwd-error" class="text-danger small mt-1 fw-bold" style="display: none;">
+                ❌ Invalid access password! Please enter the key provided by your instructor.
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-7 d-flex align-items-end gap-2 flex-wrap">
+              <button type="button" class="btn btn-primary fw-bold px-4 py-2" id="btn-start-main-test">
+                🚀 Unlock &amp; Launch Main Test in Full Screen
+              </button>
+              <a href="./quiz.html" class="btn btn-outline-secondary px-3 py-2 small" target="_blank" title="Open proctored portal in dedicated window">
+                Direct Portal Page ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRACTICE QUIZ HEADER -->
+      <div class="text-center mb-4">
+        <span class="badge bg-secondary-subtle text-secondary text-uppercase px-3 py-1 font-monospace">Practice Sandbox</span>
+        <h3 class="h5 fw-bold mt-2" style="font-family: var(--font-serif); color: var(--ink-primary);">
+          Interactive Practice Quiz (Prompt Engineering)
+        </h3>
+        <p class="small text-muted mb-0">10 comprehensive multiple-choice questions to test your prompt engineering instincts.</p>
       </div>
 
       <div class="quiz-wrapper">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <span class="badge bg-primary-subtle text-primary" id="quiz-q-num">Question 1 of 5</span>
+          <span class="badge bg-primary-subtle text-primary" id="quiz-q-num">Question 1 of 10</span>
           <span class="small text-muted font-monospace" id="quiz-score-display">Score: 0 / 0</span>
         </div>
 

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Proctored Assessment | Spreadsheet &amp; AI Tools Quiz</title>
+  <meta name="description" content="Official proctored examination environment for Sections 9, 17, and 53. Mandatory full-screen, tab-switch tracking, and anti-copy protocols.">
+
+  <!-- Proctoring Stylesheet -->
+  <link rel="stylesheet" href="./quiz_style.css">
+</head>
+<body>
+
+  <!-- Toast Notification for Blocked Actions -->
+  <div id="copy-toast" class="copy-block-toast" role="alert" aria-live="assertive"></div>
+
+  <!-- ==================== 1. PRE-EXAM ONBOARDING & BRIEFING ==================== -->
+  <main class="onboarding-container" id="onboarding-screen">
+    <div class="onboarding-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+        <div class="exam-badge" style="margin-bottom: 0;">
+          <span>🛡️</span>
+          <span>Official Proctored Examination</span>
+        </div>
+        <a href="./index.html" style="font-size: 0.85rem; font-weight: 600; color: var(--accent-navy); text-decoration: none;">
+          ← Return to Portal
+        </a>
+      </div>
+
+      <h1 class="onboarding-title">Spreadsheet Processing &amp; AI Tools Quiz</h1>
+      <p class="onboarding-desc">
+        Official examination for <strong>Section 9</strong>, <strong>Section 17</strong>, and <strong>Section 53</strong>. Submissions and scores are recorded directly in the official examination database. Please review the security invariants below and enter the session access key to begin.
+      </p>
+
+      <!-- Security Rules Panel -->
+      <div class="rules-panel">
+        <div class="rules-heading">
+          <span>⚠️</span> <span>Mandatory Examination Protocols</span>
+        </div>
+        <ul class="rules-list">
+          <li>
+            <span class="bullet">✖</span>
+            <span><strong>Full-Screen Lock:</strong> The assessment runs strictly in full-screen mode. Exiting full-screen triggers a security infraction.</span>
+          </li>
+          <li>
+            <span class="bullet">✖</span>
+            <span><strong>Anti-Copy &amp; Anti-Paste:</strong> Right-clicking, copying, cutting, pasting, and developer shortcuts (F12, Ctrl+C, Ctrl+V, Ctrl+U) are permanently disabled.</span>
+          </li>
+          <li>
+            <span class="bullet">✖</span>
+            <span><strong>Tab-Switch &amp; Focus Tracking:</strong> Navigating away to another browser tab, minimizing the window, or switching applications triggers an immediate alert strike.</span>
+          </li>
+          <li>
+            <span class="bullet">✖</span>
+            <span><strong>3-Strike Rule:</strong> Accumulating 3 security violations will immediately lock your assessment session.</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Password Gate -->
+      <div style="margin-bottom: 1.5rem;">
+        <label class="field-label" for="exam-password" style="display: block; margin-bottom: 0.4rem; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; color: var(--ink-secondary);">
+          🔑 Examination Access Key / Password *
+        </label>
+        <div style="position: relative;">
+          <input type="password" id="exam-password" class="field-input" placeholder="Enter session password to unlock assessment" autocomplete="off" style="width: 100%; padding-right: 2.75rem;" required>
+          <button type="button" id="btn-toggle-pwd" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--ink-muted); font-size: 1.1rem;" title="Show/Hide password" aria-label="Toggle password visibility">👁️</button>
+        </div>
+        <small id="password-feedback" style="color: var(--accent-crimson); font-size: 0.84rem; margin-top: 0.4rem; display: none; font-weight: 600;">
+          ❌ Invalid Access Key! Please enter the key provided by your instructor.
+        </small>
+      </div>
+
+      <!-- Launch Button -->
+      <button type="button" class="btn-launch-exam" id="btn-launch-exam">
+        <span>🚀</span> <span>Unlock &amp; Enter Full-Screen Exam</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- ==================== 2. SECURE EXAM PROCTORED VIEWPORT ==================== -->
+  <section class="proctor-exam-wrapper" id="proctor-exam-wrapper" aria-label="Proctored assessment session">
+    <!-- Heads-Up Display (HUD) Header -->
+    <header class="proctor-hud-bar">
+      <!-- Left: Status & Assessment Title -->
+      <div class="hud-left">
+        <div class="hud-status-pill">
+          <span class="hud-status-dot"></span>
+          <span>Proctor Active</span>
+        </div>
+        <div class="hud-student-info" id="hud-student-display">
+          <strong>Spreadsheet Processing &amp; AI Tools Assessment</strong>
+        </div>
+      </div>
+
+      <!-- Center: Timer & Violations Counter -->
+      <div class="hud-center">
+        <div class="hud-timer-badge" title="Elapsed examination time">
+          <span>⏱️</span>
+          <span id="hud-timer-display">00:00:00</span>
+        </div>
+
+        <div class="hud-strike-badge clean" id="hud-strikes-badge" title="Security violation counter">
+          Strikes: 0 / 3
+        </div>
+
+        <div class="btn-hud" id="hud-fullscreen-indicator" style="pointer-events: none;">
+          <span>🖥️</span> <span>Fullscreen: ON</span>
+        </div>
+      </div>
+
+      <!-- Right: Controls -->
+      <div class="hud-right">
+        <button type="button" class="btn-hud" id="btn-toggle-sound" title="Toggle violation alert audio">
+          <span>🔊</span> <span>Sound: ON</span>
+        </button>
+
+        <button type="button" class="btn-hud" id="btn-toggle-logs" title="View real-time incident audit trail">
+          <span>📋</span> <span>Incident Logs</span>
+        </button>
+
+        <button type="button" class="btn-hud btn-hud-danger" id="btn-finish-exam" title="Conclude assessment">
+          <span>Finish &amp; Exit ↗</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Embedded Google Form Container -->
+    <div class="exam-viewport-container">
+      <iframe 
+        id="google-quiz-iframe" 
+        class="google-form-iframe" 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfHq-rjAaI2GY-JWEe8vmE-NgnvPesJyOr_hNuT99NVD88UOw/viewform?embedded=true" 
+        allow="fullscreen" 
+        title="Spreadsheet Processing and AI Tools Quiz Form">
+        Loading assessment form...
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ==================== 3. VIOLATION ALERT OVERLAY ==================== -->
+  <div class="violation-overlay" id="violation-overlay" role="dialog" aria-modal="true" aria-labelledby="violation-title">
+    <div class="violation-modal-box">
+      <span class="violation-icon">🚨</span>
+      <h2 class="violation-modal-title" id="violation-title">Security Violation Detected!</h2>
+      <p class="violation-modal-desc" id="violation-reason-text">
+        You navigated away from the assessment tab or exited full-screen mode.
+      </p>
+
+      <div class="violation-strike-box" id="violation-strike-display">
+        Strike 1 of 3
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--ink-secondary); margin-bottom: 1.5rem;">
+        All tab switches and focus losses are logged with exact timestamps. Accumulating 3 strikes results in immediate session termination.
+      </p>
+
+      <button type="button" class="btn-resume-fullscreen" id="btn-resume-fullscreen">
+        I Acknowledge &amp; Restore Full Screen ↗
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== 4. EXAM LOCKOUT OVERLAY ==================== -->
+  <div class="lockout-overlay" id="lockout-overlay" role="alert">
+    <div class="lockout-card">
+      <span style="font-size: 4rem; display: block; margin-bottom: 1rem;">🛑</span>
+      <h2 style="font-family: var(--font-serif); font-size: 2rem; color: var(--accent-crimson); margin-bottom: 0.75rem;">
+        Assessment Session Locked
+      </h2>
+      <p style="font-size: 1.05rem; line-height: 1.6; color: #CBD5E1; margin-bottom: 1.25rem;">
+        You have exceeded the maximum threshold of <strong>3 security violations</strong>. Further interaction with this examination has been suspended.
+      </p>
+      <div style="background: rgba(0,0,0,0.4); padding: 0.85rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.88rem; color: #F87171; margin-bottom: 1.75rem;">
+        Status: Suspended due to repeated security infractions
+      </div>
+      <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 1.5rem;">
+        Your audit trail has been recorded. Please contact your examination proctor or course instructor immediately.
+      </p>
+      <button type="button" class="btn-launch-exam" onclick="window.location.reload();" style="background: #334155; margin-top: 1rem;">
+        <span>🔄</span> <span>Restart Assessment Session</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== 5. AUDIT LOG DRAWER ==================== -->
+  <aside class="incident-drawer" id="incident-drawer" aria-label="Security audit trail">
+    <div class="drawer-header">
+      <span>🛡️ Real-Time Security Incident Audit Trail</span>
+      <button type="button" class="btn-hud" id="btn-close-drawer" style="padding: 0.2rem 0.6rem;">✕ Close</button>
+    </div>
+    <div class="drawer-content" id="incident-log-content">
+      <div class="log-entry">[00:00:00] <strong>SYSTEM</strong>: Proctoring engine initialized. Waiting for candidate launch.</div>
+    </div>
+  </aside>
+
+  <!-- Proctoring Controller Script -->
+  <script src="./quiz_script.js"></script>
+</body>
+</html>

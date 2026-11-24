@@ -265,6 +265,37 @@ code, pre {
   background: var(--accent-gold-subtle);
 }
 
+/* Sleek Icon-Only Controls for Main Menu */
+.btn-icon-nav {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  color: var(--ink-primary);
+  font-size: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  padding: 0;
+  line-height: 1;
+}
+.btn-icon-nav:hover {
+  border-color: var(--accent-gold);
+  background: var(--bg-surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: var(--accent-gold);
+}
+.btn-icon-nav.muted {
+  opacity: 0.6;
+  border-style: dashed;
+}
+
+/* Legacy button classes fallback */
 .btn-theme-toggle,
 .btn-sound-toggle {
   background: var(--bg-surface);
@@ -287,7 +318,6 @@ code, pre {
   background: var(--bg-surface-soft);
   transform: translateY(-1px);
 }
-
 .btn-sound-toggle.muted {
   opacity: 0.65;
   border-style: dashed;
@@ -1670,4 +1700,127 @@ code, pre {
   .book-student-name {
     font-size: 0.82rem;
   }
+}
+
+/* ==========================================================================
+   PROMPT TRANSFORMATION LAB (5 BAD VS 5 GOOD PROMPTS)
+   ========================================================================== */
+.lab-card-wrapper {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  transition: all var(--transition-normal);
+}
+.lab-card-wrapper:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-medium);
+}
+
+.lab-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.lab-pair-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.prompt-col-card {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.prompt-col-card.bad {
+  background: var(--bg-surface-elevated);
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
+.prompt-col-card.good {
+  background: var(--bg-surface-elevated);
+  border-color: rgba(5, 150, 105, 0.3);
+}
+
+.prompt-col-header {
+  padding: 0.75rem 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.prompt-col-card.bad .prompt-col-header {
+  background: var(--accent-crimson-subtle);
+  color: var(--accent-crimson);
+  border-bottom: 1px solid rgba(220, 38, 38, 0.15);
+}
+
+.prompt-col-card.good .prompt-col-header {
+  background: var(--accent-emerald-subtle);
+  color: var(--accent-emerald);
+  border-bottom: 1px solid rgba(5, 150, 105, 0.15);
+}
+
+.prompt-text-box {
+  padding: 1.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ink-primary);
+  white-space: pre-wrap;
+  flex-grow: 1;
+  background: transparent;
+}
+
+.prompt-why-fails {
+  padding: 0.85rem 1.1rem;
+  background: var(--bg-surface-soft);
+  border-top: 1px dashed var(--border-subtle);
+  font-size: 0.82rem;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+.btn-copy-prompt {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--ink-secondary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.btn-copy-prompt:hover {
+  background: var(--accent-navy);
+  color: #FFFFFF;
+  border-color: var(--accent-navy);
+}
+
+.concept-pill-badge {
+  background: var(--accent-gold-subtle);
+  color: var(--accent-gold);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 50px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
